@@ -1,0 +1,144 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appproval Form</title>
+</head>
+<body>
+    <div class="container justify-content-right h-100">
+        <div class="d-flex justify-content-center h-50">
+            <table class="table table-fluid">
+                <thead>
+                    <th>Sno</th>
+                    <th>FName</th>
+                    <th>LName</th>
+                    <th>DOB</th>
+                    <th>Phone NO</th>
+                    <th>Intake</th>
+                    <th>TP NO</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                </thead>
+            <tbody id="tbody1">
+            </tbody>
+            </table>    
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+    <script>
+        var  firebaseConfig = {
+        apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+        authDomain: "apclubs-678c7.firebaseapp.com",
+        databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "apclubs-678c7",
+        storageBucket: "apclubs-678c7.appspot.com",
+        messagingSenderId: "711066755172",
+        appId: "1:711066755172:web:8187fe865e562d32807f71",
+        measurementId: "G-NCK9V02TE8"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+            function SelectedAllData(){
+                document.getElementById("tbody1").innerHTML="";
+                sno=0;
+                firebase.database().ref("Club_Registration_Form/badminton").once("value", function(snapshot){
+                    snapshot.forEach(function(childSnapshot){
+                            var fname = childSnapshot.val().FirstName;
+                            var lname = childSnapshot.val().LastName;
+                            var DOB = childSnapshot.val().DateofBirth;
+                            var PhNo = childSnapshot.val().Phone_number;
+                            var IC = childSnapshot.val().Intakecode;
+                            var tpno = childSnapshot.val().TP_number;
+                            var email = childSnapshot.val().Emailadd;
+                            var stat = childSnapshot.val().Status;
+                            AddItemsToTable(fname,lname,DOB,PhNo,IC,tpno,email,stat);
+                    });
+                });
+                }
+            window.onload = SelectedAllData;
+
+            var sno = 0;
+            var stdlist = [];
+            function AddItemsToTable(fname,lname,DOB,PhNo,IC,tpno,email,stat){
+                var tbody = document.getElementById("tbody1");
+                var trow = document.createElement("tr");
+                var td1 = document.createElement("td");
+                var td2 = document.createElement("td");
+                var td3 = document.createElement("td");
+                var td4 = document.createElement("td");
+                var td5 = document.createElement("td");
+                var td6 = document.createElement("td");
+                var td7 = document.createElement("td");
+                var td8 = document.createElement("td");
+                var td9 = document.createElement("td");
+                var td10 = document.createElement("td");
+                var td11 = document.createElement("td");
+                stdlist.push([fname,lname,DOB,PhNo,IC,tpno,email]);
+                td1.innerHTML = ++sno;
+                td2.innerHTML = fname;
+                td2.classList += "Namefield";
+                td4.classList += "Typefield";
+                td3.innerHTML = lname;
+                td4.innerHTML = DOB;
+                td5.innerHTML = PhNo;
+                td6.innerHTML = IC;
+                td7.innerHTML = tpno;
+                td8.innerHTML = email;
+                td9.innerHTML = stat;
+                td10.innerHTML = '<button onclick="Approvefea('+sno+')">Approve</button>';
+                td11.innerHTML = '<button onclick="Disfea('+sno+')">Disapprove</button>';
+                trow.appendChild(td1); trow.appendChild(td2); trow.appendChild(td3); trow.appendChild(td4);trow.appendChild(td5);trow.appendChild(td6);trow.appendChild(td7);trow.appendChild(td8);trow.appendChild(td9);trow.appendChild(td10);trow.appendChild(td11);
+                tbody.appendChild(trow);
+            }
+
+            function Approvefea(index){
+                --index;
+                firebase.database().ref("Club_Registration_Form/badminton/UID").update({
+                    FirstName: stdlist[index][0],
+                    LastName: stdlist[index][1],
+                    TP_number: stdlist[index][2],
+                    Emailadd: stdlist[index][3],
+                    Intakecode: stdlist[index][4],
+                    Phone_number: stdlist[index][5],
+                    DateofBirth: stdlist[index][6],
+                    Status: "Approve",
+               },
+                (error) => {
+                    if (error){
+                       alert("Not Update");
+                    } else {
+                        alert("Updated");
+                        SelectedAllData();
+                    }
+                }
+            )
+            }
+
+            function Disfea(index){
+                --index;
+                firebase.database().ref("Club_Registration_Form/badminton/UID").update({
+                    FirstName: stdlist[index][0],
+                    LastName: stdlist[index][1],
+                    TP_number: stdlist[index][2],
+                    Emailadd: stdlist[index][3],
+                    Intakecode: stdlist[index][4],
+                    Phone_number: stdlist[index][5],
+                    DateofBirth: stdlist[index][6],
+                    Status: "Denied",
+               },
+                (error) => {
+                    if (error){
+                       alert("Not Update");
+                    } else {
+                        alert("Updated");
+                        SelectedAllData();
+                    }
+                }
+            )
+            }
+    </script>
+</body>
+</html>

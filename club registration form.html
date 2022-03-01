@@ -1,0 +1,94 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Club Registration Form</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/css/mdb.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div>
+        <input type="text"  id="FName" placeholder="First Name">
+        <input type="text" id="LName" placeholder="Last Name">
+        <input type="text" id="TPno" placeholder="TP NO">
+        <input type="email" id="Email"placeholder="Email">
+        <input type="text" id="IntakeCode" placeholder="Intake Code">
+        <input type="tel"  id="PhoneNum" placeholder="Phone Num">
+        <input type="date" id="DOB" placeholder="DOB">
+        <select id="Club">
+            <option value="badminton">Badminton</option>
+            <option value="chinese society">Chinese Society</option>
+            <option value="XXD">XXD</option>
+        </select>
+        <button id="btn_submit">Submit</button>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <script type="module">
+    // Initialization ////////////
+        import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js"
+        var  firebaseConfig = {
+        apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+        authDomain: "apclubs-678c7.firebaseapp.com",
+        databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "apclubs-678c7",
+        storageBucket: "apclubs-678c7.appspot.com",
+        messagingSenderId: "711066755172",
+        appId: "1:711066755172:web:8187fe865e562d32807f71",
+        measurementId: "G-NCK9V02TE8"
+        };
+        const app = initializeApp(firebaseConfig);
+
+
+        import {getDatabase, ref, set}
+        from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
+        const db = getDatabase();
+
+    //////Reference//////
+
+    var Firstname = document.getElementById("FName");
+    var Lastname = document.getElementById("LName");
+    var TPnum = document.getElementById("TPno");
+    var Email = document.getElementById("Email");
+    var IntakeCode = document.getElementById("IntakeCode");
+    var PhoNum = document.getElementById("PhoneNum");
+    var DOB = document.getElementById("DOB");
+    var Club = document.getElementById("Club");
+
+    var btnsub = document.getElementById("btn_submit");
+    var status = "Pending Review";
+    var UID = "UID";
+
+    
+    /////Insert Data Function ///////////////
+
+    function InsertData(){
+        set(ref(db,"Club_Registration_Form/"+ Club.value + "/" + UID),{
+            FirstName: Firstname.value,
+            LastName: Lastname.value,
+            TP_number: TPnum.value,
+            Emailadd: Email.value,
+            Intakecode: IntakeCode.value,
+            Phone_number: PhoNum.value,
+            DateofBirth: DOB.value,
+            Status: status,
+
+        })
+        .then(()=>{
+            alert("data stored successfully");
+        })
+        .catch((error)=>{
+            alert("unsuccessful,error"+error);
+        });
+    }
+
+/////////Assign btn/////////////
+    btnsub.addEventListener("click",InsertData);
+    
+    </script>
+
+</body>
+</html>
