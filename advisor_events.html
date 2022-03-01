@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        img{
+            max-width: 100%;
+            max-height: 100%;
+            border: 2px black solid;
+        }
+    </style>
+
+    <title>APClubs | Events</title>
+</head>
+<body>
+    <label>Image Name</label> 
+    <input type="text" id="namebox"> 
+    <label id="extlab"></label> <br><br>
+    <image id="myimg"> 
+    <label id="progressbar"></label><br><br>
+
+    <button id="selbtn">Select Image</button>
+    <button id="upbtn">Upload Image</button>
+    <button id="downbtn">Retrieve Image</button> <br><br>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+      
+        const firebaseConfig = {
+          apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+          authDomain: "apclubs-678c7.firebaseapp.com",
+          databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "apclubs-678c7",
+          storageBucket: "apclubs-678c7.appspot.com",
+          messagingSenderId: "711066755172",
+          appId: "1:711066755172:web:8187fe865e562d32807f71",
+          measurementId: "G-NCK9V02TE8"
+        };
+      
+        //---Initialize Firebase---//
+        const app = initializeApp(firebaseConfig);
+
+        import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } 
+        from "https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js";
+
+        import { getDatabase, ref, set, child, get, update, remove }
+        from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
+        const realdb = getDatabase();
+
+        //---Variables---//
+        var files = [];
+        var reader = new FileReader();
+
+        var namebox = document.getElementById('namebox');
+        var extlab = document.getElementById('extlab');
+        var myimg = document.getElementById('myimg');
+        var proglab = document.getElementById('progressbar');
+        var SelBtn = document.getElementById("selbtn");
+        var UpBtn = document.getElementById('upbtn');
+        var DownBtn = document.getElementById('downbtn');
+
+        var input = document.createElement('input');
+        input.type = 'file';
+
+        input.onchange = e =>{
+            files = e.target.files;
+
+            var extension = GetFileExt(files[0]);
+            var name = GetFileName(files[0]);
+
+            namebox.value = name;
+            extlab.innerHTML = extension;
+
+            reader.readAsDataURL(files[0]);
+        }
+
+        reader.onload = function(){
+            myimg.src = reader.result;
+        }
+        
+
+        //---Select img---//
+
+        SelBtn.onclick = function(){
+            input.click();
+        }
+
+        function GetFileExt(file){
+            var temp = file.name.split('.');
+            var ext = temp.slice(temp.length-1, temp.length);
+            return '.' + ext[0];
+        }
+
+        function GetFileName(file){
+            var temp = file.name.split('.');
+            var fname = temp.slice(0, -1).join('.');
+            return fname;
+        }
+
+        //---Upload img---//
+        async function UploadProcess(){
+            var ImgToUpload = files[0];
+            var ImgName = namebox.value + extlab.innerHTML;
+
+            if(!ValidateName()){
+                alert('Name cannot contain ".", "#", "$", "[", or "]".');
+                return;
+            }
+
+            const metaData = {
+                contentType: ImgToUpload.type
+            }
+            const storage = getStorage();
+            const storageRef = sRef(storage, "Images/" + ImgName);
+            const UploadTask = uploadBytesResumable(storageRef, ImgToUpload, metaData);
+
+            UploadTask.on('state-changed', (snapshot)=>{
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes)*100;
+                proglab.innerHTML = "upload " + progress + "%";
+            },
+
+            (error)=>{
+                alert("Error: Image not uploaded!");
+            },
+
+            ()=>{
+                getDownloadURL(UploadTask.snapshot.ref).then((downloadURL)=>{
+                    SaveURLtoRealtimeDB(downloadURL);
+                });
+            }
+            );
+        }
+
+        //---Functions for REALTIME DATABASE---//
+        function SaveURLtoRealtimeDB(URL){
+            var name = namebox.value;
+            var ext = extlab.innerHTML;
+
+            set(ref(realdb, "ImagesLinks/"+name),{
+                ImageName: (name + ext),
+                ImgURL: URL
+            });
+        }
+
+        function GetURLfromRealtimeDB(){
+            var name = namebox.value;
+            var dbRef = ref(realdb);
+
+            get(child(dbRef, "ImagesLinks/"+name)).then((snapshot)=>{
+                if(snapshot.exists()){
+                    myimg.src = snapshot.val().ImgURL;
+                }
+            })
+        }
+
+        function ValidateName(){
+            var regex = /[\.#$\[\]]/
+            return !(regex.test(namebox.value));
+        }
+
+        UpBtn.onclick = UploadProcess;
+        DownBtn.onclick = GetURLfromRealtimeDB;
+
+    </script>
+</body>
+</html>
