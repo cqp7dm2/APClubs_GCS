@@ -1,0 +1,44 @@
+<style>
+/*for aboutus body part*/
+body{
+	min-height: 100vh;
+	display:;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+}
+/*for setting the picture to left*/
+.about-section{
+	background: url(laptop.jpg) no-repeat left;
+	background-size: 50%;
+	background-color: white;
+	overflow: hidden;
+	padding: 100px 0;
+
+}
+/*set the text to right*/
+.inner-section{
+	width: 55%;
+	float: right;
+	background-color: lightgrey;
+	padding: 100px;
+
+}
+/*style for h1*/
+.inner-section h1{
+	margin-bottom: 30px;
+	font-size: 30px;
+	font-weight: 900;
+	font-family:fantasy;
+}
+/*style for right hand side*/
+.text{
+	font-size: 20px;
+	color:black;
+	line-height: 30px;
+	text-align: justify;
+	margin-bottom: 40px;
+	font-family: serif;
+}
+
+</style>
