@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <title>APClubs | Details Of Clubs & Society</title>
+
+  <!-- Nav bootstap & resources -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+
+  <!--Bootstrap -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+  <!--Custome Style -->
+  <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+  <!--OWL Carousel slider-->
+  <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/owl.transitions.css" type="text/css">
+  <!--slick-slider -->
+  <link href="assets/css/slick.css" rel="stylesheet">
+  <!--bootstrap-slider -->
+  <link href="assets/css/bootstrap-slider.min.css" rel="stylesheet">
+  <!--FontAwesome Font Style -->
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144"
+    href="assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114"
+    href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72"
+    href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" type="image/png" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+</head>
+
+<body>
+
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="home.html">APClubs</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="detailsofclubs.html">Clubs & Society</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Classroom Booking</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="user_events.html">Events</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="feedback_form.html">Enquiry & Feedback</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+        </li>
+
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Signed In
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="userProfile.html">My Profile</a>
+                <a class="dropdown-item" href="admin/admin.html">Admin</a>
+                <a class="dropdown-item" href="committee/commMember.html">Committee</a>
+                <a class="dropdown-item" href="#" onclick="logout()">Sign Out</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+<!-- Navbar -->
+
+  <script id="mainscript">
+
+    //---------FIREBASE CONFIGURATION---------//
+    var firebaseConfig = {
+      apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+      authDomain: "apclubs-678c7.firebaseapp.com",
+      databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "apclubs-678c7",
+      storageBucket: "apclubs-678c7.appspot.com",
+      messagingSenderId: "711066755172",
+      appId: "1:711066755172:web:8187fe865e562d32807f71",
+      measurementId: "G-NCK9V02TE8"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    var database = firebase.database();
+
+    var cns_number;
+
+    //---------GET ALL DATA---------//
+    function SelectAllData() {
+      document.getElementById("tbody1").innerHTML = "";
+      event_number = 0;
+      firebase.database().ref('clubs').once('value',
+        function (AllRecords) {
+          AllRecords.forEach(
+            function (CurrentRecord) {
+              var csname = CurrentRecord.val().name;
+              var csdesc = CurrentRecord.val().description;
+              var cstype = CurrentRecord.val().type;
+              AddItemsToTable(csname, csdesc, cstype);
+            }
+          );
+        });
+    }
+
+    window.onload = SelectAllData;
+
+    //---------FILLING THE TABLE---------//
+
+    var cns_list = [];
+
+    function AddItemsToTable(csname, csdesc, cstype) {
+      var tbody1 = document.getElementById('tbody1');
+      var trow = document.createElement('tr');
+      var td1 = document.createElement('td');
+      var td2 = document.createElement('td');
+      var td3 = document.createElement('td');
+
+      cns_list.push([csname, csdesc, cstype]);
+
+      td1.innerHTML = csname;
+      td2.innerHTML = csdesc;
+      td3.innerHTML = cstype;
+
+      trow.appendChild(td1);
+      trow.appendChild(td2);
+      trow.appendChild(td3);
+
+      tbody1.appendChild(trow);
+    }
+
+
+  </script>
+
+  </header>
+
+  <!--Page Header-->
+  <section class="page-header listing_page">
+    <div class="container">
+      <div class="page-header_wrap">
+        <div class="page-heading">
+          <h1>Welcome to APCLUBS</h1>
+          <p>Are you looking for clubs detials & information ? <br>HCheck thru information below to know more about all
+            clubs in APU</p>
+        </div>
+      </div>
+    </div>
+    <!-- Dark Overlay-->
+    <div class="dark-overlay"></div>
+  </section>
+
+  <!--Listing-->
+  <section class="listing-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 col-md-push-3">
+          <div class="result-sorting-wrapper">
+            <div class="sorting-count">
+
+              <!-- <p><span>ACTIVE</span></p> -->
+
+              <table id="table1" class="table">
+                <thead>
+                  <th>Club/Society</th>
+                  <th>Description</th>
+                  <th>Type</th>
+                </thead>
+                <tbody id="tbody1">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <!--Side-Bar-->
+        <aside class="col-md-3 col-md-pull-9">
+          <div class="sidebar_widget">
+            <div class="widget_heading">
+              <h5><i class="fa fa-filter" aria-hidden="true"></i> Find Your Club/Seciety</h5>
+            </div>
+            <div class="sidebar_filter">
+              <form action="search-jobresult.php" method="post">
+                <div class="form-group select">
+                  <select class="form-control" name="state">
+                    <option>Skr</option>
+                    <option value="Johor">Skr 1</option>
+                    <option value="Kedah">Skr 2</option>
+
+                  </select>
+                </div>
+
+
+                <div class="form-group select">
+                  <select class="form-control" name="field">
+                    <option>Types</option>
+                    <option value="Architecture and Engineering">Cultural</option>
+                    <option value="Arts, Culture and Entertainment">Sports</option>
+                    <option value="Business, Administration and Management">Soft Skills</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search
+                    Club/Society</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </aside>
+        <!--/Side-Bar-->
+      </div>
+    </div>
+  </section>
+  <!--Footer -->
+  <?php include('includes/footer.php');?>
+
+  <!--Back to top-->
+  <div id="back-top" class="back-top"> <a href="#top"><i class="fa fa-angle-up" aria-hidden="true"></i> </a> </div>
+
+  <!--Login-Form -->
+  <?php include('includes/login.php');?>
+
+  <!--Register-Form -->
+  <?php include('includes/registration.php');?>
+
+  <!--Forgot-password-Form -->
+  <?php include('includes/forgotpassword.php');?>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/interface.js"></script>
+  <!--Switcher-->
+  <script src="assets/switcher/js/switcher.js"></script>
+  <!--bootstrap-slider-JS-->
+  <script src="assets/js/bootstrap-slider.min.js"></script>
+  <!--Slider-JS-->
+  <script src="assets/js/slick.min.js"></script>
+  <script src="assets/js/owl.carousel.min.js"></script>
+  <script>
+    function logout() {
+      window.alert("You have signed out successfully");
+      window.location.href = "login.html";
+      firebase.auth().signOut().then(() => {
+      }).catch((error) => {
+        console.log(error);
+      });
+    };
+  </script>
+
+  <footer>
+    <div class="footer">
+      <b>Powered by APCLUBS Developer Team @ 2022</b>
+    </div>
+    <style>
+      .footer {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 2%;
+        background-color: #3F3F44;
+        color: white;
+        text-align: center;
+      }
+    </style>
+  </footer>
+
+
+</body>
+
+</html>
