@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact us - Submit your feedback</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    </head>
+    <body style="padding:50px;">
+        <h3>Contact Us / Feedback Form</h3>
+        <div class="container">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="tp_No">TP Number</label>
+                    <input type="text" name="tp_No" id="tp_No" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="messages">Message</label>
+                    <input type="text" name="messages" id="messages" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class= "btn btn-success" id="btn_submit">Submit</button>
+                </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script type="module">
+  
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+            const firebaseConfig = {
+            apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+            authDomain: "apclubs-678c7.firebaseapp.com",
+            databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "apclubs-678c7",
+            storageBucket: "apclubs-678c7.appspot.com",
+            messagingSenderId: "711066755172",
+            appId: "1:711066755172:web:8187fe865e562d32807f71",
+            measurementId: "G-NCK9V02TE8"
+            };
+            const app = initializeApp(firebaseConfig);
+            
+            import {getDatabase, ref, set}
+            from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
+            const db = getDatabase();
+            
+            var Name= document.getElementById("name");
+            var Tp_no = document.getElementById("tp_No");
+            var Email = document.getElementById("email");
+            var Message = document.getElementById("messages")
+
+            var btn = document.getElementById("btn_submit");
+
+
+            var uid = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+
+            function InsertData(){
+                //set(ref(db,"feedback"),{
+                //    fid: uid,
+                //})
+                set(ref(db,"feedback/"+ uid),{
+                    name: Name.value,
+                    tp_No: Tp_no.value,
+                    email: Email.value,
+                    message: Message.value,
+                })
+                .then(()=>{
+                alert("data stored successfully");
+                })
+                .catch((error)=>{
+                alert("unsuccessful,error"+error);
+                });
+            }
+
+            btn.addEventListener("click",InsertData);
+        </script>
+    </body>
+</html>
