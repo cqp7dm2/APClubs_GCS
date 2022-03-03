@@ -78,45 +78,46 @@
 
     <header>
         <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <!-- Brand -->
-        <a class="navbar-brand" href="home.html">APClubs</a>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <!-- Brand -->
+            <a class="navbar-brand" href="home.html">APClubs</a>
 
-        <!-- Links -->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="detailsofclubs.html">Clubs & Society</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Classroom Booking</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="user_events.html">Events</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="feedback_form.html">Enquiry & Feedback</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact Us</a>
-            </li>
+            <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="detailsofclubs.html">Clubs & Society</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Classroom Booking</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="user_events.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="feedback_form.html">Enquiry & Feedback</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
 
-            <!-- Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Signed In
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="userProfile.html">My Profile</a>
-                    <a class="dropdown-item" href="admin/admin.html">Admin</a>
-                    <a class="dropdown-item" href="committee/commMember.html">Committee</a>
-                    <a class="dropdown-item" href="#" onclick="logout()">Sign Out</a>
-                </div>
-            </li>
-        </ul>
-    </nav>
-    <!-- Navbar -->
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Signed In
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="userProfile.html">My Profile</a>
+                        <a class="dropdown-item" href="admin/admin.html">Admin</a>
+                        <a class="dropdown-item" href="committee/commMember.html">Committee</a>
+                        <a class="dropdown-item" href="#" onclick="logout()">Sign Out</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- Navbar -->
     </header>
 
+    <!--Event posters displayed-->
     <div id="eventsDiv" class="container">
 
     </div>
@@ -149,7 +150,7 @@
         function GetAllEvents() {
             const dbref = ref(realdb);
 
-            get(child(dbref, "ImagesLinks"))
+            get(child(dbref, "event"))
                 .then((snapshot) => {
                     snapshot.forEach(eve => {
                         ArrayOfEvents.push(eve.val());
@@ -168,12 +169,13 @@
         function AddEvent(event, index) {
             let html =
                 `
-            <img src="`+ event.ImgURL + `" class="thumb mt-3" id="thumb` + index + `">
-            <p class="title" id="title`+ index + `">` + event.ImageName + `</p>
+            <img src="`+ event.event_imgURL + `" class="thumb mt-3" id="thumb` + index + `">
+            <p class="title" id="title`+ index + `">` + event.event_name + `</p>
             <ul class="points">
-                <li>`+ event.ImageDate + `</li>
-                <li>`+ event.ImageTime + `</li>
-                <li>`+ event.ImageLocation + `</li>
+                <li><b>Club: `+ event.event_club + `</b></li>
+                <li>`+ event.event_date + `</li>
+                <li>`+ event.event_time + `</li>
+                <li>`+ event.event_location + `</li>
             </ul>
             <button class="detbtns btn" id="detbtn">Join Now!</button>
             `
