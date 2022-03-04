@@ -76,10 +76,8 @@
         <input type="text" id="txtDoc">
         <label id="extlab"></label> <br><br>
 
-        <div class="btndiv">
-            <button id="selbtn">Select Image</button>
-            <button id="upbtn">Submit Application</button> <br><br>
-        </div>
+        <button id="selbtn">Select Image</button>
+        <button id="upbtn">Submit Application</button> <br><br>
 
         <image id="myimg"> 
         <label id="progressbar"></label><br><br>
@@ -192,12 +190,8 @@
             },
 
             ()=>{
-                alert("Record was added!");
                 getDownloadURL(UploadTask.snapshot.ref).then((downloadURL)=>{
                     SaveURLtoRealtimeDB(downloadURL);
-                    
-                    //location.reload();
-                    //return false;
                 });
             }
             );
