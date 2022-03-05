@@ -121,6 +121,16 @@
 			</div>
 		</div>
 
+<!-- Search Bar -->
+		<div class="container h-25">
+        <div class="d-flex justify-content h-100" id="searchcont">
+          <div id="searchbar_static">
+            <input class="search_input" id="search_input" type="text" name="search" autocomplete="off" placeholder="What are you looking for">
+            <button class="search_icon" id="search_icon"><i class="fas fa-search"></i></button>
+          </div>
+      </div>
+    </div>
+		<hr>
 
     <!-- Table Listing -->
     <div class="row">
@@ -245,6 +255,7 @@
 
                     td1.innerHTML = ++event_number;
                     td2.innerHTML = csname;
+										td2.classList += "Namefield";
                     td3.innerHTML = csshdesc;
                     td4.innerHTML = cstype;
                     td5.innerHTML = csdesc;
@@ -369,6 +380,38 @@
                         }
                     )
                 }
+
+								var searchbar = document.getElementById("search_input");
+		            var searchbtn = document.getElementById("search_icon");
+		            var tbody = document.getElementById("tbody1");
+		            var selected = document.querySelector(".selected");
+
+								function search_table(){
+
+												var filter = searchbar.value.toUpperCase();
+												var tr = tbody.getElementsByTagName("tr");
+												var found;
+
+												for (let i = 0; i < tr.length; i++) {
+														var td = tr[i].getElementsByClassName("Namefield")
+
+														for (let j= 0; j < td.length; j++) {
+																if(td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+																		found = true;
+																}
+														}
+
+														if(found){
+																tr[i].style.display="table-row";
+																found=false;
+														}
+
+														else{
+																tr[i].style.display="none";
+														}
+												}
+										}
+										searchbar.addEventListener("keyup",search_table);
 
             </script>
 

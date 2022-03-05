@@ -125,7 +125,7 @@
     transition:all 0.4s;
 }
 
-.select-box .options-container.active{ 
+.select-box .options-container.active{
     max-height: 240px;
     opacity: 1;
     overflow-y: scroll;
@@ -138,7 +138,7 @@
 .select-box .options-container::-webkit-scrollbar{
     width: 8px;
     background: #0d141f;
-    border-radius: 0 8px 8px 0;    
+    border-radius: 0 8px 8px 0;
 }
 
 .select-box .options-container::-webkit-scrollbar-thumb{
@@ -152,7 +152,7 @@
 }
 
 .select-box .option:hover{
-    background: #414b57 
+    background: #414b57
 }
 .select-box label {
     cursor: pointer;
@@ -168,9 +168,9 @@
         <div class="d-flex justify-content-center h-100" id="searchcont">
           <div id="searchbar_static">
             <input class="search_input" id="search_input" type="text" name="search" autocomplete="off" placeholder="What are you looking for">
-            <button class="search_icon" id="search_icon"><i class="fas fa-search"></i></button>   
+            <button class="search_icon" id="search_icon"><i class="fas fa-search"></i></button>
           </div>
-    </div>
+      </div>
     </div>
     <div class="container">
             <div class="select-box">
@@ -207,13 +207,14 @@
                 </thead>
             <tbody id="tbody1">
             </tbody>
-            </table>    
+            </table>
         </div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+
     <script>
         var  firebaseConfig = {
         apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
@@ -228,7 +229,7 @@
         firebase.initializeApp(firebaseConfig);
 
             function SelectedAllData(){
-                firebase.database().ref("clubs").once("value", 
+                firebase.database().ref("clubs").once("value",
                 function(AllRecords){
                     AllRecords.forEach(
                         function(CurrentRecord){
@@ -262,15 +263,15 @@
 
             var searchbar = document.getElementById("search_input");
             var searchbtn = document.getElementById("search_icon");
-            var tbody = document.getElementById("tbody1"); 
+            var tbody = document.getElementById("tbody1");
             var selected = document.querySelector(".selected");
 
         function search_table(){
-                
+
                 var filter = searchbar.value.toUpperCase();
                 var tr = tbody.getElementsByTagName("tr");
                 var found;
-                
+
                 for (let i = 0; i < tr.length; i++) {
                     var td = tr[i].getElementsByClassName("Namefield")
 
@@ -323,16 +324,16 @@
              });
          });
 
-         var tbody = document.getElementById("tbody1"); 
+         var tbody = document.getElementById("tbody1");
 
-         function search_table_filter(){      
-                
+         function search_table_filter(){
+
                 var searchvalue = searchbar.value.toUpperCase();
                 var filter = selected.innerHTML.toUpperCase();
                 var tr = tbody.getElementsByTagName("tr");
                 var found;
 
-               if (searchvalue == "") { 
+               if (searchvalue == "") {
                 for (let i = 0; i < tr.length; i++) {
                     var td = tr[i].getElementsByClassName("Typefield")
 
@@ -369,13 +370,13 @@
                         tr[i].style.display="none";
                         }
                     }
-                }   
+                }
         }
-            
+
     </script>
     <script>
         var sinp  =  document.getElementById("search_input");
-        var scont =  document.getElementById("searchcont");    
+        var scont =  document.getElementById("searchcont");
 
             window.onscroll= function(){myfuctions()};
                 function myfuctions() {
@@ -400,9 +401,9 @@
 
     </script>
      <script>
-      
+
      </script>
-       
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
