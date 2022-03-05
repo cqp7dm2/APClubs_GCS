@@ -1,10 +1,5 @@
 @charset "utf-8";
 
-/*
-Theme Name: CarForYou - Responsive Car Dealer HTML5 Template.
-Author: WMD Team
-Version:1.0
-*/
 
 /*===========================
  =  Table of CSS
@@ -39626,6 +39621,71 @@ table.info-tabel tr td {
     letter-spacing: -.015em;
     font-family: apercu,Helvetica,"Helvetica Neue",Arial,"Lucida Grande",sans-serif!important;
 }
+
+
+.about-section3{
+	background: url(../images/joined.jpg) no-repeat left;
+	background-size: 50%;
+	background-color: #fae7d9;
+	overflow:hidden;
+	padding: 100px 0;
+	margin-top: 20px;
+}
+.inner-container3{
+	width: 55%;
+	float: right;
+	background-color: #FFFFFF;
+	padding: 100px;
+}
+.inner-container3 h1{
+	font-family: apercu,Helvetica,"Helvetica Neue",Arial,"Lucida Grande",sans-serif!important;
+	font-size: 13px;
+	color: #152e70;
+	font-style: normal;
+  font-weight: 500;
+  line-height: 115%;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+.inner-container3 p{
+	font-family: apercu,Helvetica,"Helvetica Neue",Arial,"Lucida Grande",sans-serif!important;
+	color: #152e70;
+	letter-spacing: .035em;
+}
+
+.about-section4{
+	background: url(../images/commpic.jpg) no-repeat right;
+	background-size: 50%;
+	background-color: #FFF7E0;
+	overflow:hidden;
+	padding: 100px 0;
+	margin-top: 20px;
+}
+.inner-container4{
+	width: 55%;
+	float: left;
+	background-color: #FFFFFF;
+	padding: 100px;
+}
+.inner-container4 h1{
+	font-family: apercu,Helvetica,"Helvetica Neue",Arial,"Lucida Grande",sans-serif!important;
+	font-size: 13px;
+	color: #152e70;
+	font-style: normal;
+  font-weight: 500;
+  line-height: 115%;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+.inner-container4 p{
+	color: #152e70;
+    font-size: 15px;
+    line-height: 135%;
+    text-align:left;
+    letter-spacing: -.015em;
+    font-family: apercu,Helvetica,"Helvetica Neue",Arial,"Lucida Grande",sans-serif!important;
+}
+
 
 
 
