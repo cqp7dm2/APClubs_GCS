@@ -290,8 +290,10 @@
         }
 
         function DeleteEvent(){
+            var delimgref = storageRef.child("Images/" + ModDoc.value);
             firebase.database().ref("event/" + ModName.value).remove().then(
                 function(){
+                    delimgref.delete();
                     alert("Record was deleted!");
                     SelectAllData();
                     $("exampleModalCenter").modal('hide');
@@ -299,6 +301,17 @@
                     return false;
                 }
             )
+        }
+
+        function DeleteImg(){
+            const desertRef = ref(storage, 'Images/' + ModDoc.value);
+            deleteObject(desertRef).then(() => {
+                // File deleted successfully
+                alert("Image was deleted!");
+            }).catch((error) => {
+                // Uh-oh, an error occurred!
+                alert("Image was not deleted!");
+            });
         }
 
         var searchBar = document.getElementById("SearchBar");
