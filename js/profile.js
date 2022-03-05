@@ -41,6 +41,7 @@ function getinfo() {
         var intakecode = childData.IntakeCode;
         var dob = childData.DateOfBirth;
         var email = childData.Email;
+        var userdescription = childData.Description;
         var key = childSnapshot.key;
 
         if (key == currentUID) {
@@ -49,44 +50,30 @@ function getinfo() {
           document.getElementById('intakeCode').value = intakecode;
           document.getElementById('Email').value = email;
           document.getElementById('dob').value = dob;
+          document.getElementById('userDesc').value = userdescription;
         }
       });
-      // //find currentUID
-      // var ref = firebase.database().ref('users');
-      // ref.once("value", function(snapshot) {
-      //     var uidlist = Object.keys(snapshot.val());
-      //     for (var i = 0; i < uidlist.length; i++) {
-
-      //       if (uidlist.includes(currentUID)) {
-      //         console.log("Data Insert");
-
-      //             var ref = firebase.database().ref('/users/' + currentUID);
-      //             ref.once("value") 
-      //               .then(function(snapshot) {
-      //                 uidkey = snapshot.key;
-      //                 key = Object.keys(snapshot.val());
-      //                 console.log(key);
-      //                 var fullname = snapshot.child(key).val().FullName;
-      //                 var tpnumber = childData.TPNumber;
-      //                 var intakecode = childData.IntakeCode;
-      //                 var email = childData.Email;
-      //                 var dob = childData.DateOfBirth;
-
-      //                 document.getElementById('userFullName').value = fullname;
-      //                 document.getElementById('tpNumber').value = tpnumber;
-      //                 document.getElementById('intakeCode').value = intakecode;
-      //                 document.getElementById('Email').value = email;
-      //                 document.getElementById('dob').value = dob;
-      //               });
-      //               break;
-
-      //       } else {
-      //         console.log("Data not match at all");
-      //       }
-      //     }
-      //   });
-      //   } else {
-      //     alert("Wrong Coding");
     });
   }
+};
+
+function updateuserdata(){
+
+  var currentUID = firebase.auth().currentUser.uid;
+  var userDescription = document.getElementById("userDesc").value;
+
+  firebase.database().ref("users/" + currentUID).update(
+      {
+            Description: userDescription
+      },
+      (error) =>{
+          if(error){
+              alert("Record was not updated, there was some problem!");
+          }else{
+              alert("Record was updated!");
+              location.reload();
+              return false;
+          }
+      }
+  )
 }
