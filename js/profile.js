@@ -9,7 +9,10 @@ var firebaseConfig = {
   measurementId: "G-NCK9V02TE8"
 };
 
-firebase.initializeApp(firebaseConfig);
+//The firebase.init below is commented out as the userProfile page uses 2 js files
+//Both have firebase.init. If you init it more than once without providing separate arguements it will produce an error
+
+// firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
 //when the page run ,the code will be call to display all data from the db to the user.
@@ -17,7 +20,7 @@ var database = firebase.database();
 
 var database = firebase.database();
 var profileref = database.ref('users');
-profileref.once('value',getinfo );
+profileref.once('value', getinfo);
 var adminref = database.ref('admins');
 adminref.once('value');
 
@@ -30,8 +33,8 @@ function getinfo() {
     console.log("user id: " + firebase.auth().currentUser.uid);
 
     var ref = firebase.database().ref('users');
-    ref.once("value", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
+    ref.once("value", function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
         var childData = childSnapshot.val();
         var fullname = childData.FullName;
         var tpnumber = childData.TPNumber;
@@ -40,49 +43,50 @@ function getinfo() {
         var email = childData.Email;
         var key = childSnapshot.key;
 
-    if (key == currentUID) {
-      document.getElementById('userFullName').value = fullname;
-      document.getElementById('tpNumber').value = tpnumber;
-      document.getElementById('intakeCode').value = intakecode;
-      document.getElementById('Email').value = email;
-      document.getElementById('dob').value = dob;}
+        if (key == currentUID) {
+          document.getElementById('userFullName').value = fullname;
+          document.getElementById('tpNumber').value = tpnumber;
+          document.getElementById('intakeCode').value = intakecode;
+          document.getElementById('Email').value = email;
+          document.getElementById('dob').value = dob;
+        }
       });
-    // //find currentUID
-    // var ref = firebase.database().ref('users');
-    // ref.once("value", function(snapshot) {
-    //     var uidlist = Object.keys(snapshot.val());
-    //     for (var i = 0; i < uidlist.length; i++) {
+      // //find currentUID
+      // var ref = firebase.database().ref('users');
+      // ref.once("value", function(snapshot) {
+      //     var uidlist = Object.keys(snapshot.val());
+      //     for (var i = 0; i < uidlist.length; i++) {
 
-    //       if (uidlist.includes(currentUID)) {
-    //         console.log("Data Insert");
+      //       if (uidlist.includes(currentUID)) {
+      //         console.log("Data Insert");
 
-    //             var ref = firebase.database().ref('/users/' + currentUID);
-    //             ref.once("value") 
-    //               .then(function(snapshot) {
-    //                 uidkey = snapshot.key;
-    //                 key = Object.keys(snapshot.val());
-    //                 console.log(key);
-    //                 var fullname = snapshot.child(key).val().FullName;
-    //                 var tpnumber = childData.TPNumber;
-    //                 var intakecode = childData.IntakeCode;
-    //                 var email = childData.Email;
-    //                 var dob = childData.DateOfBirth;
+      //             var ref = firebase.database().ref('/users/' + currentUID);
+      //             ref.once("value") 
+      //               .then(function(snapshot) {
+      //                 uidkey = snapshot.key;
+      //                 key = Object.keys(snapshot.val());
+      //                 console.log(key);
+      //                 var fullname = snapshot.child(key).val().FullName;
+      //                 var tpnumber = childData.TPNumber;
+      //                 var intakecode = childData.IntakeCode;
+      //                 var email = childData.Email;
+      //                 var dob = childData.DateOfBirth;
 
-    //                 document.getElementById('userFullName').value = fullname;
-    //                 document.getElementById('tpNumber').value = tpnumber;
-    //                 document.getElementById('intakeCode').value = intakecode;
-    //                 document.getElementById('Email').value = email;
-    //                 document.getElementById('dob').value = dob;
-    //               });
-    //               break;
+      //                 document.getElementById('userFullName').value = fullname;
+      //                 document.getElementById('tpNumber').value = tpnumber;
+      //                 document.getElementById('intakeCode').value = intakecode;
+      //                 document.getElementById('Email').value = email;
+      //                 document.getElementById('dob').value = dob;
+      //               });
+      //               break;
 
-    //       } else {
-    //         console.log("Data not match at all");
-    //       }
-    //     }
-    //   });
-//   } else {
-//     alert("Wrong Coding");
-  });
- }
+      //       } else {
+      //         console.log("Data not match at all");
+      //       }
+      //     }
+      //   });
+      //   } else {
+      //     alert("Wrong Coding");
+    });
+  }
 }
