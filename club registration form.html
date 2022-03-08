@@ -123,7 +123,7 @@
                                                 <select id="Club" class="form-control">
                                                     <option value="badminton">Badminton</option>
                                                     <option value="chinese society">Chinese Society</option>
-                                                    <option value="XXD">XXD</option>
+                                                    <option value="music">Music</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -201,11 +201,11 @@
                                 function InsertData(CURUID) {
                                     firebase.database().ref("Club_Registration_Form/"+Club.value+"/" + CURUID).set( {
                                         FullName: FullName.value,
-                                        TP_number: TPnum.value,
-                                        Emailadd: Email.value,
-                                        Intakecode: IntakeCode.value,
+                                        TPNumber: TPnum.value,
+                                        Email: Email.value,
+                                        IntakeCode: IntakeCode.value,
                                         Phone_number: PhoNum.value,
-                                        DateofBirth: DOB.value,
+                                        DateOfBirth: DOB.value,
                                         Status: status,
 
                                     },(error) => {

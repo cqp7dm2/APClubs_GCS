@@ -168,29 +168,41 @@
                 var database = firebase.database();
                 var cns_number;
 
+                firebase.auth().onAuthStateChanged((user) => {
+                                    if (user){
+                                        var uids = user.uid;
+                                        FindClub(uids);
+                                    }
+                });
+
+                function FindClub(curcomID) {
                 firebase.database().ref("committee").once('value',function(value){
                     value.forEach(
                         function(DetailRecord){
+                            if(curcomID == DetailRecord.key){
                             var commitclub = DetailRecord.val().Committee;
                              SelectAllData(commitclub);
+                            }
                         }
                     )
 
                 })
+            }
 
                 //---------GET ALL DATA---------//
                 function SelectAllData(commitclubname){
+                    console.log(commitclubname);
                     document.getElementById("tbody1").innerHTML = "";
                     firebase.database().ref('Club_Registration_Form/'+ commitclubname).once('value',
                     function(AllRecords){
                         AllRecords.forEach(
                             function(CurrentRecord){
                                 var Name = CurrentRecord.val().FullName;
-                                var DOB = CurrentRecord.val().DateofBirth;
+                                var DOB = CurrentRecord.val().DateOfBirth;
                                 var PhNo = CurrentRecord.val().Phone_number;
-                                var IntCode = CurrentRecord.val().Intakecode;
-                                var TPNo = CurrentRecord.val().TP_number;
-                                var Email = CurrentRecord.val().Emailadd;
+                                var IntCode = CurrentRecord.val().IntakeCode;
+                                var TPNo = CurrentRecord.val().TPNumber;
+                                var Email = CurrentRecord.val().Email;
                                 var Stat = CurrentRecord.val().Status;
                                 AddItemsToTable(Name,DOB,PhNo,IntCode,TPNo,Email,Stat,commitclubname);
                             }
@@ -240,6 +252,7 @@
                     trow.appendChild(td10);
                     td9.innerHTML = '<button class="btn btn-primary my-2 ml-2" onclick="Approvefea('+serial_number+')">Approve</button>';
                     td10.innerHTML = '<button class="btn btn-primary my-2 ml-2" onclick="Disfea('+serial_number+')">Disapprove</button>';
+                    tbody1.appendChild(trow);
                 };
  
             
@@ -260,10 +273,10 @@
                             function movedb(UserID) {
                                     firebase.database().ref("clubMember/"+cm_list[index][6]+"/"+ UserID).set({
                                         FullName: cm_list[index][0],
-                                        DateofBirth: cm_list[index][1],
+                                        DateOfBirth: cm_list[index][1],
                                         Phone_number: cm_list[index][2],
-                                        Intakecode: cm_list[index][3],
-                                        TP_number: cm_list[index][4],
+                                        IntakeCode: cm_list[index][3],
+                                        TPNumber: cm_list[index][4],
                                         Email: cm_list[index][5],
                                         },
                                         (error) => {
