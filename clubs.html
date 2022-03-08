@@ -1,89 +1,103 @@
 <!DOCTYPE HTML>
 <html lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<title>APClubs | Details Of Clubs & Society</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <title>APClubs | Details Of Clubs & Society</title>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
 
-<!--Bootstrap -->
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
-<!--Custome Style -->
-<link rel="stylesheet" href="assets/css/style.css" type="text/css">
-<!--OWL Carousel slider-->
-<link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
-<link rel="stylesheet" href="assets/css/owl.transitions.css" type="text/css">
-<!--slick-slider -->
-<link href="assets/css/slick.css" rel="stylesheet">
-<!--bootstrap-slider -->
-<link href="assets/css/bootstrap-slider.min.css" rel="stylesheet">
-<!--FontAwesome Font Style -->
-<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Nav bootstap & resources -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="js/loggedinstate.js"></script>
 
-<!-- Fav and touch icons -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon" type="image/png" href="favicon.ico"/>
-<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+  <!--Bootstrap -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+  <!--Custome Style -->
+  <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+  <!--OWL Carousel slider-->
+  <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/owl.transitions.css" type="text/css">
+  <!--slick-slider -->
+  <link href="assets/css/slick.css" rel="stylesheet">
+  <!--bootstrap-slider -->
+  <link href="assets/css/bootstrap-slider.min.css" rel="stylesheet">
+  <!--FontAwesome Font Style -->
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144"
+    href="assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114"
+    href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72"
+    href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" type="image/png" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 </head>
 
 
 <body>
 
-  <!-- Navigation -->
-  <nav id="navigation_bar" class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
-        <button id="menu_slide" data-target="#navigation" aria-expanded="false" data-toggle="collapse" class="navbar-toggle collapsed" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      </div>
-      <div class="header_wrap">
-        <div class="user_login">
-          <ul>
-            <li class="dropdown"> <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i>SIGN IN
-            <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-          <ul class="dropdown-menu">
-            <li><a href="">My Profile</a></li>
-            <li><a href="">Update Password</a></li>
-            <li><a href="admin.html">Admin</a></li>
-            <li><a href="">Sign Out</a></li>
-          </ul>
-            </li>
-          </ul>
-        </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="home.html">APClubs</a>
 
-      </div>
-      <div class="collapse navbar-collapse" id="navigation">
-        <ul class="nav navbar-nav">
-          <li><a href="home.html">Home</a></li>
-          <li><a href="detialsofclubs.html">All Clubs & Society</a></li>
-          <li><a href="">Classroom Booking</a></li>
-          <li><a href="">Event Management</a></li>
-          <li><a href="">Enquiry and Feedback</a></li>
-          <li><a href="">Contact Us</a></li>
-        </ul>
-      </div>
-    </div>
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="Club_Search_Result.html">Clubs & Society</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Classroom Booking</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="user_events.html">Events</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="feedback_form.html">Enquiry & Feedback</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="club registration form.html">Club Registration</a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          Signed In
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="userProfile.html">My Profile</a>
+          <a class="dropdown-item" id="adminbtn" href="admin/admin.html">Admin</a>
+          <a class="dropdown-item" id="committeebtn" href="committee/commMember.html">Committee</a>
+          <a class="dropdown-item" href="#" onclick="logout()">Sign Out</a>
+        </div>
+      </li>
+    </ul>
   </nav>
-  <!-- Navigation end -->
+  <!-- Navbar -->
 
   <!--Page Header-->
   <section class="page-header listing_page">
     <div class="container">
       <div class="page-header_wrap">
-        <div class="page-heading" id="page-heading" >
+        <div class="page-heading" id="page-heading">
         </div>
       </div>
     </div>
@@ -95,69 +109,80 @@
     <div class="inner-container">
       <h1><b>About Us</b></h1>
       <p>Due to the covid-19 pandemic started from 2019, the whole world has been affected by
-         the Covid-19 epidemic that caused lockdown, people cannot go out and need to maintain social
-         distancing. Also, due to this pandemic, a lot of people has lost their job especially the fresh
-         graduate as they are still novice to the workplace. Most of the company does not willing to
-         spend their money to train new workers during this pandemic. This situation causes many fresh
-         graduates feel hard to find job during this pandemic. Because of
-         all that reason, our group got inspiration to solve all of the problem that help candidates to get
-         job with just one click.
+        the Covid-19 epidemic that caused lockdown, people cannot go out and need to maintain social
+        distancing. Also, due to this pandemic, a lot of people has lost their job especially the fresh
+        graduate as they are still novice to the workplace. Most of the company does not willing to
+        spend their money to train new workers during this pandemic. This situation causes many fresh
+        graduates feel hard to find job during this pandemic. Because of
+        all that reason, our group got inspiration to solve all of the problem that help candidates to get
+        job with just one click.
       </p>
-          </div>
-          </div>
-          <div class="about-section2">
-            <div class="inner-container2">
-              <h1><b>WHY CHOOSE HIREME ?</b></h1>
-              <p>This website is designed to advertise the company's empty position and
-                candidates can find their job here. The project comes with a job available tab, urgent hiring tab,
-                view list resume, company profile and user profile as well. Companies can promote their
-                available job and candidates can find a suitable job for themselves following the condition and
-                requirement of the company. The candidate can let the company to download their own resume
-                for further use.
-              </p>
-                  </div>
-                  </div>
+    </div>
+  </div>
+  <div class="about-section2">
+    <div class="inner-container2">
+      <h1><b>WHY CHOOSE HIREME ?</b></h1>
+      <p>This website is designed to advertise the company's empty position and
+        candidates can find their job here. The project comes with a job available tab, urgent hiring tab,
+        view list resume, company profile and user profile as well. Companies can promote their
+        available job and candidates can find a suitable job for themselves following the condition and
+        requirement of the company. The candidate can let the company to download their own resume
+        for further use.
+      </p>
+    </div>
+  </div>
   <script>
-var options = window.location.search.slice(1)
-                      .split('&')
-                      .reduce(function _reduce (/*Object*/ a, /*String*/ b) {
-                        b = b.split('=');
-                        a[b[0]] = decodeURIComponent(b[1]);
-                        return a;
-                      }, {});
+    var options = window.location.search.slice(1)
+      .split('&')
+      .reduce(function _reduce(/*Object*/ a, /*String*/ b) {
+        b = b.split('=');
+        a[b[0]] = decodeURIComponent(b[1]);
+        return a;
+      }, {});
 
-var clubname = options.clubs;
-console.log(clubname);
-var  firebaseConfig = {
-        apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
-        authDomain: "apclubs-678c7.firebaseapp.com",
-        databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "apclubs-678c7",
-        storageBucket: "apclubs-678c7.appspot.com",
-        messagingSenderId: "711066755172",
-        appId: "1:711066755172:web:8187fe865e562d32807f71",
-        measurementId: "G-NCK9V02TE8"
-        };
-        firebase.initializeApp(firebaseConfig);
+    var clubname = options.clubs;
+    console.log(clubname);
+    // var  firebaseConfig = {
+    //         apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+    //         authDomain: "apclubs-678c7.firebaseapp.com",
+    //         databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+    //         projectId: "apclubs-678c7",
+    //         storageBucket: "apclubs-678c7.appspot.com",
+    //         messagingSenderId: "711066755172",
+    //         appId: "1:711066755172:web:8187fe865e562d32807f71",
+    //         measurementId: "G-NCK9V02TE8"
+    //         };
+    //         firebase.initializeApp(firebaseConfig);
 
-            function SelectedAllData(){
-                firebase.database().ref("clubs/"+clubname).once("value",
-                function(AllRecords){
-                            var Cdesc = AllRecords.val().desc;
-                            var Cname = AllRecords.val().name;
-                            console.log(Cname);
-                            AddItemsToTable(Cdesc,Cname);
-                        });
-            }
-            window.onload = SelectedAllData;         
-            
-            function AddItemsToTable(Cdesc,Cname){
-                var club_container = document.getElementById("page-heading");
-                var club_name_text = document.createElement("h1");
-                var club_description_text = document.createElement("p");
-                club_container.appendChild(club_name_text);club_container.appendChild(club_description_text);
-                club_name_text.innerHTML = Cname;
-                club_description_text.innerHTML = Cdesc;
-            }
+    function SelectedAllData() {
+      firebase.database().ref("clubs/" + clubname).once("value",
+        function (AllRecords) {
+          var Cdesc = AllRecords.val().desc;
+          var Cname = AllRecords.val().name;
+          console.log(Cname);
+          AddItemsToTable(Cdesc, Cname);
+        });
+    }
+    window.onload = SelectedAllData;
+
+    function AddItemsToTable(Cdesc, Cname) {
+      var club_container = document.getElementById("page-heading");
+      var club_name_text = document.createElement("h1");
+      var club_description_text = document.createElement("p");
+      club_container.appendChild(club_name_text); club_container.appendChild(club_description_text);
+      club_name_text.innerHTML = Cname;
+      club_description_text.innerHTML = Cdesc;
+    }
   </script>
+  <script>
+    function logout() {
+      window.alert("You have signed out successfully");
+      window.location.href = "login.html";
+      firebase.auth().signOut().then(() => {
+      }).catch((error) => {
+        console.log(error);
+      });
+    };
+  </script>
+
 </body>

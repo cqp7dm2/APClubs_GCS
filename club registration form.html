@@ -1,14 +1,70 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Club Registration Form</title>
+
+    <!-- Nav bootstap & resources -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+    <script type="text/javascript" src="js/loggedinstate.js"></script>
+    <script type="text/javascript" src="js/clubregistration.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
+
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="home.html">APClubs</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="Club_Search_Result.html">Clubs & Society</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Classroom Booking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_events.html">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="feedback_form.html">Enquiry & Feedback</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="club registration form.html">Club Registration</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Signed In
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="userProfile.html">My Profile</a>
+                    <a class="dropdown-item" id="adminbtn" href="admin/admin.html">Admin</a>
+                    <a class="dropdown-item" id="committeebtn" href="committee/commMember.html">Committee</a>
+                    <a class="dropdown-item" href="#" onclick="logout()">Sign Out</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <!-- Navbar -->
+
+</header>
+
 <body class="bg-light">
     <div>
         <div class="container w-100 h-100 bg-">
@@ -43,7 +99,7 @@
                                             </div>
                                         </div>
                                     </div>
-    
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group"><strong>Phone Number</strong>
@@ -56,7 +112,7 @@
                                             </div>
                                         </div>
                                     </div>
-    
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group"><strong>Email</strong>
@@ -73,75 +129,76 @@
                                             </div>
                                         </div>
                                     </div>
-    
+
                                     <div class="form-group">
-                                    <button id="btn_submit"
-                                        class="btn btn-success btn-sm">Register</button>
+                                        <button id="btn_submit" class="btn btn-success btn-sm">Register</button>
                                     </div>
-                                </div>  
-    </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
-    <script type="module">
-    // Initialization ////////////
-        import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js"
-        var  firebaseConfig = {
-        apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
-        authDomain: "apclubs-678c7.firebaseapp.com",
-        databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "apclubs-678c7",
-        storageBucket: "apclubs-678c7.appspot.com",
-        messagingSenderId: "711066755172",
-        appId: "1:711066755172:web:8187fe865e562d32807f71",
-        measurementId: "G-NCK9V02TE8"
-        };
-        const app = initializeApp(firebaseConfig);
+                                </div>
+                            </div>
+                            <script>
 
 
-        import {getDatabase, ref, set}
-        from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
-        const db = getDatabase();
+                            </script>
+                            <script>
 
-    //////Reference//////
+                                //////Reference//////
 
-    var FullName = document.getElementById("fullName");
-    var TPnum = document.getElementById("tpNumber");
-    var Email = document.getElementById("Email");
-    var IntakeCode = document.getElementById("intakeCode");
-    var PhoNum = document.getElementById("phoNum");
-    var DOB = document.getElementById("dob");
-    var Club = document.getElementById("Club");
-    var btnsub = document.getElementById("btn_submit");
-    var status = "Pending Review";
-    var UID = "UID";
+                                var FullName = document.getElementById("fullName");
+                                var TPnum = document.getElementById("tpNumber");
+                                var Email = document.getElementById("Email");
+                                var IntakeCode = document.getElementById("intakeCode");
+                                var PhoNum = document.getElementById("phoNum");
+                                var DOB = document.getElementById("dob");
+                                var Club = document.getElementById("Club");
+                                var btnsub = document.getElementById("btn_submit");
+                                var status = "Pending Review";
 
-    
-    /////Insert Data Function ///////////////
+                                btnsub.onclick = function () {
+                                    firebase.auth().onAuthStateChanged((user) => {
+                                        if (user) {
+                                            var uids = user.uid;
+                                            InsertData(uids);
+                                        }
+                                    });
+                                }
 
-    function InsertData(){
-        set(ref(db,"Club_Registration_Form/"+ Club.value + "/" + UID),{
-            FullName: FullName.value,
-            TP_number: TPnum.value,
-            Emailadd: Email.value,
-            Intakecode: IntakeCode.value,
-            Phone_number: PhoNum.value,
-            DateofBirth: DOB.value,
-            Status: status,
+                                /////Insert Data Function ///////////////
 
-        })
-        .then(()=>{
-            alert("data stored successfully");
-        })
-        .catch((error)=>{
-            alert("unsuccessful,error"+error);
-        });
-    }
+                                function InsertData(CURUID) {
+                                    firebase.database().ref("Club_Registration_Form/" + Club.value + "/" + CURUID).set({
+                                        FullName: FullName.value,
+                                        TP_number: TPnum.value,
+                                        Emailadd: Email.value,
+                                        Intakecode: IntakeCode.value,
+                                        Phone_number: PhoNum.value,
+                                        DateofBirth: DOB.value,
+                                        Status: status,
 
-/////////Assign btn/////////////
-    btnsub.addEventListener("click",InsertData);
-    
-    </script>
+                                    }, (error) => {
+                                        if (error) {
+                                            alert("Your registration did not go through. Please try again");
+                                        } else {
+                                            alert("Registration successful");
+                                            location.reload();
+                                        }
+                                    })
+                                };
+                                /////////Assign btn/////////////
+                               // btnsub.addEventListener("click", InsertData);
+
+                            </script>
+
+                            <script>
+                                function logout() {
+                                    window.alert("You have signed out successfully");
+                                    window.location.href = "login.html";
+                                    firebase.auth().signOut().then(() => {
+                                    }).catch((error) => {
+                                        console.log(error);
+                                    });
+                                };
+                            </script>
 
 </body>
+
 </html>
