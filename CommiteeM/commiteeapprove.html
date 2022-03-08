@@ -123,7 +123,7 @@
 
 
     <!-- Table Listing -->
-    <div class="row">
+    <div class="row" id="row">
       <div class="col-md-12">
         <div class="container">
             <table id="table1" class="table">
@@ -167,8 +167,6 @@
                 firebase.initializeApp(firebaseConfig);
                 var database = firebase.database();
                 var cns_number;
-                // var currentUID = firebase.auth().currentUser.UID;
-                var currentUID = 'ihAzlCroRrf0YraoUW8WE5I7a6n1';
 
                 firebase.database().ref("committee").once('value',function(value){
                     value.forEach(
@@ -194,7 +192,7 @@
                                 var TPNo = CurrentRecord.val().TP_number;
                                 var Email = CurrentRecord.val().Emailadd;
                                 var Stat = CurrentRecord.val().Status;
-                                AddItemsToTable(Name,DOB,PhNo,IntCode,TPNo,Email,Stat);
+                                AddItemsToTable(Name,DOB,PhNo,IntCode,TPNo,Email,Stat,commitclubname);
                             }
                         );
                     });
@@ -203,8 +201,9 @@
 
                 //---------FILLING THE TABLE---------//
                 serial_number = 0;
+                
                 var cm_list = [];
-                function AddItemsToTable(Name,DOB,PhNo,IntCode,TPNo,Email,Stat){
+                function AddItemsToTable(Name,DOB,PhNo,IntCode,TPNo,Email,Stat,clubname){
                     var tbody1 = document.getElementById('tbody1');
                     var trow = document.createElement('tr');
                     var td1 = document.createElement('td');
@@ -217,7 +216,8 @@
                     var td8 = document.createElement('td');
                     var td9 = document.createElement("td");
                     var td10 = document.createElement("td");
-                    cm_list.push([Name,DOB,PhNo,IntCode,TPNo,Email,Stat]);
+                    cm_list.push([Name,DOB,PhNo,IntCode,TPNo,Email,clubname]);
+                    
 
                     td1.innerHTML = ++serial_number;
                     td2.innerHTML = Name;
@@ -240,40 +240,66 @@
                     trow.appendChild(td10);
                     td9.innerHTML = '<button class="btn btn-primary my-2 ml-2" onclick="Approvefea('+serial_number+')">Approve</button>';
                     td10.innerHTML = '<button class="btn btn-primary my-2 ml-2" onclick="Disfea('+serial_number+')">Disapprove</button>';
-                    tbody1.appendChild(trow);
-                }
-
-                
+                };
+ 
+            
                 function Approvefea(index){
                 --index;
-                firebase.database().ref("Club_Registration_Form/"+commitclub+ "/UID").remove(
-                (error) => {
-                    if (error){
-                       alert("Not Update");
-                    } else {
-                        alert("Updated");
-                        location.reload();
-                    }
-                }
-            )
-             firebase.database().ref("clubMember/"+commitclub+"/UID").set(
+                firebase.database().ref('users/').once('value',
+                function(thisuser){
+                        thisuser.forEach(
+                            function (detailthisuser){
+                                if (detailthisuser.val().FullName == cm_list[index][0]) {
+                                    var userID=detailthisuser.ref.key;
+                                    console.log(userID);
+                                    firebase.database().ref("Club_Registration_Form/"+ cm_list[index][6] + "/"+ userID).remove();
+                                    movedb(userID);
+                                } 
+                            }) 
+                        });
+                            function movedb(UserID) {
+                                    firebase.database().ref("clubMember/"+cm_list[index][6]+"/"+ UserID).set({
+                                        FullName: cm_list[index][0],
+                                        DateofBirth: cm_list[index][1],
+                                        Phone_number: cm_list[index][2],
+                                        Intakecode: cm_list[index][3],
+                                        TP_number: cm_list[index][4],
+                                        Email: cm_list[index][5],
+                                        },
+                                        (error) => {
+                                            if (error){
+                                            alert("Error Approved");
+                                            } else {
+                                                alert("Approved");
+                                                location.reload();
+                                            }
+                                            });
+                                    }                            
 
-             )
-
-            }
+             }
 
             function Disfea(index){
                 --index;
-                firebase.database().ref("Club_Registration_Form/badminton/UID").remove(
-                (error) => {
-                    if (error){
-                       alert("Not Deleted");
-                    } else {
-                        alert("Deleted");
-                        location.reload();
-                    }
-                }
-            )
+                firebase.database().ref('users/').once('value',
+                function(thisuser){
+                        thisuser.forEach(
+                            function (detailthisuser){
+                                if (detailthisuser.val().FullName == cm_list[index][0]) {
+                                    var userID=detailthisuser.ref.key;
+                                    console.log(userID);
+                                    firebase.database().ref("Club_Registration_Form/"+ cm_list[index][6] + "/"+ userID).remove(
+                                        (error) => {
+                                            if (error){
+                                            alert("Error Disapprove");
+                                            } else {
+                                                alert("Disapprove");
+                                                location.reload();
+                                            }
+                                            });
+                                } 
+                            })
+
+                });
             }   
 
 </script>
