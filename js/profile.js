@@ -13,7 +13,6 @@ var firebaseConfig = {
 //Both have firebase.init. If you init it more than once without providing separate arguements it will produce an error
 
 // firebase.initializeApp(firebaseConfig);
-var database = firebase.database();
 
 //when the page run ,the code will be call to display all data from the db to the user.
 //will be judge according to the user ID and carry out the data under the register User ID.
