@@ -15,7 +15,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
     <script type="text/javascript" src="js/loggedinstate.js"></script>
-    <script type="text/javascript" src="js/clubregistration.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -136,12 +135,13 @@
                                 </div>
                             </div>
                             <script>
-
+                            
 
                             </script>
                             <script>
 
                                 //////Reference//////
+
 
                                 var FullName = document.getElementById("fullName");
                                 var TPnum = document.getElementById("tpNumber");
@@ -153,19 +153,53 @@
                                 var btnsub = document.getElementById("btn_submit");
                                 var status = "Pending Review";
 
-                                btnsub.onclick = function () {
-                                    firebase.auth().onAuthStateChanged((user) => {
-                                        if (user) {
-                                            var uids = user.uid;
-                                            InsertData(uids);
+                                
+                                firebase.auth().onAuthStateChanged((user) => {
+                                    if (user){
+                                        var uids = user.uid;
+                                        PresetValue(uids);
                                         }
-                                    });
+                                });
+
+                                function PresetValue(CurrID) {
+                                    firebase.database().ref("users/"+ CurrID).once("value",
+                                    function(CurrentUserRecords){
+                                        CurrentUserRecords.forEach(
+                                            function(){
+                                                var UName = CurrentUserRecords.val().FullName;
+                                                var UTPno = CurrentUserRecords.val().TPNumber;
+                                                var UIntCode = CurrentUserRecords.val().IntakeCode;
+                                                var UDOB = CurrentUserRecords.val().DateOfBirth;
+                                                var UEmail = CurrentUserRecords.val().Email;
+                                                AddItemsToText(UName,UTPno,UIntCode,UDOB,UEmail);
+                                            }
+                                    );
+                                });
                                 }
+
+                                function AddItemsToText(UName,UTPno,UIntCode,UDOB,UEmail){
+                                    FullName.value = UName;
+                                    TPnum.value = UTPno;
+                                    IntakeCode.value = UIntCode;
+                                    DOB.value = UDOB;
+                                    Email.value= UEmail;
+                                }
+
+                                btnsub.onclick = function() {
+                                firebase.auth().onAuthStateChanged((user) => {
+                                    if (user){
+                                        var uids = user.uid;
+                                        InsertData(uids);
+                                        }
+                                });
+
+
+                            }
 
                                 /////Insert Data Function ///////////////
 
                                 function InsertData(CURUID) {
-                                    firebase.database().ref("Club_Registration_Form/" + Club.value + "/" + CURUID).set({
+                                    firebase.database().ref("Club_Registration_Form/"+Club.value+"/" + CURUID).set( {
                                         FullName: FullName.value,
                                         TP_number: TPnum.value,
                                         Emailadd: Email.value,
@@ -174,15 +208,15 @@
                                         DateofBirth: DOB.value,
                                         Status: status,
 
-                                    }, (error) => {
-                                        if (error) {
-                                            alert("Your registration did not go through. Please try again");
-                                        } else {
-                                            alert("Registration successful");
-                                            location.reload();
-                                        }
-                                    })
-                                };
+                                    },(error) => {
+                                    if (error){
+                                    alert("Registration failed. Please try again");
+                                    } else {
+                                        alert("Registration successful");
+                                        location.reload();
+                                    }
+                                })
+                            };
                                 /////////Assign btn/////////////
                                // btnsub.addEventListener("click", InsertData);
 
