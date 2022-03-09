@@ -108,11 +108,12 @@
             </ul>
         </nav>
 
+        <!-- Label -->
         <div class="content-wrapper">
             <div class="container-fluid">
 
-                <div class="row">
-                    <div class="col-md-12">
+               <div class="row">
+                    <div class="col-md-12"> 
 
                         <h2 class="page-title">Commitee Members - Monthly Report</h2>
 
@@ -143,38 +144,37 @@
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Adding New Clubs</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        <!-- Label 2 -->
+        <div class="content-wrapper">
+            <div class="container-fluid">
+
+               <div class="row">
+                    <div class="col-md-12"> 
+
+                        <h5>Below is your automatically generated activities report</h5>
+
                     </div>
-                    <div class="modal-body">
-                        <label class="labs">Club/Society:</label>
-                        <input type="input-group-text" id="NameMod"> <br>
-                        <label class="labs">Short&nbsp;Description</label>
-                        <input type="text" id="ShDescMod"> <br>
-                        <label class="labs">Type</label>
-                        <input type="text" id="TypeMod"> <br>
-                        <hr>
-                        <label class="labs">Description</label>
-                        <textarea class="form-control" aria-label="With textarea" id="DescMod"></textarea>
-                        <label class="labs">Activity</label>
-                        <textarea class="form-control" aria-label="With textarea" id="ActMod"></textarea>
-                        <label class="labs">How&nbsp;To&nbsp;Join</label><br>
-                        <textarea class="form-control" aria-label="With textarea" id="HTJMod"></textarea>
-                        <label class="labs">Commitee&nbsp;Members</label><br>
-                        <textarea class="form-control" aria-label="With textarea" id="CMMod"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="UpdateModBtn" type="button" class="btn btn-success" onclick="UpdateEvent()">Update
-                            Clubs</button>
-                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Listing -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
+                    <table id="table2" class="table">
+                        <thead>
+                            <th>No.</th>
+                            <th>Event Name</th>
+                            <th>Event Date</th>
+                            <th>Event Time</th>
+                            <th>Event Description</th>
+                            <th>Location</th>
+                        </thead>
+                        <tbody id="tbody2">
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

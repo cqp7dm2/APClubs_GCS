@@ -25,6 +25,7 @@ firebase.auth().onAuthStateChanged((user) => {
                     var club = childSnapshot.val();
                     console.log(club);
                     SelectAllData(club);
+                    SelectEventData(club);
                 });
             });
 
@@ -89,6 +90,64 @@ function AddItemsToTable(fullName, tpNumber, intakeCode, email) {
     trow.appendChild(td3);
     trow.appendChild(td4);
     trow.appendChild(td5);
+
+    tbody1.appendChild(trow);
+}
+
+// Getting the data
+function SelectEventData(club) {
+    console.log("Select Event Data" + club);
+    document.getElementById("tbody2").innerHTML = "";
+    event_number = 0;
+
+    firebase.database().ref('event').once('value',
+        function (AllRecords) {
+            AllRecords.forEach(
+                function (CurrentRecord) {
+                    console.log(AllRecords.val());
+                    var eventClub = CurrentRecord.val().event_club;
+                    var eventName = CurrentRecord.val().event_name;
+                    var eventDate = CurrentRecord.val().event_date;
+                    var eventTime = CurrentRecord.val().event_time;
+                    var eventDescription = CurrentRecord.val().event_desc;
+                    var eventLocation = CurrentRecord.val().event_location;
+                    if (eventClub == club){
+                        AddEventsToTable(eventName, eventDate, eventTime, eventDescription,eventLocation);
+                    }
+                }
+            );
+        });
+}
+
+// Inserting data to the table
+var cns_list = [];
+
+function AddEventsToTable(eventName, eventDate, eventTime, eventDescription,eventLocation) {
+    var tbody1 = document.getElementById('tbody2');
+    var trow = document.createElement('tr');
+    var td1 = document.createElement('td');
+    var td2 = document.createElement('td');
+    var td3 = document.createElement('td');
+    var td4 = document.createElement('td');
+    var td5 = document.createElement('td');
+    var td6 = document.createElement('td');
+
+    cns_list.push([eventName, eventDate, eventTime, eventDescription,eventLocation]);
+
+    td1.innerHTML = ++event_number;
+    td2.innerHTML = eventName;
+    td2.classList += "Namefield";
+    td3.innerHTML = eventDate;
+    td4.innerHTML = eventTime;
+    td5.innerHTML = eventDescription;
+    td6.innerHTML = eventLocation;
+
+    trow.appendChild(td1);
+    trow.appendChild(td2);
+    trow.appendChild(td3);
+    trow.appendChild(td4);
+    trow.appendChild(td5);
+    trow.appendChild(td6);
 
     tbody1.appendChild(trow);
 }
