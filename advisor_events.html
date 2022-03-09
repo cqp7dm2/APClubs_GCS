@@ -15,6 +15,10 @@
             width: 100px;
         }
 
+        .inp{
+            width: 300px;
+        }
+
         .lbl{
             display: inline-block;
             width: 100px;
@@ -27,7 +31,7 @@
         }
 
         textarea{
-            width: 400px;
+            width: 300px;
             border: gray 1px solid;
             resize: none;
             padding: 8px;
@@ -35,18 +39,19 @@
         }
         
         img{
-            width: 300px;
-            height: 300px;
+            width: 330px;
+            height: 490px;
             border: 2px black solid;
         }
 
-        /* .btndiv{
-            text-align: center;
+        .container{
+            display: flex;
         }
 
-        button{
-            padding: 14px 40px;
-        } */
+        .column{
+            float: left;
+            width: 400px;
+        }
         
     </style>
 
@@ -54,107 +59,40 @@
 </head>
 <body>
     <div class="container border">
-        <!--Search bar start-->
-        <div class="input-group mb-3 mt-3">
-            <input id="SearchBar" type="text" class="form-control" placeholder="Search a Record" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <select class="custom-select" id="CategorySelected">
-                    <option selected value="1">By Name</option>
-                    <option value="2">By Club</option>
-                    <option value="3">By Date</option>
-                    <option value="4">By Time</option>
-                    <option value="5">By Location</option>
-                </select>
-                <button id="SearchBtn" class="btn btn-outline-secondary ml-1" type="button">Search</button>
-            </div>
+        <div class="column">
+            <!--Event Submission Form-->
+            <label class="labs">Name: </label>
+            <input type="text" class="inp" id="txtName"> <br>
+
+            <label class="lbl">Description: </label>
+            <textarea type="text" class="inp" id="txtDesc"></textarea> <br>
+
+            <label class="labs">Club Name: </label>
+            <input type="text" class="inp" id="txtClub"> <br>
+
+            <label class="labs">Date: </label>
+            <input type="text" class="inp" id="txtDate"> <br>
+
+            <label class="labs">Time: </label>
+            <input type="text" class="inp" id="txtTime"> <br>
+
+            <label class="labs">Location: </label>
+            <input type="text" class="inp" id="txtLoc"> <br>
+
+            <label class="labs">Poster: </label>
+            <input type="text" class="inp" id="txtDoc" disabled>
+            <label id="extlab"></label> <br>
         </div>
-        <!--Search bar end-->
 
-        <button type="button" id="btnAdd" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter">
-            Add New Record
-        </button>
+        <div class="column">
+            <label class="labs" visible="false"></label>
+            <image id="myimg"> <br>
+            <label id="progressbar"></label> <br>
 
-        <!---Data Table--->
-        <table id="table1" class="table">
-            <thead>
-                <th>No.</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Club Name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Location</th>
-                <th>Document</th>
-                <th>Control</th>
-            </thead>
-            <tbody id="tbody1">
-                
-            </tbody>
-        </table>
-
-        <!--Event Submission Form-->
-        <label class="labs">Name: </label>
-        <input type="text" id="txtName"> <br>
-
-        <label class="lbl">Description: </label>
-        <textarea type="text" id="txtDesc"></textarea> <br>
-
-        <label class="labs">Club Name: </label>
-        <input type="text" id="txtClub"> <br>
-
-        <label class="labs">Date: </label>
-        <input type="text" id="txtDate"> <br>
-
-        <label class="labs">Time: </label>
-        <input type="text" id="txtTime"> <br>
-
-        <label class="labs">Location: </label>
-        <input type="text" id="txtLoc"> <br>
-
-        <label class="labs">Document: </label>
-        <input type="text" id="txtDoc">
-        <label id="extlab"></label> <br><br>
-
-        <button id="selbtn">Select Image</button>
-        <button id="upbtn">Submit Application</button> <br><br>
-
-        <image id="myimg"> 
-        <label id="progressbar"></label><br><br>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Control Panel</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <label class="labs">Name: </label>
-                    <input class="inp" type="text" id="NameMod"> <br>
-                    <label class="labs">Description: </label>
-                    <input class="inp" type="text" id="DescMod"> <br>
-                    <label class="labs">Club Name: </label>
-                    <input class="inp" type="text" id="ClubMod"> <br>
-                    <label class="labs">Date: </label>
-                    <input class="inp" type="text" id="DateMod"> <br>
-                    <label class="labs">Time: </label>
-                    <input class="inp" type="text" id="TimeMod"> <br>
-                    <label class="labs">Location: </label>
-                    <input class="inp" type="text" id="LocMod"> <br>
-                    <label class="labs">Document: </label>
-                    <input class="inp" type="text" id="DocMod"> <br>
-                </div>
-                <div class="modal-footer">
-                    <button id="AddModBtn" type="button" class="btn btn-primary" onclick="AddEvent()">Add New Record</button>
-                    <button id="UpdateModBtn" type="button" class="btn btn-success" onclick="UpdateEvent()">Update Record</button>
-                    <button id="DeleteModBtn" type="button" class="btn btn-danger" onclick="DeleteEvent()">Delete Record</button>
-                </div>
-            </div>
+            <button id="selbtn" class="btn btn-primary">Select Image</button>
+            <button id="upbtn" class="btn btn-primary">Submit Application</button> <br><br>
         </div>
+        
     </div>
 
     <script type="module">
@@ -180,139 +118,6 @@
         import { getDatabase, ref, set, child, get, update, remove }
             from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
         const realdb = getDatabase();
-
-        var event_number;
-
-        //---------GET ALL DATA---------//
-        function SelectAllData(){
-            document.getElementById("tbody1").innerHTML = "";
-            event_number = 0;
-            const dbref = ref(realdb);
-            get(child(dbref,'event'))
-                .then((snapshot) => {
-                    snapshot.forEach(
-                        function(CurrentRecord){
-                        var name = CurrentRecord.val().event_name;
-                        var desc = CurrentRecord.val().event_desc;
-                        var club = CurrentRecord.val().event_club;
-                        var date = CurrentRecord.val().event_date;
-                        var time = CurrentRecord.val().event_time;
-                        var loc = CurrentRecord.val().event_location;
-                        var doc = CurrentRecord.val().event_image;
-                        AddItemsToTable(name,desc,club,date,time,loc,doc);
-                    });
-                });
-        }
-
-        window.onload = SelectAllData;
-
-        //---------FILLING THE TABLE---------//
-        
-        var event_list = [];
-
-        function AddItemsToTable(name,desc,club,date,time,loc,doc,btn){
-            var tbody1 = document.getElementById('tbody1');
-            var trow = document.createElement('tr');
-            var td0 = document.createElement('td');
-            var td1 = document.createElement('td');
-            var td2 = document.createElement('td');
-            var td3 = document.createElement('td');
-            var td4 = document.createElement('td');
-            var td5 = document.createElement('td');
-            var td6 = document.createElement('td');
-            var td7 = document.createElement('td');
-
-            event_list.push([name,desc,club,date,time,loc,doc]);
-
-            td0.innerHTML = ++event_number;
-            td1.innerHTML = name;
-            td2.innerHTML = desc;
-            td3.innerHTML = club;
-            td4.innerHTML = date;
-            td5.innerHTML = time;
-            td6.innerHTML = loc;
-            td7.innerHTML = doc;
-
-            td1.classList += 'nameField';
-            td3.classList += 'clubField';
-            td4.classList += 'dateField';
-            td5.classList += 'timeField';
-            td6.classList += 'locField';
-            //td6.classList += 'docField';
-            
-            trow.appendChild(td0);
-            trow.appendChild(td1);
-            trow.appendChild(td2);
-            trow.appendChild(td3);
-            trow.appendChild(td4);
-            trow.appendChild(td5);
-            trow.appendChild(td6);
-            trow.appendChild(td7);
-
-            var ControlDiv = document.createElement('div');
-            ControlDiv.innerHTML = '';
-            ControlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="Filltxt('+ event_number +')">Edit</button>';
-
-            trow.appendChild(ControlDiv);
-            tbody1.appendChild(trow);
-        }
-
-        var ModName = document.getElementById('txtName');
-        var ModDesc = document.getElementById('txtDesc');
-        var ModClub = document.getElementById('txtClub');
-        var ModDate = document.getElementById('txtDate');
-        var ModTime = document.getElementById('txtTime');
-        var ModLoc = document.getElementById('txtLoc');
-        var ModDoc = document.getElementById('txtDoc');
-
-        var BTNmodAdd = document.getElementById('AddModBtn');
-        var BTNmodUpdate = document.getElementById('UpdateModBtn');
-        var BTNmodDelete = document.getElementById('DeleteModBtn');
-
-        function Filltxt(index){
-            if(index==null){
-                ModName.value = "";
-                ModDesc.value = "";
-                ModClub.value = "";
-                ModDate.value = "";
-                ModTime.value = "";
-                ModLoc.value = "";
-                ModDoc.value = "";
-                ModName.disabled = false;
-                BTNmodAdd.style.display = 'inline-block';
-                BTNmodUpdate.style.display = 'none';
-                BTNmodDelete.style.display = 'none';
-            } else {
-                --index;
-                ModName.value = event_list[index][0];
-                ModDesc.value = event_list[index][1];
-                ModClub.value = event_list[index][2];
-                ModDate.value = event_list[index][3];
-                ModTime.value = event_list[index][4];
-                ModLoc.value = event_list[index][5];
-                ModDoc.value = event_list[index][6];
-                ModName.disabled = true;
-                BTNmodAdd.style.display = 'none';
-                BTNmodUpdate.style.display = 'inline-block';
-                BTNmodDelete.style.display = 'inline-block';
-            }
-        }
-
-        function fillform(){
-            ModName.value = "";
-            ModDesc.value = "";
-            ModClub.value = "";
-            ModDate.value = "";
-            ModTime.value = "";
-            ModLoc.value = "";
-            ModDoc.value = "";
-            ModName.disabled = false;
-            BTNmodAdd.style.display = 'inline-block';
-            BTNmodUpdate.style.display = 'none';
-            BTNmodDelete.style.display = 'none';
-        }
-
-        document.getElementById('btnAdd').addEventListener('click', fillform);
 
         //---Variables for Images Process---//
         var files = [];
@@ -370,10 +175,28 @@
             return fname;
         }
 
+        function clearbox(){
+            evbox.value = "";
+            descbox.value = "";
+            clubbox.value = "";
+            datebox.value = "";
+            timebox.value = "";
+            locbox.value = "";
+            namebox.value = "";
+            extlab.value = "";
+            myimg.src = "";
+            proglab.innerHTML = "";
+        }
+
         //---Upload img---//
         async function UploadProcess(){
             var ImgToUpload = files[0];
             var ImgName = namebox.value + extlab.innerHTML;
+
+            if(evbox.value=="" || clubbox.value=="" || datebox.value=="" || timebox.value=="" || locbox.value=="" || namebox.value==""){
+                alert('Please fill in every contents!');
+                return;
+            }
 
             if(!ValidateName()){
                 alert('Name cannot contain ".", "#", "$", "[", or "]".');
@@ -389,7 +212,7 @@
 
             UploadTask.on('state-changed', (snapshot)=>{
                 var progress = (snapshot.bytesTransferred / snapshot.totalBytes)*100;
-                proglab.innerHTML = "upload " + progress + "%";
+                proglab.innerHTML = "Upload " + progress + "%";
             },
 
             (error)=>{
@@ -399,6 +222,8 @@
             ()=>{
                 getDownloadURL(UploadTask.snapshot.ref).then((downloadURL)=>{
                     SaveURLtoRealtimeDB(downloadURL);
+                    alert("Event submitted successfully!")
+                    clearbox();
                 });
             }
             );
@@ -409,6 +234,7 @@
             var name = namebox.value;
             var ename = evbox.value;
             var ext = extlab.innerHTML;
+            var status = "Pending";
 
             set(ref(realdb, "event/"+ename),{
                 event_name: evbox.value,
@@ -418,7 +244,8 @@
                 event_time: timebox.value,
                 event_location: locbox.value,
                 event_image: (name + ext),
-                event_imgURL: URL
+                event_imgURL: URL,
+                event_status: status
             });
         }
 

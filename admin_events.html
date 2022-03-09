@@ -7,6 +7,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js"></script>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -19,6 +20,11 @@
         }
 
         .inp{
+            width: 350px;
+        }
+
+        .inpS{
+            height: 30px;
             width: 350px;
         }
 
@@ -41,6 +47,7 @@
                     <option value="3">By Date</option>
                     <option value="4">By Time</option>
                     <option value="5">By Location</option>
+                    <option value="6">By Status</option>
                 </select>
                 <button id="SearchBtn" class="btn btn-outline-secondary ml-1" type="button">Search</button>
             </div>
@@ -61,8 +68,9 @@
                 <th>Date</th>
                 <th>Time</th>
                 <th>Location</th>
-                <th>Document</th>
-                <th>Control</th>
+                <th>Poster</th>
+                <th>Status</th>
+                <th>Controls</th>
             </thead>
             <tbody id="tbody1">
                 
@@ -86,7 +94,11 @@
                     <label class="labs">Description: </label>
                     <input class="inp" type="text" id="DescMod"> <br>
                     <label class="labs">Club Name: </label>
-                    <input class="inp" type="text" id="ClubMod"> <br>
+                    <!-- <input class="inp" type="text" id="ClubMod"> <br> -->
+                    <select class="inpS" id="ClubMod" onchange="existingClub()">
+                        <option>---Select Club---</option>
+                    </select> <br>
+
                     <label class="labs">Date: </label>
                     <input class="inp" type="text" id="DateMod"> <br>
                     <label class="labs">Time: </label>
@@ -95,6 +107,12 @@
                     <input class="inp" type="text" id="LocMod"> <br>
                     <label class="labs">Document: </label>
                     <input class="inp" type="text" id="DocMod"> <br>
+                    <label class="labs">Status: </label>
+                    <select class="inpS" id="StatusMod">
+                        <option selected value="Pending">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button id="AddModBtn" type="button" class="btn btn-primary" onclick="AddEvent()">Add New Record</button>
@@ -105,18 +123,54 @@
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+        
+        //---Initialize Firebase---//
+        const app = initializeApp(firebaseConfig);
+
+        import { getStorage, ref, deleteObject } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js";
+
+        const storage = getStorage();
+
+        var ModDoc = document.getElementById('DocMod');
+
+        document.getElementById('DeleteModBtn').addEventListener('click', function(){
+            // Create a reference to the file to delete
+            const desertRef = ref(storage, 'Images/' + ModDoc.value);
+            // Delete the file
+            deleteObject(desertRef).then(() => {
+                alert('File deleted successfully');
+            }).catch((error) => {
+               alert('Uh-oh, an error occurred!');
+            });
+        })
+        
+    </script>
+
     <script id="mainscript">
 
         //---------FIREBASE CONFIGURATION---------//
-        var firebaseConfig = {
-        apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
-        authDomain: "apclubs-678c7.firebaseapp.com",
-        databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "apclubs-678c7",
-        storageBucket: "apclubs-678c7.appspot.com",
-        messagingSenderId: "711066755172",
-        appId: "1:711066755172:web:8187fe865e562d32807f71",
-        measurementId: "G-NCK9V02TE8"
+        // var firebaseConfig = {
+        // apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+        // authDomain: "apclubs-678c7.firebaseapp.com",
+        // databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+        // projectId: "apclubs-678c7",
+        // storageBucket: "apclubs-678c7.appspot.com",
+        // messagingSenderId: "711066755172",
+        // appId: "1:711066755172:web:8187fe865e562d32807f71",
+        // measurementId: "G-NCK9V02TE8"
+        // };
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+            authDomain: "apclubs-678c7.firebaseapp.com",
+            databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "apclubs-678c7",
+            storageBucket: "apclubs-678c7.appspot.com",
+            messagingSenderId: "711066755172",
+            appId: "1:711066755172:web:8187fe865e562d32807f71",
+            measurementId: "G-NCK9V02TE8"
         };
 
         firebase.initializeApp(firebaseConfig);
@@ -139,7 +193,8 @@
                         var time = CurrentRecord.val().event_time;
                         var loc = CurrentRecord.val().event_location;
                         var doc = CurrentRecord.val().event_image;
-                        AddItemsToTable(name,desc,club,date,time,loc,doc);
+                        var status = CurrentRecord.val().event_status;
+                        AddItemsToTable(name,desc,club,date,time,loc,doc,status);
                     }
                 );
             });
@@ -151,7 +206,7 @@
         
         var event_list = [];
 
-        function AddItemsToTable(name,desc,club,date,time,loc,doc,btn){
+        function AddItemsToTable(name,desc,club,date,time,loc,doc,status){
             var tbody1 = document.getElementById('tbody1');
             var trow = document.createElement('tr');
             var td0 = document.createElement('td');
@@ -162,8 +217,9 @@
             var td5 = document.createElement('td');
             var td6 = document.createElement('td');
             var td7 = document.createElement('td');
+            var td8 = document.createElement('td');
 
-            event_list.push([name,desc,club,date,time,loc,doc]);
+            event_list.push([name,desc,club,date,time,loc,doc,status]);
 
             td0.innerHTML = ++event_number;
             td1.innerHTML = name;
@@ -173,13 +229,22 @@
             td5.innerHTML = time;
             td6.innerHTML = loc;
             td7.innerHTML = doc;
+            td8.innerHTML = status;
+
+            if(td8.innerHTML == "Pending"){
+                td8.innerHTML = "<b><span style='color:blue'>"+status+"</span></b>";
+            } else if(td8.innerHTML == "Approved"){
+                td8.innerHTML = "<b><span style='color:green'>"+status+"</span></b>";
+            } else if(td8.innerHTML == "Rejected"){
+                td8.innerHTML = "<b><span style='color:red'>"+status+"</span></b>";
+            };
 
             td1.classList += 'nameField';
             td3.classList += 'clubField';
             td4.classList += 'dateField';
             td5.classList += 'timeField';
             td6.classList += 'locField';
-            //td6.classList += 'docField';
+            td8.classList += 'statusField';
             
             trow.appendChild(td0);
             trow.appendChild(td1);
@@ -189,10 +254,10 @@
             trow.appendChild(td5);
             trow.appendChild(td6);
             trow.appendChild(td7);
+            trow.appendChild(td8);
 
             var ControlDiv = document.createElement('div');
-            ControlDiv.innerHTML = '';
-            ControlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes('+ event_number +')">Edit</button>';
+            ControlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes('+ event_number +')">Manage</button>';
 
             trow.appendChild(ControlDiv);
             tbody1.appendChild(trow);
@@ -205,6 +270,7 @@
         var ModTime = document.getElementById('TimeMod');
         var ModLoc = document.getElementById('LocMod');
         var ModDoc = document.getElementById('DocMod');
+        var StatusDoc = document.getElementById('StatusMod');
 
         var BTNmodAdd = document.getElementById('AddModBtn');
         var BTNmodUpdate = document.getElementById('UpdateModBtn');
@@ -219,7 +285,9 @@
                 ModTime.value = "";
                 ModLoc.value = "";
                 ModDoc.value = "";
+                StatusDoc.value = "";
                 ModName.disabled = false;
+                ModDoc.disabled = false;
                 BTNmodAdd.style.display = 'inline-block';
                 BTNmodUpdate.style.display = 'none';
                 BTNmodDelete.style.display = 'none';
@@ -227,16 +295,69 @@
                 --index;
                 ModName.value = event_list[index][0];
                 ModDesc.value = event_list[index][1];
-                ModClub.value = event_list[index][2];
+                //ModClub.value = event_list[index][2];
                 ModDate.value = event_list[index][3];
                 ModTime.value = event_list[index][4];
                 ModLoc.value = event_list[index][5];
                 ModDoc.value = event_list[index][6];
+                StatusDoc.value = event_list[index][7];
                 ModName.disabled = true;
+                ModDoc.disabled = true;
                 BTNmodAdd.style.display = 'none';
                 BTNmodUpdate.style.display = 'inline-block';
                 BTNmodDelete.style.display = 'inline-block';
             }
+        }
+
+        function existingClub(){
+            //Get text or inner html of the selected option
+            var d = document.getElementById("ClubMod");
+            var selectedText = d.options[d.selectedIndex].text;
+
+            firebase.database().ref('vehicles').child('vehicle_number').on('value', function(vehinumSnapshot) {
+                var vehinumChildSnapshot = vehinumSnapshot.val();
+
+                var queryRef = firebase.database().ref('vehicles').orderByChild('vehicle_number').equalTo(selectedText);
+                queryRef.on('value', function(querySnapshot) {
+                    querySnapshot.forEach(function(dinoSnapshot) {
+                        var vin_mainte = '';
+                        var plate_mainte = '';
+                        var val = dinoSnapshot.val();
+
+                        vin_mainte += val.vin;
+                        plate_mainte += val.plate_no;
+
+                        document.getElementById('vinInput1').value = vin_mainte;
+                        document.getElementById('platenoInput1').value = plate_mainte;
+                    });
+                });
+            });
+        }
+
+        function EventApproval(){
+            firebase.database().ref("event/" + ModName.value).update(
+                {
+                    event_name: ModName.value,
+                    event_desc: ModDesc.value,
+                    event_club: ModClub.value,
+                    event_date: ModDate.value,
+                    event_time: ModTime.value,
+                    event_location: ModLoc.value,
+                    event_image: ModDoc.value,
+                    event_status: StatusDoc.value
+                },
+                (error) =>{
+                    if(error){
+                        alert("Record was not updated, there was some problem!");
+                    }else{
+                        alert("Record was updated!");
+                        SelectAllData();
+                        $("exampleModalCenter").modal('hide');
+                        location.reload();
+                        return false;
+                    }
+                }
+            )
         }
 
         function AddEvent(){
@@ -248,7 +369,8 @@
                     event_date: ModDate.value,
                     event_time: ModTime.value,
                     event_location: ModLoc.value,
-                    event_image: ModDoc.value
+                    event_image: ModDoc.value,
+                    event_status: StatusDoc.value
                 },
                 (error) =>{
                     if(error){
@@ -273,7 +395,8 @@
                     event_date: ModDate.value,
                     event_time: ModTime.value,
                     event_location: ModLoc.value,
-                    event_image: ModDoc.value
+                    event_image: ModDoc.value,
+                    event_status: StatusDoc.value
                 },
                 (error) =>{
                     if(error){
@@ -290,10 +413,8 @@
         }
 
         function DeleteEvent(){
-            var delimgref = storageRef.child("Images/" + ModDoc.value);
             firebase.database().ref("event/" + ModName.value).remove().then(
                 function(){
-                    delimgref.delete();
                     alert("Record was deleted!");
                     SelectAllData();
                     $("exampleModalCenter").modal('hide');
@@ -301,17 +422,6 @@
                     return false;
                 }
             )
-        }
-
-        function DeleteImg(){
-            const desertRef = ref(storage, 'Images/' + ModDoc.value);
-            deleteObject(desertRef).then(() => {
-                // File deleted successfully
-                alert("Image was deleted!");
-            }).catch((error) => {
-                // Uh-oh, an error occurred!
-                alert("Image was not deleted!");
-            });
         }
 
         var searchBar = document.getElementById("SearchBar");
@@ -385,6 +495,9 @@
 
             else if(category.value == 5)
             SearchTable("locField");
+
+            else if(category.value == 6)
+            SearchTable("statusField");
 
             //else if(category.value == 4)
             //SearchTableByExactValues("locField");
