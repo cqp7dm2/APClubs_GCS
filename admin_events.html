@@ -28,9 +28,6 @@
             width: 350px;
         }
 
-        .container{
-            max-width: 90%;
-        }
     </style>
 
     <title>APClubs | Events Management</title>
@@ -314,7 +311,7 @@
             var d = document.getElementById("ClubMod");
             var selectedText = d.options[d.selectedIndex].text;
 
-            firebase.database().ref('vehicles').child('vehicle_number').on('value', function(vehinumSnapshot) {
+            firebase.database().ref('clubs').on('value', function(vehinumSnapshot) {
                 var vehinumChildSnapshot = vehinumSnapshot.val();
 
                 var queryRef = firebase.database().ref('vehicles').orderByChild('vehicle_number').equalTo(selectedText);
@@ -328,7 +325,6 @@
                         plate_mainte += val.plate_no;
 
                         document.getElementById('vinInput1').value = vin_mainte;
-                        document.getElementById('platenoInput1').value = plate_mainte;
                     });
                 });
             });
