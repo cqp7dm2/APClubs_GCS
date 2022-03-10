@@ -186,7 +186,7 @@
                 <li>`+ event.event_time + `</li>
                 <li>`+ event.event_location + `</li>
             </ul>
-            <button class="detbtns btn" id="detbtn">Join Now!</button>
+            <button class="detbtns btn" id="detbtn" onclick="location.href='clubs.html?clubs=`+ event.event_club +`'">Join Now!</button>
             `
             let newEvent = document.createElement('div');
             newEvent.classList.add('productcard');
