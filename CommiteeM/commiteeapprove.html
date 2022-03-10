@@ -2,158 +2,169 @@
 <html lang="en" class="no-js">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="theme-color" content="#3e454c">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="theme-color" content="#3e454c">
 
-	<title>APCLUBS | Commitee Panel</title>
-	<!--Bootstrap -->
-	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
-	<!--Custome Style -->
-	<link rel="stylesheet" href="../assets/css/style.css" type="text/css">
-	<!--OWL Carousel slider-->
-	<link rel="stylesheet" href="../assets/css/owl.carousel.css" type="text/css">
-	<link rel="stylesheet" href="../assets/css/owl.transitions.css" type="text/css">
-	<!--slick-slider -->
-	<link href="../assets/css/slick.css" rel="stylesheet">
-	<!--bootstrap-slider -->
-	<link href="../assets/css/bootstrap-slider.min.css" rel="stylesheet">
-	<!--FontAwesome Font Style -->
-	<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+    <title>APCLUBS | Commitee Panel</title>
+    <!--Bootstrap -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
+    <!--Custome Style -->
+    <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
+    <!--OWL Carousel slider-->
+    <link rel="stylesheet" href="../assets/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/owl.transitions.css" type="text/css">
+    <!--slick-slider -->
+    <link href="../assets/css/slick.css" rel="stylesheet">
+    <!--bootstrap-slider -->
+    <link href="../assets/css/bootstrap-slider.min.css" rel="stylesheet">
+    <!--FontAwesome Font Style -->
+    <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 
-	<!-- Fav and touch icons -->
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="../assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" type="image/png" href="../favicon.ico"/>
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-	<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
-	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+        href="../assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+        href="../assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="../assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" type="image/png" href="../favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
-	<!-- Firebase -->
-	<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
-		<!-- Font awesome -->
-		<link rel="stylesheet" href="../admin/css/font-awesome.min.css">
-		<!-- Sandstone Bootstrap CSS -->
-		<link rel="stylesheet" href="../admin/css/bootstrap.min.css">
-		<!-- Bootstrap Datatables -->
-		<link rel="stylesheet" href="../admin/css/dataTables.bootstrap.min.css">
-		<!-- Bootstrap social button library -->
-		<link rel="stylesheet" href="../admin/css/bootstrap-social.css">
-		<!-- Bootstrap select -->
-		<link rel="stylesheet" href="../admin/css/bootstrap-select.css">
-		<!-- Bootstrap file input -->
-		<link rel="stylesheet" href="../admin/css/fileinput.min.css">
-		<!-- Awesome Bootstrap checkbox -->
-		<link rel="stylesheet" href="../admin/css/awesome-bootstrap-checkbox.css">
-		<!-- Admin Stye -->
-		<link rel="stylesheet" href="../admin/css/style.css">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="../admin/css/font-awesome.min.css">
+    <!-- Sandstone Bootstrap CSS -->
+    <link rel="stylesheet" href="../admin/css/bootstrap.min.css">
+    <!-- Bootstrap Datatables -->
+    <link rel="stylesheet" href="../admin/css/dataTables.bootstrap.min.css">
+    <!-- Bootstrap social button library -->
+    <link rel="stylesheet" href="../admin/css/bootstrap-social.css">
+    <!-- Bootstrap select -->
+    <link rel="stylesheet" href="../admin/css/bootstrap-select.css">
+    <!-- Bootstrap file input -->
+    <link rel="stylesheet" href="../admin/css/fileinput.min.css">
+    <!-- Awesome Bootstrap checkbox -->
+    <link rel="stylesheet" href="../admin/css/awesome-bootstrap-checkbox.css">
+    <!-- Admin Stye -->
+    <link rel="stylesheet" href="../admin/css/style.css">
 
-		<style>
-		    .labs{
-		        display: inline-block;
-		        width: 100px;
-		    }
-		</style>
+    <style>
+        .labs {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
 
 </head>
 
 <body>
 
-	<!-- Header -->
+    <!-- Header -->
   <div class="brand clearfix">
-  	<a href="commMember.html" style="font-size: 15px; color: #b5df1a;" class="logo">APCLUBS | Commitee Panel</a>
-  		<span class="menu-btn"><i class="fa fa-bars"></i></span>
-  		<ul class="ts-profile-nav">
+    <a href="commMember.html" style="font-size: 15px; color: #b5df1a;" class="logo">APCLUBS | Commitee Panel</a>
+        <span class="menu-btn"><i class="fa fa-bars"></i></span>
+        <ul class="ts-profile-nav">
 
-  			<li class="ts-account " >
-  				<a href="#" style="color: #b5df1a;">Account <i class="fa fa-angle-down hidden-side "  ></i></a>
-  				<ul>
-  					<li><a href="logout.php">Logout</a></li>
-  				</ul>
-  			</li>
-  		</ul>
-  	</div>
-<div class="ts-main-content">
-
-	<!-- Left Side Bar -->
-  <nav class="ts-sidebar">
-			<ul class="ts-sidebar-menu">
-
-				<li class="ts-label " style="color: #b5df1a;">Main</li>
-				<li><a href="commMember.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-				<li><a href=""><i class="fa fa-male"></i>Monthly Report</a></li>
-				<li><a href=""><i class="fa fa-building"></i>Classroom Booking</a></li>
-				<li><a href=""><i class="fa fa-users"></i>Check Status & Booking</a></li>
-				<li><a href="UpdateClubDetails.html"><i class="fa fa-envelope"></i>Update Clubs Detials</a></li>
-        <li><a href=""><i class="fa fa-envelope"></i>Student Enquiry</a></li>
-			<!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
-
-			</ul>
-		</nav>
-
-		<div class="content-wrapper">
-			<div class="container-fluid">
-
-				<div class="row">
-					<div class="col-md-12">
-
-						<h2 class="page-title">Commitee Members - Update Clubs Details</h2>
-
-						<h5>Kindly update your clubs info and details from time to time</h5>
-
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-    <!-- Table Listing -->
-    <div class="row" id="row">
-      <div class="col-md-12">
-        <div class="container">
-            <table id="table1" class="table">
-                <thead>
-                    <th>No.</th>
-                    <th>Full Name</th>
-                    <th>Date of Birth</th>
-                    <th>Phone No</th>
-                    <th>Intake</th>
-                    <th>TP Number</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th>Approve</ht>
-                    <th>Decline</th>
-                    <!-- <th>Image 1</th>
-                    <th>Image 2</th> -->
-                </thead>
-                <tbody id="tbody1">
-
-                </tbody>
-            </table>
-        </div>
-      </div>
+            <li class="ts-account " >
+                <a href="#" style="color: #b5df1a;">Account <i class="fa fa-angle-down hidden-side "  ></i></a>
+                <ul>
+                    <li><a href="#" onclick="logout()">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
+<div class="ts-main-content">
+  <!-- Left Side Bar -->
+  <nav class="ts-sidebar">
+          <ul class="ts-sidebar-menu">
+
+              <li class="ts-label " style="color: #b5df1a;">Main</li>
+              <li><a href="commMember.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+              <li><a href="monthlyReport.html"><i class="fa fa-male"></i>Monthly Report</a></li>
+              <li><a href="commiteeapprove.html"><i class="fa fa-male"></i>Members Registration</a></li>
+              <li><a href=""><i class="fa fa-building"></i>Classroom Booking</a></li>
+              <li><a href=""><i class="fa fa-users"></i>Check Status & Booking</a></li>
+              <li><a href="advisor_events.html"><i class="fa fa-users"></i>Event Management</a></li>
+              <li><a href="UpdateClubDetails.html"><i class="fa fa-envelope"></i>Update Clubs Detials</a></li>
+      <li><a href=""><i class="fa fa-envelope"></i>Student Enquiry</a></li>
+          <!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
+
+          </ul>
+      </nav>
+
+        <div class="content-wrapper">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h2 class="page-title">Commitee Members - Update Clubs Details</h2>
+
+                        <h5>Kindly update your clubs info and details from time to time</h5>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-            <script id="mainscript">
+        <!-- Table Listing -->
+        <div class="row" id="row">
+            <div class="col-md-12">
+                <div class="container">
+                    <table id="table1" class="table">
+                        <thead>
+                            <th>No.</th>
+                            <th>Full Name</th>
+                            <th>Date of Birth</th>
+                            <th>Phone No</th>
+                            <th>Intake</th>
+                            <th>TP Number</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Approve</ht>
+                            <th>Decline</th>
+                            <!-- <th>Image 1</th>
+                    <th>Image 2</th> -->
+                        </thead>
+                        <tbody id="tbody1">
 
-                //---------FIREBASE CONFIGURATION---------//
-                var firebaseConfig = {
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <script id="mainscript">
+
+            //---------FIREBASE CONFIGURATION---------//
+            var firebaseConfig = {
                 apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
                 authDomain: "apclubs-678c7.firebaseapp.com",
                 databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -162,26 +173,26 @@
                 messagingSenderId: "711066755172",
                 appId: "1:711066755172:web:8187fe865e562d32807f71",
                 measurementId: "G-NCK9V02TE8"
-                };
+            };
 
-                firebase.initializeApp(firebaseConfig);
-                var database = firebase.database();
-                var cns_number;
+            firebase.initializeApp(firebaseConfig);
+            var database = firebase.database();
+            var cns_number;
 
-                firebase.auth().onAuthStateChanged((user) => {
-                                    if (user){
-                                        var uids = user.uid;
-                                        FindClub(uids);
-                                    }
-                });
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    var uids = user.uid;
+                    FindClub(uids);
+                }
+            });
 
-                function FindClub(curcomID) {
-                firebase.database().ref("committee").once('value',function(value){
+            function FindClub(curcomID) {
+                firebase.database().ref("committee").once('value', function (value) {
                     value.forEach(
-                        function(DetailRecord){
-                            if(curcomID == DetailRecord.key){
-                            var commitclub = DetailRecord.val().Committee;
-                             SelectAllData(commitclub);
+                        function (DetailRecord) {
+                            if (curcomID == DetailRecord.key) {
+                                var commitclub = DetailRecord.val().Committee;
+                                SelectAllData(commitclub);
                             }
                         }
                     )
@@ -189,14 +200,14 @@
                 })
             }
 
-                //---------GET ALL DATA---------//
-                function SelectAllData(commitclubname){
-                    console.log(commitclubname);
-                    document.getElementById("tbody1").innerHTML = "";
-                    firebase.database().ref('Club_Registration_Form/'+ commitclubname).once('value',
-                    function(AllRecords){
+            //---------GET ALL DATA---------//
+            function SelectAllData(commitclubname) {
+                console.log(commitclubname);
+                document.getElementById("tbody1").innerHTML = "";
+                firebase.database().ref('Club_Registration_Form/' + commitclubname).once('value',
+                    function (AllRecords) {
                         AllRecords.forEach(
-                            function(CurrentRecord){
+                            function (CurrentRecord) {
                                 var Name = CurrentRecord.val().FullName;
                                 var DOB = CurrentRecord.val().DateOfBirth;
                                 var PhNo = CurrentRecord.val().Phone_number;
@@ -204,139 +215,150 @@
                                 var TPNo = CurrentRecord.val().TPNumber;
                                 var Email = CurrentRecord.val().Email;
                                 var Stat = CurrentRecord.val().Status;
-                                AddItemsToTable(Name,DOB,PhNo,IntCode,TPNo,Email,Stat,commitclubname);
+                                AddItemsToTable(Name, DOB, PhNo, IntCode, TPNo, Email, Stat, commitclubname);
                             }
                         );
                     });
+            }
+
+
+            //---------FILLING THE TABLE---------//
+            serial_number = 0;
+
+            var cm_list = [];
+            function AddItemsToTable(Name, DOB, PhNo, IntCode, TPNo, Email, Stat, clubname) {
+                var tbody1 = document.getElementById('tbody1');
+                var trow = document.createElement('tr');
+                var td1 = document.createElement('td');
+                var td2 = document.createElement('td');
+                var td3 = document.createElement('td');
+                var td4 = document.createElement('td');
+                var td5 = document.createElement('td');
+                var td6 = document.createElement('td');
+                var td7 = document.createElement('td');
+                var td8 = document.createElement('td');
+                var td9 = document.createElement("td");
+                var td10 = document.createElement("td");
+                cm_list.push([Name, DOB, PhNo, IntCode, TPNo, Email, clubname]);
+
+
+                td1.innerHTML = ++serial_number;
+                td2.innerHTML = Name;
+                td3.innerHTML = DOB;
+                td4.innerHTML = PhNo;
+                td5.innerHTML = IntCode;
+                td6.innerHTML = TPNo;
+                td7.innerHTML = Email;
+                td8.innerHTML = Stat;
+
+                trow.appendChild(td1);
+                trow.appendChild(td2);
+                trow.appendChild(td3);
+                trow.appendChild(td4);
+                trow.appendChild(td5);
+                trow.appendChild(td6);
+                trow.appendChild(td7);
+                trow.appendChild(td8);
+                trow.appendChild(td9);
+                trow.appendChild(td10);
+                td9.innerHTML = '<button class="btn btn-primary my-2 ml-2" onclick="Approvefea(' + serial_number + ')">Approve</button>';
+                td10.innerHTML = '<button class="btn btn-primary my-2 ml-2" onclick="Disfea(' + serial_number + ')">Disapprove</button>';
+                tbody1.appendChild(trow);
+            };
+
+
+            function Approvefea(index) {
+                --index;
+                firebase.database().ref('users/').once('value',
+                    function (thisuser) {
+                        thisuser.forEach(
+                            function (detailthisuser) {
+                                if (detailthisuser.val().FullName == cm_list[index][0]) {
+                                    var userID = detailthisuser.ref.key;
+                                    console.log(userID);
+                                    firebase.database().ref("Club_Registration_Form/" + cm_list[index][6] + "/" + userID).remove();
+                                    movedb(userID);
+                                }
+                            })
+                    });
+                function movedb(UserID) {
+                    firebase.database().ref("clubMember/" + cm_list[index][6] + "/" + UserID).set({
+                        FullName: cm_list[index][0],
+                        DateOfBirth: cm_list[index][1],
+                        Phone_number: cm_list[index][2],
+                        IntakeCode: cm_list[index][3],
+                        TPNumber: cm_list[index][4],
+                        Email: cm_list[index][5],
+                    },
+                        (error) => {
+                            if (error) {
+                                alert("Error Approved");
+                            } else {
+                                alert("Approved");
+                                location.reload();
+                            }
+                        });
                 }
 
+            }
 
-                //---------FILLING THE TABLE---------//
-                serial_number = 0;
-                
-                var cm_list = [];
-                function AddItemsToTable(Name,DOB,PhNo,IntCode,TPNo,Email,Stat,clubname){
-                    var tbody1 = document.getElementById('tbody1');
-                    var trow = document.createElement('tr');
-                    var td1 = document.createElement('td');
-                    var td2 = document.createElement('td');
-                    var td3 = document.createElement('td');
-                    var td4 = document.createElement('td');
-                    var td5 = document.createElement('td');
-                    var td6 = document.createElement('td');
-                    var td7 = document.createElement('td');
-                    var td8 = document.createElement('td');
-                    var td9 = document.createElement("td");
-                    var td10 = document.createElement("td");
-                    cm_list.push([Name,DOB,PhNo,IntCode,TPNo,Email,clubname]);
-                    
-
-                    td1.innerHTML = ++serial_number;
-                    td2.innerHTML = Name;
-                    td3.innerHTML = DOB;
-                    td4.innerHTML = PhNo;
-                    td5.innerHTML = IntCode;
-                    td6.innerHTML = TPNo;
-                    td7.innerHTML = Email;
-                    td8.innerHTML = Stat;
-
-                    trow.appendChild(td1);
-                    trow.appendChild(td2);
-                    trow.appendChild(td3);
-                    trow.appendChild(td4);
-                    trow.appendChild(td5);
-                    trow.appendChild(td6);
-                    trow.appendChild(td7);
-                    trow.appendChild(td8);
-                    trow.appendChild(td9);
-                    trow.appendChild(td10);
-                    td9.innerHTML = '<button class="btn btn-primary my-2 ml-2" onclick="Approvefea('+serial_number+')">Approve</button>';
-                    td10.innerHTML = '<button class="btn btn-primary my-2 ml-2" onclick="Disfea('+serial_number+')">Disapprove</button>';
-                    tbody1.appendChild(trow);
-                };
- 
-            
-                function Approvefea(index){
+            function Disfea(index) {
                 --index;
                 firebase.database().ref('users/').once('value',
-                function(thisuser){
+                    function (thisuser) {
                         thisuser.forEach(
-                            function (detailthisuser){
+                            function (detailthisuser) {
                                 if (detailthisuser.val().FullName == cm_list[index][0]) {
-                                    var userID=detailthisuser.ref.key;
+                                    var userID = detailthisuser.ref.key;
                                     console.log(userID);
-                                    firebase.database().ref("Club_Registration_Form/"+ cm_list[index][6] + "/"+ userID).remove();
-                                    movedb(userID);
-                                } 
-                            }) 
-                        });
-                            function movedb(UserID) {
-                                    firebase.database().ref("clubMember/"+cm_list[index][6]+"/"+ UserID).set({
-                                        FullName: cm_list[index][0],
-                                        DateOfBirth: cm_list[index][1],
-                                        Phone_number: cm_list[index][2],
-                                        IntakeCode: cm_list[index][3],
-                                        TPNumber: cm_list[index][4],
-                                        Email: cm_list[index][5],
-                                        },
+                                    firebase.database().ref("Club_Registration_Form/" + cm_list[index][6] + "/" + userID).remove(
                                         (error) => {
-                                            if (error){
-                                            alert("Error Approved");
-                                            } else {
-                                                alert("Approved");
-                                                location.reload();
-                                            }
-                                            });
-                                    }                            
-
-             }
-
-            function Disfea(index){
-                --index;
-                firebase.database().ref('users/').once('value',
-                function(thisuser){
-                        thisuser.forEach(
-                            function (detailthisuser){
-                                if (detailthisuser.val().FullName == cm_list[index][0]) {
-                                    var userID=detailthisuser.ref.key;
-                                    console.log(userID);
-                                    firebase.database().ref("Club_Registration_Form/"+ cm_list[index][6] + "/"+ userID).remove(
-                                        (error) => {
-                                            if (error){
-                                            alert("Error Disapprove");
+                                            if (error) {
+                                                alert("Error Disapprove");
                                             } else {
                                                 alert("Disapprove");
                                                 location.reload();
                                             }
-                                            });
-                                } 
+                                        });
+                                }
                             })
 
+                    });
+            }
+
+        </script>
+        <!-- Loading Scripts -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap-select.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/dataTables.bootstrap.min.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/fileinput.js"></script>
+        <script src="js/chartData.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Loading Scripts -->
+        <script src="../admin/js/jquery.min.js"></script>
+        <script src="../admin/js/bootstrap-select.min.js"></script>
+        <script src="../admin/js/bootstrap.min.js"></script>
+        <script src="../admin/js/jquery.dataTables.min.js"></script>
+        <script src="../admin/js/dataTables.bootstrap.min.js"></script>
+        <script src="../admin/js/Chart.min.js"></script>
+        <script src="../admin/js/fileinput.js"></script>
+        <script src="../admin/js/chartData.js"></script>
+        <script src="../admin/js/main.js"></script>
+        <script>
+            function logout() {
+                window.alert("You have signed out successfully");
+                window.location.href = "../login.html";
+                firebase.auth().signOut().then(() => {
+                }).catch((error) => {
+                    console.log(error);
                 });
-            }   
-
-</script>
-            <!-- Loading Scripts -->
-            <script src="js/jquery.min.js"></script>
-            <script src="js/bootstrap-select.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.dataTables.min.js"></script>
-            <script src="js/dataTables.bootstrap.min.js"></script>
-            <script src="js/Chart.min.js"></script>
-            <script src="js/fileinput.js"></script>
-            <script src="js/chartData.js"></script>
-            <script src="js/main.js"></script>
-
-    <!-- Loading Scripts -->
-    <script src="../admin/js/jquery.min.js"></script>
-    <script src="../admin/js/bootstrap-select.min.js"></script>
-    <script src="../admin/js/bootstrap.min.js"></script>
-    <script src="../admin/js/jquery.dataTables.min.js"></script>
-    <script src="../admin/js/dataTables.bootstrap.min.js"></script>
-    <script src="../admin/js/Chart.min.js"></script>
-    <script src="../admin/js/fileinput.js"></script>
-    <script src="../admin/js/chartData.js"></script>
-    <script src="../admin/js/main.js"></script>
+            };
+        </script>
 
 </body>
+
 </html>

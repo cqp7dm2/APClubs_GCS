@@ -54,7 +54,7 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="userProfile.html">My Profile</a>
                     <a class="dropdown-item" id="adminbtn" href="admin/admin.html">Admin</a>
-                    <a class="dropdown-item" id="committeebtn" href="committee/commMember.html">Committee</a>
+                    <a class="dropdown-item" id="committeebtn" href="CommiteeM/commMember.html">Committee</a>
                     <a class="dropdown-item" href="#" onclick="logout()">Sign Out</a>
                 </div>
             </li>
@@ -121,9 +121,6 @@
                                         <div class="col">
                                             <div class="form-group"><strong>Club Choice</strong>
                                                 <select id="Club" class="form-control">
-                                                    <option value="badminton">Badminton</option>
-                                                    <option value="chinese society">Chinese Society</option>
-                                                    <option value="music">Music</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -135,7 +132,7 @@
                                 </div>
                             </div>
                             <script>
-                            
+
 
                             </script>
                             <script>
@@ -153,53 +150,63 @@
                                 var btnsub = document.getElementById("btn_submit");
                                 var status = "Pending Review";
 
-                                
+                                firebase.database().ref("clubs").once("value",
+                                    function (LoadData) {
+                                        LoadData.forEach(
+                                            function (listclubname) {
+                                                var clubname = listclubname.key;
+                                                console.log(clubname);
+                                                Club.innerHTML += "<option value='" + clubname + "'>" + clubname + "</option>"
+                                            }
+                                        )
+                                    });
+
                                 firebase.auth().onAuthStateChanged((user) => {
-                                    if (user){
+                                    if (user) {
                                         var uids = user.uid;
                                         PresetValue(uids);
-                                        }
+                                    }
                                 });
 
                                 function PresetValue(CurrID) {
-                                    firebase.database().ref("users/"+ CurrID).once("value",
-                                    function(CurrentUserRecords){
-                                        CurrentUserRecords.forEach(
-                                            function(){
-                                                var UName = CurrentUserRecords.val().FullName;
-                                                var UTPno = CurrentUserRecords.val().TPNumber;
-                                                var UIntCode = CurrentUserRecords.val().IntakeCode;
-                                                var UDOB = CurrentUserRecords.val().DateOfBirth;
-                                                var UEmail = CurrentUserRecords.val().Email;
-                                                AddItemsToText(UName,UTPno,UIntCode,UDOB,UEmail);
-                                            }
-                                    );
-                                });
+                                    firebase.database().ref("users/" + CurrID).once("value",
+                                        function (CurrentUserRecords) {
+                                            CurrentUserRecords.forEach(
+                                                function () {
+                                                    var UName = CurrentUserRecords.val().FullName;
+                                                    var UTPno = CurrentUserRecords.val().TPNumber;
+                                                    var UIntCode = CurrentUserRecords.val().IntakeCode;
+                                                    var UDOB = CurrentUserRecords.val().DateOfBirth;
+                                                    var UEmail = CurrentUserRecords.val().Email;
+                                                    AddItemsToText(UName, UTPno, UIntCode, UDOB, UEmail);
+                                                }
+                                            );
+                                        });
                                 }
 
-                                function AddItemsToText(UName,UTPno,UIntCode,UDOB,UEmail){
+                                function AddItemsToText(UName, UTPno, UIntCode, UDOB, UEmail) {
                                     FullName.value = UName;
                                     TPnum.value = UTPno;
                                     IntakeCode.value = UIntCode;
                                     DOB.value = UDOB;
-                                    Email.value= UEmail;
+                                    Email.value = UEmail;
                                 }
 
-                                btnsub.onclick = function() {
-                                firebase.auth().onAuthStateChanged((user) => {
-                                    if (user){
-                                        var uids = user.uid;
-                                        InsertData(uids);
+                                btnsub.onclick = function () {
+                                    firebase.auth().onAuthStateChanged((user) => {
+                                        if (user) {
+                                            var uids = user.uid;
+                                            InsertData(uids);
                                         }
-                                });
+                                    });
 
 
-                            }
+                                }
 
                                 /////Insert Data Function ///////////////
 
                                 function InsertData(CURUID) {
-                                    firebase.database().ref("Club_Registration_Form/"+Club.value+"/" + CURUID).set( {
+                                    firebase.database().ref("Club_Registration_Form/" + Club.value + "/" + CURUID).set({
                                         FullName: FullName.value,
                                         TPNumber: TPnum.value,
                                         Email: Email.value,
@@ -208,15 +215,15 @@
                                         DateOfBirth: DOB.value,
                                         Status: status,
 
-                                    },(error) => {
-                                    if (error){
-                                    alert("Registration failed. Please try again");
-                                    } else {
-                                        alert("Registration successful");
-                                        location.reload();
-                                    }
-                                })
-                            };
+                                    }, (error) => {
+                                        if (error) {
+                                            alert("Registration failed. Please try again");
+                                        } else {
+                                            alert("Registration successful");
+                                            location.reload();
+                                        }
+                                    })
+                                };
                                 /////////Assign btn/////////////
                                // btnsub.addEventListener("click", InsertData);
 

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <title>APCLUBS | Admin Dashboard </title>
+    <!--Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+    <!--Custome Style -->
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <!--OWL Carousel slider-->
+    <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/owl.transitions.css" type="text/css">
+    <!--slick-slider -->
+    <link href="assets/css/slick.css" rel="stylesheet">
+    <!--bootstrap-slider -->
+    <link href="assets/css/bootstrap-slider.min.css" rel="stylesheet">
+    <!--FontAwesome Font Style -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+        href="assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+        href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- Sandstone Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Bootstrap Datatables -->
+    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+    <!-- Bootstrap social button library -->
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+    <!-- Bootstrap select -->
+    <link rel="stylesheet" href="css/bootstrap-select.css">
+    <!-- Bootstrap file input -->
+    <link rel="stylesheet" href="css/fileinput.min.css">
+    <!-- Awesome Bootstrap checkbox -->
+    <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+    <!-- Admin Stye -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .labs {
+            display: inline-block;
+            width: 100px;
+        }
+
+        .inp {
+            width: 350px;
+        }
+
+        .inpS {
+            height: 30px;
+            width: 350px;
+        }
+
+        .container {
+            width: 67%;
+        }
+    </style>
+
+    <title>APClubs | Events Management</title>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="brand clearfix">
+        <a href="dashboard.php" style="font-size: 15px; color: #d53939;" class="logo">APCLUBS | Admin Panel</a>
+        <span class="menu-btn"><i class="fa fa-bars"></i></span>
+        <ul class="ts-profile-nav">
+
+            <li class="ts-account">
+                <a href="#" style="color: #d53939;">Account <i class="fa fa-angle-down hidden-side"></i></a>
+                <ul>
+                    <li><a href="#" onclick="logout()">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="ts-main-content">
+        <!-- Left Side Bar -->
+        <nav class="ts-sidebar">
+            <ul class="ts-sidebar-menu">
+
+                <li class="ts-label" style="color: #d53939;">Main</li>
+                <li><a href="admin.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                <li><a href="Admin_AddClubs.html"><i class="fa fa-male"></i>Clubs & Society</a></li>
+                <li><a href=""><i class="fa fa-building"></i>Classroom Booking</a></li>
+                <li><a href="admin_events.html"><i class="fa fa-users"></i>Event Management</a></li>
+                <li><a href=""><i class="fa fa-envelope"></i>Contact Us & Feedback</a></li>
+                <!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
+
+            </ul>
+        </nav>
+
+        <div class="container">
+            <!--Search bar start-->
+            <div class="input-group mb-3 mt-3">
+                <input id="SearchBar" type="text" class="form-control" placeholder="Search a Record"
+                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <select class="custom-select" id="CategorySelected">
+                        <option selected value="1">By Name</option>
+                        <option value="2">By Club</option>
+                        <option value="3">By Date</option>
+                        <option value="4">By Time</option>
+                        <option value="5">By Location</option>
+                        <option value="6">By Status</option>
+                    </select>
+                    <button id="SearchBtn" class="btn btn-outline-secondary ml-1" type="button">Search</button>
+                </div>
+            </div>
+            <!--Search bar end-->
+
+            <!-- <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null)">
+            Add New Record
+        </button> -->
+
+            <!---Data Table--->
+            <table id="table1" class="table">
+                <thead>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Club Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Poster</th>
+                    <th>Status</th>
+                    <th>Controls</th>
+                </thead>
+                <tbody id="tbody1">
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Control Panel</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="labs">Name: </label>
+                        <input class="inp" type="text" id="NameMod"> <br>
+                        <label class="labs">Description: </label>
+                        <input class="inp" type="text" id="DescMod"> <br>
+                        <label class="labs">Club Name: </label>
+                        <select class="inpS" id="ClubMod" onclick="stoploop()">
+
+                        </select> <br>
+
+                        <label class="labs">Date: </label>
+                        <input class="inp" type="text" id="DateMod"> <br>
+                        <label class="labs">Time: </label>
+                        <input class="inp" type="text" id="TimeMod"> <br>
+                        <label class="labs">Location: </label>
+                        <input class="inp" type="text" id="LocMod"> <br>
+                        <label class="labs">Document: </label>
+                        <input class="inp" type="text" id="DocMod"> <br>
+                        <label class="labs">Status: </label>
+                        <select class="inpS" id="StatusMod">
+                            <option selected value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="AddModBtn" type="button" class="btn btn-primary" onclick="AddEvent()">Add New
+                            Record</button>
+                        <button id="UpdateModBtn" type="button" class="btn btn-success" onclick="UpdateEvent()">Update
+                            Record</button>
+                        <button id="DeleteModBtn" type="button" class="btn btn-danger" onclick="DeleteEvent()">Delete
+                            Record</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+
+            //---Initialize Firebase---//
+            const app = initializeApp(firebaseConfig);
+
+            import { getStorage, ref, deleteObject } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js";
+
+            const storage = getStorage();
+
+            var ModDoc = document.getElementById('DocMod');
+
+            document.getElementById('DeleteModBtn').addEventListener('click', function () {
+                // Create a reference to the file to delete
+                const desertRef = ref(storage, 'Images/' + ModDoc.value);
+                // Delete the file
+                deleteObject(desertRef).then(() => {
+                    alert('File deleted successfully');
+                }).catch((error) => {
+                    alert('Uh-oh, an error occurred!');
+                });
+            })
+
+        </script>
+
+        <script id="mainscript">
+            //---------FIREBASE CONFIGURATION---------//
+            const firebaseConfig = {
+                apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+                authDomain: "apclubs-678c7.firebaseapp.com",
+                databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "apclubs-678c7",
+                storageBucket: "apclubs-678c7.appspot.com",
+                messagingSenderId: "711066755172",
+                appId: "1:711066755172:web:8187fe865e562d32807f71",
+                measurementId: "G-NCK9V02TE8"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            var database = firebase.database();
+
+            var event_number;
+
+            //---------GET ALL DATA---------//
+            function SelectAllData() {
+                document.getElementById("tbody1").innerHTML = "";
+                event_number = 0;
+                firebase.database().ref('event').once('value',
+                    function (AllRecords) {
+                        AllRecords.forEach(
+                            function (CurrentRecord) {
+                                var name = CurrentRecord.val().event_name;
+                                var desc = CurrentRecord.val().event_desc;
+                                var club = CurrentRecord.val().event_club;
+                                var date = CurrentRecord.val().event_date;
+                                var time = CurrentRecord.val().event_time;
+                                var loc = CurrentRecord.val().event_location;
+                                var doc = CurrentRecord.val().event_image;
+                                var status = CurrentRecord.val().event_status;
+                                AddItemsToTable(name, desc, club, date, time, loc, doc, status);
+                            }
+                        );
+                    });
+            }
+
+            window.onload = SelectAllData;
+
+            //---------FILLING THE TABLE---------//
+
+            var event_list = [];
+
+            function AddItemsToTable(name, desc, club, date, time, loc, doc, status) {
+                var tbody1 = document.getElementById('tbody1');
+                var trow = document.createElement('tr');
+                var td0 = document.createElement('td');
+                var td1 = document.createElement('td');
+                var td2 = document.createElement('td');
+                var td3 = document.createElement('td');
+                var td4 = document.createElement('td');
+                var td5 = document.createElement('td');
+                var td6 = document.createElement('td');
+                var td7 = document.createElement('td');
+                var td8 = document.createElement('td');
+
+                event_list.push([name, desc, club, date, time, loc, doc, status]);
+
+                td0.innerHTML = ++event_number;
+                td1.innerHTML = name;
+                td2.innerHTML = desc;
+                td3.innerHTML = club;
+                td4.innerHTML = date;
+                td5.innerHTML = time;
+                td6.innerHTML = loc;
+                td7.innerHTML = doc;
+                td8.innerHTML = status;
+
+                if (td8.innerHTML == "Pending") {
+                    td8.innerHTML = "<b><span style='color:blue'>" + status + "</span></b>";
+                } else if (td8.innerHTML == "Approved") {
+                    td8.innerHTML = "<b><span style='color:green'>" + status + "</span></b>";
+                } else if (td8.innerHTML == "Rejected") {
+                    td8.innerHTML = "<b><span style='color:red'>" + status + "</span></b>";
+                };
+
+                td1.classList += 'nameField';
+                td3.classList += 'clubField';
+                td4.classList += 'dateField';
+                td5.classList += 'timeField';
+                td6.classList += 'locField';
+                td8.classList += 'statusField';
+
+                trow.appendChild(td0);
+                trow.appendChild(td1);
+                trow.appendChild(td2);
+                trow.appendChild(td3);
+                trow.appendChild(td4);
+                trow.appendChild(td5);
+                trow.appendChild(td6);
+                trow.appendChild(td7);
+                trow.appendChild(td8);
+
+                var ControlDiv = document.createElement('div');
+                ControlDiv.innerHTML = '<button type="button" id="btnManage" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(' + event_number + ')">Manage</button>';
+
+                trow.appendChild(ControlDiv);
+                tbody1.appendChild(trow);
+            }
+
+            var ModName = document.getElementById('NameMod');
+            var ModDesc = document.getElementById('DescMod');
+            var ModClub = document.getElementById('ClubMod');
+            var ModDate = document.getElementById('DateMod');
+            var ModTime = document.getElementById('TimeMod');
+            var ModLoc = document.getElementById('LocMod');
+            var ModDoc = document.getElementById('DocMod');
+            var StatusDoc = document.getElementById('StatusMod');
+
+            var BTNmodAdd = document.getElementById('AddModBtn');
+            var BTNmodUpdate = document.getElementById('UpdateModBtn');
+            var BTNmodDelete = document.getElementById('DeleteModBtn');
+
+            function FillTboxes(index) {
+                if (index == null) {
+                    ModName.value = "";
+                    ModDesc.value = "";
+                    ModClub.value = "";
+                    ModDate.value = "";
+                    ModTime.value = "";
+                    ModLoc.value = "";
+                    ModDoc.value = "";
+                    StatusDoc.value = "";
+                    ModName.disabled = false;
+                    ModDoc.disabled = false;
+                    BTNmodAdd.style.display = 'inline-block';
+                    BTNmodUpdate.style.display = 'none';
+                    BTNmodDelete.style.display = 'none';
+                } else {
+                    --index;
+                    ModName.value = event_list[index][0];
+                    ModDesc.value = event_list[index][1];
+                    ModClub.value = event_list[index][2];
+                    ModDate.value = event_list[index][3];
+                    ModTime.value = event_list[index][4];
+                    ModLoc.value = event_list[index][5];
+                    ModDoc.value = event_list[index][6];
+                    StatusDoc.value = event_list[index][7];
+                    ModName.disabled = true;
+                    ModDoc.disabled = true;
+                    BTNmodAdd.style.display = 'none';
+                    BTNmodUpdate.style.display = 'inline-block';
+                    BTNmodDelete.style.display = 'inline-block';
+                }
+            }
+
+            //Show ONLY existing clubs on dropbox
+            function stoploop() {
+                var ele = document.getElementById('opt');
+                if (ele) {
+                    return;
+                } else {
+                    DisplayExistingClubs();
+                }
+            }
+
+            function DisplayExistingClubs() {
+                firebase.database().ref("clubs").once("value",
+                    function (AllRecords) {
+                        AllRecords.forEach(
+                            function (CurrentRecord) {
+                                var name = CurrentRecord.val().name;
+                                AddClubs(name);
+                            }
+                        );
+                    });
+            }
+
+            function AddClubs(clubname) {
+                var sel = document.getElementById('ClubMod');
+                sel.innerHTML += '<option id="opt">' + clubname + '</option>';
+            }
+
+            //Add, Update, Delete Functions
+            function AddEvent() {
+                firebase.database().ref("event/" + ModName.value).set(
+                    {
+                        event_name: ModName.value,
+                        event_desc: ModDesc.value,
+                        event_club: ModClub.value,
+                        event_date: ModDate.value,
+                        event_time: ModTime.value,
+                        event_location: ModLoc.value,
+                        event_image: ModDoc.value,
+                        event_status: StatusDoc.value
+                    },
+                    (error) => {
+                        if (error) {
+                            alert("Record was not added, there was some problem!");
+                        } else {
+                            alert("Record was added!");
+                            SelectAllData();
+                            $("exampleModalCenter").modal('hide');
+                            location.reload();
+                            return false;
+                        }
+                    }
+                )
+            }
+
+            function UpdateEvent() {
+                firebase.database().ref("event/" + ModName.value).update(
+                    {
+                        event_name: ModName.value,
+                        event_desc: ModDesc.value,
+                        event_club: ModClub.value,
+                        event_date: ModDate.value,
+                        event_time: ModTime.value,
+                        event_location: ModLoc.value,
+                        event_image: ModDoc.value,
+                        event_status: StatusDoc.value
+                    },
+                    (error) => {
+                        if (error) {
+                            alert("Record was not updated, there was some problem!");
+                        } else {
+                            alert("Record was updated!");
+                            SelectAllData();
+                            $("exampleModalCenter").modal('hide');
+                            location.reload();
+                            return false;
+                        }
+                    }
+                )
+            }
+
+            function DeleteEvent() {
+                firebase.database().ref("event/" + ModName.value).remove().then(
+                    function () {
+                        alert("Record was deleted!");
+                        SelectAllData();
+                        $("exampleModalCenter").modal('hide');
+                        location.reload();
+                        return false;
+                    }
+                )
+            }
+
+            //Search Bar Function
+            var searchBar = document.getElementById("SearchBar");
+            var searchBtn = document.getElementById("SearchBtn");
+            var category = document.getElementById("CategorySelected");
+            var tbody = document.getElementById("tbody1");
+
+            function SearchTable(Category) {
+                var filter = searchBar.value.toUpperCase();
+                var tr = tbody.getElementsByTagName("tr");
+
+                for (let i = 0; i < tr.length; i++) {
+                    var td = tr[i].getElementsByClassName(Category);
+
+                    for (let j = 0; j < td.length; j++) {
+                        if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            //We have a record that matches our searchbar value
+                            found = true;
+                        }
+                    }
+
+                    if (found) {
+                        tr[i].style.display = "";
+                        found = false;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+
+            }
+
+            function SearchTableByExactValues(Category) {
+                var filter = searchBar.value.toUpperCase();
+                var tr = tbody.getElementsByTagName("tr");
+
+                for (let i = 0; i < tr.length; i++) {
+                    var td = tr[i].getElementsByClassName(Category);
+
+                    for (let j = 0; j < td.length; j++) {
+                        if (td[j].innerHTML.toUpperCase() == filter) {
+                            //We have a record that matches our searchbar value
+                            found = true;
+                        }
+                    }
+
+                    if (found) {
+                        tr[i].style.display = "";
+                        found = false;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+
+            }
+
+            searchBtn.onclick = function () {
+                if (searchBar.value == "") {
+                    SearchTable("nameField");
+                }
+                else if (category.value == 1)
+                    SearchTable("nameField");
+
+                else if (category.value == 2)
+                    SearchTable("clubField");
+
+                else if (category.value == 3)
+                    SearchTable("dateField");
+
+                else if (category.value == 4)
+                    SearchTable("timeField");
+
+                else if (category.value == 5)
+                    SearchTable("locField");
+
+                else if (category.value == 6)
+                    SearchTable("statusField");
+
+                //else if(category.value == 4)
+                //SearchTableByExactValues("locField");
+            }
+
+            //press Enter to search
+            searchBar.onkeypress = function (event) {
+                if (event.keyCode == 13) {
+                    searchBtn.click();
+                }
+            }
+
+        </script>
+        <script>
+            function logout() {
+                window.alert("You have signed out successfully");
+                window.location.href = "login.html";
+                firebase.auth().signOut().then(() => {
+                }).catch((error) => {
+                    console.log(error);
+                });
+            };
+        </script>
+
+</body>
+
+</html>

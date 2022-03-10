@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>APCLUBS | Commitee Panel</title>
+    <!--Bootstrap -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
+    <!--Custome Style -->
+    <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
+    <!--OWL Carousel slider-->
+    <link rel="stylesheet" href="../assets/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/owl.transitions.css" type="text/css">
+    <!--slick-slider -->
+    <link href="../assets/css/slick.css" rel="stylesheet">
+    <!--bootstrap-slider -->
+    <link href="../assets/css/bootstrap-slider.min.css" rel="stylesheet">
+    <!--FontAwesome Font Style -->
+    <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+        href="../assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+        href="../assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="../assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" type="image/png" href="../favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="../admin/css/font-awesome.min.css">
+    <!-- Sandstone Bootstrap CSS -->
+    <link rel="stylesheet" href="../admin/css/bootstrap.min.css">
+    <!-- Bootstrap Datatables -->
+    <link rel="stylesheet" href="../admin/css/dataTables.bootstrap.min.css">
+    <!-- Bootstrap social button library -->
+    <link rel="stylesheet" href="../admin/css/bootstrap-social.css">
+    <!-- Bootstrap select -->
+    <link rel="stylesheet" href="../admin/css/bootstrap-select.css">
+    <!-- Bootstrap file input -->
+    <link rel="stylesheet" href="../admin/css/fileinput.min.css">
+    <!-- Awesome Bootstrap checkbox -->
+    <link rel="stylesheet" href="../admin/css/awesome-bootstrap-checkbox.css">
+    <!-- Admin Stye -->
+    <link rel="stylesheet" href="../admin/css/style.css">
+
+    <style>
+        .labs {
+            display: inline-block;
+            width: 100px;
+        }
+
+        .inp {
+            width: 300px;
+            height: 30px;
+        }
+
+        .lbl {
+            display: inline-block;
+            width: 100px;
+            height: auto;
+            vertical-align: top;
+        }
+
+        #txtDesc {
+            height: 150px;
+        }
+
+        textarea {
+            width: 300px;
+            border: gray 1px solid;
+            resize: none;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 330px;
+            height: 490px;
+            border: 2px black solid;
+        }
+
+        .container {
+            display: flex;
+            width: 67%;
+        }
+
+        .column {
+            float: left;
+            width: 400px;
+        }
+    </style>
+
+    <title>APClubs | Event Submission</title>
+</head>
+
+<body>
+
+    <!-- Header -->
+  <div class="brand clearfix">
+    <a href="commMember.html" style="font-size: 15px; color: #b5df1a;" class="logo">APCLUBS | Commitee Panel</a>
+        <span class="menu-btn"><i class="fa fa-bars"></i></span>
+        <ul class="ts-profile-nav">
+
+            <li class="ts-account " >
+                <a href="#" style="color: #b5df1a;">Account <i class="fa fa-angle-down hidden-side "  ></i></a>
+                <ul>
+                    <li><a href="#" onclick="logout()">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<div class="ts-main-content">
+  <!-- Left Side Bar -->
+  <nav class="ts-sidebar">
+          <ul class="ts-sidebar-menu">
+
+              <li class="ts-label " style="color: #b5df1a;">Main</li>
+              <li><a href="commMember.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+              <li><a href="monthlyReport.html"><i class="fa fa-male"></i>Monthly Report</a></li>
+              <li><a href="commiteeapprove.html"><i class="fa fa-male"></i>Members Registration</a></li>
+              <li><a href=""><i class="fa fa-building"></i>Classroom Booking</a></li>
+              <li><a href=""><i class="fa fa-users"></i>Check Status & Booking</a></li>
+              <li><a href="advisor_events.html"><i class="fa fa-users"></i>Event Management</a></li>
+              <li><a href="UpdateClubDetails.html"><i class="fa fa-envelope"></i>Update Clubs Detials</a></li>
+      <li><a href=""><i class="fa fa-envelope"></i>Student Enquiry</a></li>
+          <!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
+
+          </ul>
+      </nav>
+
+      <div class="content-wrapper">
+          <div class="container-fluid">
+
+              <div class="row">
+                  <div class="col-md-12">
+
+                      <h2 class="page-title">Commitee Members - Dashboard</h2>
+
+                      <h5>Welcome to Commitee Members Dashboard</h5>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+    
+    <div class="container">
+        <div class="column">
+            <!--Event Submission Form-->
+            <label class="labs">Name: </label>
+            <input type="text" class="inp" id="txtName"> <br>
+
+            <label class="lbl">Description: </label>
+            <textarea type="text" class="inp" id="txtDesc"></textarea> <br>
+
+            <label class="labs">Club Name: </label>
+            <!-- <input type="text" class="inp" id="txtClub"> <br> -->
+            <select class="inp" id="txtClub">
+                <option value=""></option>
+            </select><br>
+
+            <label class="labs">Date: </label>
+            <input type="text" class="inp" id="txtDate"> <br>
+
+            <label class="labs">Time: </label>
+            <input type="text" class="inp" id="txtTime"> <br>
+
+            <label class="labs">Location: </label>
+            <input type="text" class="inp" id="txtLoc"> <br>
+
+            <label class="labs">Poster: </label>
+            <input type="text" class="inp" id="txtDoc" disabled>
+            <label id="extlab"></label> <br>
+        </div>
+
+        <div class="column">
+            <label class="labs" visible="false"></label>
+            <image id="myimg"> <br>
+                <label id="progressbar"></label> <br>
+
+                <button id="selbtn" class="btn btn-primary">Select Image</button>
+                <button id="upbtn" class="btn btn-primary">Submit Application</button> <br><br>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+
+        //---Initialize Firebase---//
+        const app = initializeApp(firebaseConfig);
+
+        import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL }
+            from "https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js";
+
+        import { getDatabase, ref, set, child, get, update, remove }
+            from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
+        const realdb = getDatabase();
+
+        //---Variables for Images Process---//
+        var files = [];
+        var reader = new FileReader();
+
+        var evbox = document.getElementById('txtName');
+        var descbox = document.getElementById('txtDesc');
+        var clubbox = document.getElementById('txtClub');
+        var datebox = document.getElementById('txtDate');
+        var timebox = document.getElementById('txtTime');
+        var locbox = document.getElementById('txtLoc');
+        var namebox = document.getElementById('txtDoc');
+
+        var extlab = document.getElementById('extlab');
+        var myimg = document.getElementById('myimg');
+        var proglab = document.getElementById('progressbar');
+
+        var SelBtn = document.getElementById("selbtn");
+        var UpBtn = document.getElementById('upbtn');
+
+        var input = document.createElement('input');
+        input.type = 'file';
+
+        input.onchange = e => {
+            files = e.target.files;
+
+            var extension = GetFileExt(files[0]);
+            var name = GetFileName(files[0]);
+
+            namebox.value = name;
+            extlab.innerHTML = extension;
+
+            reader.readAsDataURL(files[0]);
+        }
+
+        reader.onload = function () {
+            myimg.src = reader.result;
+        }
+
+        //---Select img---//
+
+        SelBtn.onclick = function () {
+            input.click();
+        }
+
+        function GetFileExt(file) {
+            var temp = file.name.split('.');
+            var ext = temp.slice(temp.length - 1, temp.length);
+            return '.' + ext[0];
+        }
+
+        function GetFileName(file) {
+            var temp = file.name.split('.');
+            var fname = temp.slice(0, -1).join('.');
+            return fname;
+        }
+
+        function clearbox() {
+            evbox.value = "";
+            descbox.value = "";
+            clubbox.value = "";
+            datebox.value = "";
+            timebox.value = "";
+            locbox.value = "";
+            namebox.value = "";
+            extlab.value = "";
+            myimg.src = "";
+            proglab.innerHTML = "";
+        }
+
+        //---Upload img---//
+        async function UploadProcess() {
+            var ImgToUpload = files[0];
+            var ImgName = namebox.value + extlab.innerHTML;
+
+            if (evbox.value == "" || clubbox.value == "" || datebox.value == "" || timebox.value == "" || locbox.value == "" || namebox.value == "") {
+                alert('Please fill in every column before submission!');
+                return;
+            }
+
+            if (!ValidateName()) {
+                alert('Name cannot contain ".", "#", "$", "[", or "]".');
+                return;
+            }
+
+            const metaData = {
+                contentType: ImgToUpload.type
+            }
+            const storage = getStorage();
+            const storageRef = sRef(storage, "Images/" + ImgName);
+            const UploadTask = uploadBytesResumable(storageRef, ImgToUpload, metaData);
+
+            UploadTask.on('state-changed', (snapshot) => {
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                proglab.innerHTML = "Upload " + progress + "%";
+            },
+
+                (error) => {
+                    alert("Error: Image is not uploaded!");
+                },
+
+                () => {
+                    getDownloadURL(UploadTask.snapshot.ref).then((downloadURL) => {
+                        SaveURLtoRealtimeDB(downloadURL);
+                        alert("Event submitted successfully!")
+                        clearbox();
+                    });
+                }
+            );
+        }
+
+        //---Functions for REALTIME DATABASE---//
+        function SaveURLtoRealtimeDB(URL) {
+            var name = namebox.value;
+            var ename = evbox.value;
+            var ext = extlab.innerHTML;
+            var status = "Pending";
+
+            set(ref(realdb, "event/" + ename), {
+                event_name: evbox.value,
+                event_desc: descbox.value,
+                event_club: clubbox.value,
+                event_date: datebox.value,
+                event_time: timebox.value,
+                event_location: locbox.value,
+                event_image: (name + ext),
+                event_imgURL: URL,
+                event_status: status
+            });
+        }
+
+        function ValidateName() {
+            var regex = /[\.#$\[\]]/
+            return !(regex.test(namebox.value));
+        }
+
+        UpBtn.onclick = UploadProcess;
+    </script>
+
+    <script>
+        //---------FIREBASE CONFIGURATION---------//
+        const firebaseConfig = {
+            apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+            authDomain: "apclubs-678c7.firebaseapp.com",
+            databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "apclubs-678c7",
+            storageBucket: "apclubs-678c7.appspot.com",
+            messagingSenderId: "711066755172",
+            appId: "1:711066755172:web:8187fe865e562d32807f71",
+            measurementId: "G-NCK9V02TE8"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+
+        //Show ONLY existing clubs on dropbox
+        window.onload = DisplayExistingClubs();
+
+        function DisplayExistingClubs() {
+            firebase.database().ref("clubs").once("value",
+                function (AllRecords) {
+                    AllRecords.forEach(
+                        function (CurrentRecord) {
+                            var name = CurrentRecord.val().name;
+                            AddClubs(name);
+                        }
+                    );
+                });
+        }
+        function AddClubs(clubname) {
+            var sel = document.getElementById('txtClub');
+            sel.innerHTML += '<option class="opt" value="' + clubname + '">' + clubname + '</option>';
+        }
+    </script>
+    <script>
+        function logout() {
+            window.alert("You have signed out successfully");
+            window.location.href = "../login.html";
+            firebase.auth().signOut().then(() => {
+            }).catch((error) => {
+                console.log(error);
+            });
+        };
+    </script>
+</body>
+
+</html>

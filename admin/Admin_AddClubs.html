@@ -1,36 +1,40 @@
 <!DOCTYPE HTML>
 <html lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<title>APClubs | Admin - Add Clubs & Society</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>APClubs | Admin - Add Clubs & Society</title>
 
-<!--Bootstrap -->
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
-<!--Custome Style -->
-<link rel="stylesheet" href="assets/css/style.css" type="text/css">
-<!--OWL Carousel slider-->
-<link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
-<link rel="stylesheet" href="assets/css/owl.transitions.css" type="text/css">
-<!--slick-slider -->
-<link href="assets/css/slick.css" rel="stylesheet">
-<!--bootstrap-slider -->
-<link href="assets/css/bootstrap-slider.min.css" rel="stylesheet">
-<!--FontAwesome Font Style -->
-<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <!--Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+    <!--Custome Style -->
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <!--OWL Carousel slider-->
+    <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/owl.transitions.css" type="text/css">
+    <!--slick-slider -->
+    <link href="assets/css/slick.css" rel="stylesheet">
+    <!--bootstrap-slider -->
+    <link href="assets/css/bootstrap-slider.min.css" rel="stylesheet">
+    <!--FontAwesome Font Style -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
-<!-- Fav and touch icons -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon" type="image/png" href="favicon.ico"/>
-<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+        href="assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+        href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 </head>
 
 <!-- Firebase -->
@@ -40,31 +44,38 @@
 <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
-	<!-- Font awesome -->
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<!-- Sandstone Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<!-- Bootstrap Datatables -->
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<!-- Bootstrap social button library -->
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<!-- Bootstrap select -->
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<!-- Bootstrap file input -->
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<!-- Awesome Bootstrap checkbox -->
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-	<!-- Admin Stye -->
-	<link rel="stylesheet" href="css/style.css">
+<!-- Font awesome -->
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<!-- Sandstone Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- Bootstrap Datatables -->
+<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+<!-- Bootstrap social button library -->
+<link rel="stylesheet" href="css/bootstrap-social.css">
+<!-- Bootstrap select -->
+<link rel="stylesheet" href="css/bootstrap-select.css">
+<!-- Bootstrap file input -->
+<link rel="stylesheet" href="css/fileinput.min.css">
+<!-- Awesome Bootstrap checkbox -->
+<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+<!-- Admin Stye -->
+<link rel="stylesheet" href="css/style.css">
 
 
 <style>
-    .labs{
+    .labs {
         display: inline-block;
         width: 100px;
     }
@@ -72,110 +83,114 @@
 
 <body>
 
-  	<!-- Header -->
-		<div class="brand clearfix">
-	  	<a href="dashboard.php" style="font-size: 15px; color: #d53939;" class="logo">APCLUBS | Admin Panel</a>
-	  		<span class="menu-btn"><i class="fa fa-bars"></i></span>
-	  		<ul class="ts-profile-nav">
+    <!-- Header -->
+    <div class="brand clearfix">
+        <a href="dashboard.php" style="font-size: 15px; color: #d53939;" class="logo">APCLUBS | Admin Panel</a>
+        <span class="menu-btn"><i class="fa fa-bars"></i></span>
+        <ul class="ts-profile-nav">
 
-	  			<li class="ts-account">
-	  				<a href="#" style="color: #d53939;">Account <i class="fa fa-angle-down hidden-side"></i></a>
-	  				<ul>
-	  					<li><a href="logout.php">Logout</a></li>
-	  				</ul>
-	  			</li>
-	  		</ul>
-	  	</div>
-<div class="ts-main-content">
-  	<!-- Left Side Bar -->
-    <nav class="ts-sidebar">
-        <ul class="ts-sidebar-menu">
-
-          <li class="ts-label">Main</li>
-          <li><a href="admin.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-          <li><a href="Admin_AddClubs.html"><i class="fa fa-male"></i>Clubs & Society</a></li>
-          <li><a href=""><i class="fa fa-building"></i>Classroom Booking</a></li>
-          <li><a href=""><i class="fa fa-users"></i>Event Management</a></li>
-          <li><a href=""><i class="fa fa-envelope"></i>Contact Us & Feedback</a></li>
-        <!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
-
+            <li class="ts-account">
+                <a href="#" style="color: #d53939;">Account <i class="fa fa-angle-down hidden-side"></i></a>
+                <ul>
+                    <li><a href="#" onclick="logout()">Logout</a></li>
+                </ul>
+            </li>
         </ul>
-      </nav>
+    </div>
+    <div class="ts-main-content">
+        <!-- Left Side Bar -->
+		<nav class="ts-sidebar">
+			<ul class="ts-sidebar-menu">
 
-      <div class="content-wrapper">
-        <div class="container-fluid">
+				<li class="ts-label" style="color: #d53939;">Main</li>
+				<li><a href="admin.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+				<li><a href="Admin_AddClubs.html"><i class="fa fa-male"></i>Clubs & Society</a></li>
+				<li><a href=""><i class="fa fa-building"></i>Classroom Booking</a></li>
+				<li><a href="admin_events.html"><i class="fa fa-users"></i>Event Management</a></li>
+				<li><a href=""><i class="fa fa-envelope"></i>Contact Us & Feedback</a></li>
+				<!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
 
-          <div class="row">
+			</ul>
+		</nav>
+
+        <div class="content-wrapper">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h2 class="page-title">Admin - Clubs & Society</h2>
+
+                        <h5>Add & Edit Clubs/Society Information</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Listing -->
+        <div class="row">
             <div class="col-md-12">
-
-              <h2 class="page-title">Admin - Clubs & Society</h2>
-
-              <h5>Add & Edit Clubs/Society Information</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-
-<!-- Table Listing -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="container">
-        <table id="table1" class="table">
-            <thead>
-                <th>No.</th>
-                <th>Club/Society</th>
-                <th>Short Description</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Activity</th>
-                <th>How To Join</th>
-                <th>Commitee Member</th>
-                <!-- <th>Image 1</th>
+                <div class="container">
+                    <table id="table1" class="table">
+                        <thead>
+                            <th>No.</th>
+                            <th>Club/Society</th>
+                            <th>Short Description</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Activity</th>
+                            <th>How To Join</th>
+                            <th>Commitee Member</th>
+                            <!-- <th>Image 1</th>
                 <th>Image 2</th> -->
-            </thead>
-            <tbody id="tbody1">
+                        </thead>
+                        <tbody id="tbody1">
 
-            </tbody>
-        </table>
-    </div>
-  </div>
-</div>
-
-  <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Adding New Clubs</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <label class="labs">Club/Society:</label>
-                    <input type="input-group-text" id="NameMod"> <br>
-                    <label class="labs">Short&nbsp;Description</label>
-                    <input type="text" id="ShDescMod"> <br>
-                    <label class="labs">Type</label>
-                    <input type="text" id="TypeMod"> <br>
-                    <hr>
-                    <label class="labs">Description</label>
-                    <textarea class="form-control" aria-label="With textarea" id="DescMod"></textarea>
-                    <label class="labs">Activity</label>
-                    <textarea class="form-control" aria-label="With textarea" id="ActMod"></textarea>
-                    <label class="labs">How&nbsp;To&nbsp;Join</label><br>
-                    <textarea class="form-control" aria-label="With textarea" id="HTJMod"></textarea>
-                    <label class="labs">Commitee&nbsp;Members</label><br>
-                    <textarea class="form-control" aria-label="With textarea" id="CMMod"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button id="AddModBtn" type="button" class="btn btn-primary" onclick="AddEvent()">Add New Clubs</button>
-                    <button id="UpdateModBtn" type="button" class="btn btn-success" onclick="UpdateEvent()">Update Clubs</button>
-                    <button id="DeleteModBtn" type="button" class="btn btn-danger" onclick="DeleteEvent()">Remove Clubs</button>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Adding New Clubs</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="labs">Club/Society:</label>
+                        <input type="input-group-text" id="NameMod"> <br>
+                        <label class="labs">Short&nbsp;Description</label>
+                        <input type="text" id="ShDescMod"> <br>
+                        <label class="labs">Type</label>
+                        <input type="text" id="TypeMod"> <br>
+                        <hr>
+                        <label class="labs">Description</label>
+                        <textarea class="form-control" aria-label="With textarea" id="DescMod"></textarea>
+                        <label class="labs">Activity</label>
+                        <textarea class="form-control" aria-label="With textarea" id="ActMod"></textarea>
+                        <label class="labs">How&nbsp;To&nbsp;Join</label><br>
+                        <textarea class="form-control" aria-label="With textarea" id="HTJMod"></textarea>
+                        <label class="labs">Commitee&nbsp;Members</label><br>
+                        <textarea class="form-control" aria-label="With textarea" id="CMMod"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="AddModBtn" type="button" class="btn btn-primary" onclick="AddEvent()">Add New
+                            Clubs</button>
+                        <button id="UpdateModBtn" type="button" class="btn btn-success" onclick="UpdateEvent()">Update
+                            Clubs</button>
+                        <button id="DeleteModBtn" type="button" class="btn btn-danger" onclick="DeleteEvent()">Remove
+                            Clubs</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -183,14 +198,14 @@
 
             //---------FIREBASE CONFIGURATION---------//
             var firebaseConfig = {
-            apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
-            authDomain: "apclubs-678c7.firebaseapp.com",
-            databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "apclubs-678c7",
-            storageBucket: "apclubs-678c7.appspot.com",
-            messagingSenderId: "711066755172",
-            appId: "1:711066755172:web:8187fe865e562d32807f71",
-            measurementId: "G-NCK9V02TE8"
+                apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+                authDomain: "apclubs-678c7.firebaseapp.com",
+                databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "apclubs-678c7",
+                storageBucket: "apclubs-678c7.appspot.com",
+                messagingSenderId: "711066755172",
+                appId: "1:711066755172:web:8187fe865e562d32807f71",
+                measurementId: "G-NCK9V02TE8"
             };
 
             firebase.initializeApp(firebaseConfig);
@@ -199,24 +214,24 @@
             var cns_number;
 
             //---------GET ALL DATA---------//
-            function SelectAllData(){
+            function SelectAllData() {
                 document.getElementById("tbody1").innerHTML = "";
                 event_number = 0;
                 firebase.database().ref('clubs').once('value',
-                function(AllRecords){
-                    AllRecords.forEach(
-                        function(CurrentRecord){
-                            var csname = CurrentRecord.val().name;
-                            var csshdesc = CurrentRecord.val().sh_desc;
-                            var cstype = CurrentRecord.val().type;
-                            var csdesc = CurrentRecord.val().desc;
-                            var csact = CurrentRecord.val().act;
-                            var csHTJ = CurrentRecord.val().htj;
-                            var csCM = CurrentRecord.val().comm;
-                            AddItemsToTable(csname,csshdesc,cstype,csdesc,csact,csHTJ,csCM);
-                        }
-                    );
-                });
+                    function (AllRecords) {
+                        AllRecords.forEach(
+                            function (CurrentRecord) {
+                                var csname = CurrentRecord.val().name;
+                                var csshdesc = CurrentRecord.val().sh_desc;
+                                var cstype = CurrentRecord.val().type;
+                                var csdesc = CurrentRecord.val().desc;
+                                var csact = CurrentRecord.val().act;
+                                var csHTJ = CurrentRecord.val().htj;
+                                var csCM = CurrentRecord.val().comm;
+                                AddItemsToTable(csname, csshdesc, cstype, csdesc, csact, csHTJ, csCM);
+                            }
+                        );
+                    });
             }
 
             window.onload = SelectAllData;
@@ -225,7 +240,7 @@
 
             var cns_list = [];
 
-            function AddItemsToTable(csname,csshdesc,cstype,csdesc,csact,csHTJ,csCM,btn){
+            function AddItemsToTable(csname, csshdesc, cstype, csdesc, csact, csHTJ, csCM, btn) {
                 var tbody1 = document.getElementById('tbody1');
                 var trow = document.createElement('tr');
                 var td1 = document.createElement('td');
@@ -237,7 +252,7 @@
                 var td7 = document.createElement('td');
                 var td8 = document.createElement('td');
 
-                cns_list.push([csname,csshdesc,cstype,csdesc,csact,csHTJ,csCM]);
+                cns_list.push([csname, csshdesc, cstype, csdesc, csact, csHTJ, csCM]);
 
                 td1.innerHTML = ++event_number;
                 td2.innerHTML = csname;
@@ -259,7 +274,7 @@
 
                 var ControlDiv = document.createElement('div');
                 ControlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null)">Add New Clubs</button>&nbsp;&nbsp;&nbsp;';
-                ControlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes('+event_number+')">Edit Clubs</button>';
+                ControlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(' + event_number + ')">Edit Clubs</button>';
 
                 trow.appendChild(ControlDiv);
                 tbody1.appendChild(trow);
@@ -277,8 +292,8 @@
             var BTNmodUpdate = document.getElementById('UpdateModBtn');
             var BTNmodDelete = document.getElementById('DeleteModBtn');
 
-            function FillTboxes(index){
-                if(index==null){
+            function FillTboxes(index) {
+                if (index == null) {
                     ModName.value = "";
                     ModShDesc.value = "";
                     ModType.value = "";
@@ -305,7 +320,7 @@
                 }
             }
 
-            function AddEvent(){
+            function AddEvent() {
                 firebase.database().ref("clubs/" + ModName.value).set(
                     {
                         name: ModName.value,
@@ -316,10 +331,10 @@
                         htj: ModHTJ.value,
                         comm: ModCM.value
                     },
-                    (error) =>{
-                        if(error){
+                    (error) => {
+                        if (error) {
                             alert("Record was not added, there was some problem!");
-                        }else{
+                        } else {
                             alert("Record was added!");
                             SelectAllData();
                             $("exampleModalCenter").modal('hide');
@@ -330,21 +345,21 @@
                 )
             }
 
-            function UpdateEvent(){
+            function UpdateEvent() {
                 firebase.database().ref("clubs/" + ModName.value).update(
                     {
-                          name: ModName.value,
-                          sh_desc: ModShDesc.value,
-                          type: ModType.value,
-                          desc: ModDesc.value,
-                          act: ModAct.value,
-                          htj: ModHTJ.value,
-                          comm: ModCM.value
+                        name: ModName.value,
+                        sh_desc: ModShDesc.value,
+                        type: ModType.value,
+                        desc: ModDesc.value,
+                        act: ModAct.value,
+                        htj: ModHTJ.value,
+                        comm: ModCM.value
                     },
-                    (error) =>{
-                        if(error){
+                    (error) => {
+                        if (error) {
                             alert("Record was not updated, there was some problem!");
-                        }else{
+                        } else {
                             alert("Record was updated!");
                             SelectAllData();
                             $("exampleModalCenter").modal('hide');
@@ -355,9 +370,9 @@
                 )
             }
 
-            function DeleteEvent(){
+            function DeleteEvent() {
                 firebase.database().ref("clubs/" + ModName.value).remove().then(
-                    function(){
+                    function () {
                         alert("Record was deleted!");
                         SelectAllData();
                         $("exampleModalCenter").modal('hide');
@@ -379,7 +394,16 @@
         <script src="js/fileinput.js"></script>
         <script src="js/chartData.js"></script>
         <script src="js/main.js"></script>
-
-
+        <script>
+            function logout() {
+                window.alert("You have signed out successfully");
+                window.location.href = "login.html";
+                firebase.auth().signOut().then(() => {
+                }).catch((error) => {
+                    console.log(error);
+                });
+            };
+        </script>
 </body>
+
 </html>
