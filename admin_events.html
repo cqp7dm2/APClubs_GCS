@@ -322,6 +322,10 @@
 
         //Add, Update, Delete Functions
         function AddEvent(){
+            if(ModName.value=="" || ModDesc.value=="" || ModClub.value=="" || ModDate.value=="" || ModTime.value=="" || ModLoc.value=="" || ModDoc.value=="" || StatusDoc.value==""){
+                alert('Please fill in every column before submission!');
+                return;
+            }
             firebase.database().ref("event/" + ModName.value).set(
                 {
                     event_name: ModName.value,
@@ -348,6 +352,10 @@
         }
 
         function UpdateEvent(){
+            if(ModName.value=="" || ModDesc.value=="" || ModClub.value=="" || ModDate.value=="" || ModTime.value=="" || ModLoc.value=="" || ModDoc.value=="" || StatusDoc.value==""){
+                alert('Please fill in every column before submission!');
+                return;
+            }
             firebase.database().ref("event/" + ModName.value).update(
                 {
                     event_name: ModName.value,

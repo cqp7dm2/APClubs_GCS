@@ -421,34 +421,12 @@
                 sel.innerHTML += '<option id="opt">' + clubname + '</option>';
             }
 
-            //Add, Update, Delete Functions
-            function AddEvent() {
-                firebase.database().ref("event/" + ModName.value).set(
-                    {
-                        event_name: ModName.value,
-                        event_desc: ModDesc.value,
-                        event_club: ModClub.value,
-                        event_date: ModDate.value,
-                        event_time: ModTime.value,
-                        event_location: ModLoc.value,
-                        event_image: ModDoc.value,
-                        event_status: StatusDoc.value
-                    },
-                    (error) => {
-                        if (error) {
-                            alert("Record was not added, there was some problem!");
-                        } else {
-                            alert("Record was added!");
-                            SelectAllData();
-                            $("exampleModalCenter").modal('hide');
-                            location.reload();
-                            return false;
-                        }
-                    }
-                )
-            }
-
+            //Update, Delete Function
             function UpdateEvent() {
+                if(ModName.value=="" || ModDesc.value=="" || ModClub.value=="" || ModDate.value=="" || ModTime.value=="" || ModLoc.value=="" || ModDoc.value=="" || StatusDoc.value==""){
+                    alert('Please fill in every column before submission!');
+                    return;
+                }
                 firebase.database().ref("event/" + ModName.value).update(
                     {
                         event_name: ModName.value,
