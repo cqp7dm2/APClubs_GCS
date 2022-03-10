@@ -147,7 +147,8 @@
 
         //---Initialize Firebase---//
         const app = initializeApp(firebaseConfig);
-        import { getDatabase, ref, set, child, get, update, remove }
+        import { getDatabase, ref, set, child, get, update, remove, 
+            query, orderByChild, equalTo }
             from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
         const realdb = getDatabase();
 
@@ -156,9 +157,9 @@
         window.addEventListener('load', GetAllEvents);
 
         function GetAllEvents() {
-            const dbref = ref(realdb);
+            const que = query(ref(realdb, "event"), orderByChild("event_status"), equalTo("Approved"));
 
-            get(child(dbref, "event"))
+            get(que)
                 .then((snapshot) => {
                     snapshot.forEach(eve => {
                         ArrayOfEvents.push(eve.val());
@@ -180,7 +181,7 @@
             <img src="`+ event.event_imgURL + `" class="thumb mt-3" id="thumb` + index + `">
             <p class="title" id="title`+ index + `">` + event.event_name + `</p>
             <ul class="points">
-                <li><b>Club: `+ event.event_club + `</b></li>
+                <li><b>From: `+ event.event_club + `</b></li>
                 <li>`+ event.event_date + `</li>
                 <li>`+ event.event_time + `</li>
                 <li>`+ event.event_location + `</li>
