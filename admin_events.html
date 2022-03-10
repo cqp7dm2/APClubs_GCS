@@ -91,9 +91,8 @@
                     <label class="labs">Description: </label>
                     <input class="inp" type="text" id="DescMod"> <br>
                     <label class="labs">Club Name: </label>
-                    <!-- <input class="inp" type="text" id="ClubMod"> <br> -->
-                    <select class="inpS" id="ClubMod" onclick="DisplayExistingClubs()">
-                        <!-- <option>---Select Club---</option> -->
+                    <select class="inpS" id="ClubMod" onclick="stoploop()">
+                        
                     </select> <br>
 
                     <label class="labs">Date: </label>
@@ -296,6 +295,14 @@
         }
 
         //Show ONLY existing clubs on dropbox
+        function stoploop(){
+            var ele = document.getElementById('opt');
+            if(ele){
+                return;
+            } else {
+                DisplayExistingClubs();
+            }
+        }
 
         function DisplayExistingClubs(){
             firebase.database().ref("clubs").once("value",
@@ -311,9 +318,7 @@
 
         function AddClubs(clubname){
             var sel = document.getElementById('ClubMod');
-            var opt = document.createElement('option');
-            opt.innerHTML = clubname;
-            sel.appendChild(opt);
+            sel.innerHTML += '<option id="opt">'+clubname+'</option>';
         }
 
         //Add, Update, Delete Functions
