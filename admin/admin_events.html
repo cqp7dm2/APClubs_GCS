@@ -307,7 +307,7 @@
                 event_list.push([name, desc, club, date, time, loc, doc, status]);
 
                 td0.innerHTML = ++event_number;
-                td1.innerHTML = name;
+                td1.innerText = name; //innerText, instead of innerHTML, to sanitize input to prevent XSS attack!
                 td2.innerHTML = desc;
                 td3.innerHTML = club;
                 td4.innerHTML = date;
