@@ -307,14 +307,14 @@
                 event_list.push([name, desc, club, date, time, loc, doc, status]);
 
                 td0.innerHTML = ++event_number;
-                td1.innerText = name; //innerText, instead of innerHTML, to sanitize input to prevent XSS attack!
-                td2.innerHTML = desc;
-                td3.innerHTML = club;
-                td4.innerHTML = date;
-                td5.innerHTML = time;
-                td6.innerHTML = loc;
-                td7.innerHTML = doc;
-                td8.innerHTML = status;
+                td1.innerText = name;
+                td2.innerText = desc; //innerText, instead of innerHTML, to sanitize input to prevent XSS attack!
+                td3.innerText = club;
+                td4.innerText = date;
+                td5.innerText = time;
+                td6.innerText = loc;
+                td7.innerText = doc;
+                td8.innerText = status;
 
                 if (td8.innerHTML == "Pending") {
                     td8.innerHTML = "<b><span style='color:blue'>" + status + "</span></b>";
