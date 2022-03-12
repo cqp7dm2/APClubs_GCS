@@ -1,155 +1,292 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="en">
 
 <head>
-    <title>Contact us - Submit your feedback</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <title>APClubs | Details Of Clubs & Society</title>
 
-    <!--Firebase-->
-    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
 
-    <!-- Nav bootstap & resources -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="js/loggedinstate.js"></script>
+  <!-- Nav bootstap & resources -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="js/loggedinstate.js"></script>
 
+  <!--Bootstrap -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+  <!--Custome Style -->
+  <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+  <!--OWL Carousel slider-->
+  <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/owl.transitions.css" type="text/css">
+  <!--slick-slider -->
+  <link href="assets/css/slick.css" rel="stylesheet">
+  <!--bootstrap-slider -->
+  <link href="assets/css/bootstrap-slider.min.css" rel="stylesheet">
+  <!--FontAwesome Font Style -->
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144"
+    href="assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114"
+    href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72"
+    href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" type="image/png" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 </head>
 
+
 <body>
-    <header>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <!-- Brand -->
-            <a class="navbar-brand" href="home.html">APClubs</a>
 
-            <!-- Links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="Club_Search_Result.html">Clubs & Society</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Classroom Booking</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="user_events.html">Events</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="feedback_form.html">Enquiry & Feedback</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="club registration form.html">Club Registration</a>
-                </li>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="home.html">APClubs</a>
 
-                <!-- Dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        Signed In
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="userProfile.html">My Profile</a>
-                        <a class="dropdown-item" id="adminbtn" href="admin/admin.html">Admin</a>
-                        <a class="dropdown-item" id="committeebtn" href="CommiteeM/commMember.html">Committee</a>
-                        <a class="dropdown-item" href="#" onclick="logout()">Sign Out</a>
-                    </div>
-                </li>
-            </ul>
-        </nav>
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="Club_Search_Result.html">Clubs & Society</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Classroom Booking</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="user_events.html">Events</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="feedback_form.html">Enquiry & Feedback</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="club registration form.html">Club Registration</a>
+        </li>
+
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Signed In
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="userProfile.html">My Profile</a>
+                <a class="dropdown-item" id="adminbtn" href="admin/admin.html">Admin</a>
+                <a class="dropdown-item" id="committeebtn" href="CommiteeM/commMember.html">Committee</a>
+                <a class="dropdown-item" href="#" onclick="logout()">Sign Out</a>
+            </div>
+        </li>
+    </ul>
+</nav>
         <!-- Navbar -->
 
     </header>
     <br />
 
-    <div class="container">
-        <h3>Contact Us & Feedback Form</h3>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="tp_No">TP Number</label>
-            <input type="text" name="tp_No" id="tp_No" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="messages">Message</label>
-            <input type="text" name="messages" id="messages" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
-        </div>
-    </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script type="module">
 
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
-        const firebaseConfig = {
-            apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
-            authDomain: "apclubs-678c7.firebaseapp.com",
-            databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "apclubs-678c7",
-            storageBucket: "apclubs-678c7.appspot.com",
-            messagingSenderId: "711066755172",
-            appId: "1:711066755172:web:8187fe865e562d32807f71",
-            measurementId: "G-NCK9V02TE8"
-        };
-        const app = initializeApp(firebaseConfig);
+    <div>
+        <div class="container w-100 h-100 bg-">
+            <div class="row align-items-center h-100">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card shadow mb-3">
+                                <div class="card-header py-3">
+                                    <!-- <p class="text-primary m-0 font-weight-bold">User Profile</p> -->
+                                    <h3 class="text-primary ">Enquiry Form</h3>
+                                    <!-- <button onclick= "getinfo()" class="btn btn-primary btn-sm" type="submit" >Get&nbsp;Data</button> -->
+                                </div>
+                                <div class="card-body">
+                                    <!-- <form method = "POST"> -->
 
-        import { getDatabase, ref, set }
-            from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
-        const db = getDatabase();
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group"><strong>Name</strong>
+                                                <input type="text" class="form-control" id="name" name="name"
+                                                    placeholder="" required>
+                                            </div>
+                                        </div>
+                                    </div>
 
-        var Name = document.getElementById("name");
-        var Tp_no = document.getElementById("tp_No");
-        var Email = document.getElementById("email");
-        var Message = document.getElementById("messages")
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group"><strong>TP Number</strong>
+                                                <input class="form-control" type="text" id="tp_No"
+                                                    placeholder="Eg: TP123456" required></input>
+                                            </div>
+                                        </div>
+                                    </div>
 
-        var btn = document.getElementById("btn_submit");
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group"><strong>Email</strong>
+                                                <input class="form-control" type="text" id="email"
+                                                    placeholder="Eg: example@example.com" required></input>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group"><strong>Club</strong>
+                                                <select id="club" class="form-control" required>
+                                                    <option selected="true" disabled="disabled">Choose Club or Admin
+                                                    </option>
+                                                    <option value="admin">Student Affair Officer</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group"><strong>Enquiry/Feedback</strong>
+                                                <textarea class="form-control" type="text" id="message" rows=" 3"
+                                                    placeholder="Eg: I have some enquiry about..." required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
-        var uid = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+                                    <div class="form-group">
+                                        <button id="btn_submit" class="btn btn-success btn-sm">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
 
-        function InsertData() {
-            //set(ref(db,"feedback"),{
-            //    fid: uid,
-            //})
-            set(ref(db, "feedback/" + uid), {
-                name: Name.value,
-                tp_No: Tp_no.value,
-                email: Email.value,
-                message: Message.value,
-            })
-                .then(() => {
-                    alert("data stored successfully");
-                })
-                .catch((error) => {
-                    alert("unsuccessful,error" + error);
-                });
-        }
 
-        btn.addEventListener("click", InsertData);
-    </script>
-    <script>
-        function logout() {
-            window.alert("You have signed out successfully");
-            window.location.href = "login.html";
-            firebase.auth().signOut().then(() => {
-            }).catch((error) => {
-                console.log(error);
-            });
-        };
-    </script>
+
+                            <script type="module">
+
+
+                                var firebaseConfig = {
+                                    apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+                                    authDomain: "apclubs-678c7.firebaseapp.com",
+                                    databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+                                    projectId: "apclubs-678c7",
+                                    storageBucket: "apclubs-678c7.appspot.com",
+                                    messagingSenderId: "711066755172",
+                                    appId: "1:711066755172:web:8187fe865e562d32807f71",
+                                    measurementId: "G-NCK9V02TE8"
+                                };
+
+                                firebase.initializeApp(firebaseConfig);
+                                var database = firebase.database();
+
+                                var Name = document.getElementById("name");
+                                var Tp_no = document.getElementById("tp_No");
+                                var Email = document.getElementById("email");
+                                var Message = document.getElementById("message");
+                                var Status = "pending";
+
+                                var btn = document.getElementById("btn_submit");
+
+                                var fid = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+
+                                window.onload = getAllClub;
+
+                                btn.onclick = function () {
+                                    firebase.auth().onAuthStateChanged((user) => {
+                                        if (user) {
+                                            var uids = user.uid;
+                                            InsertData(uids);
+                                        }
+                                    });
+
+                                }
+
+
+                                function InsertData(uids) {
+                                    var Club = document.getElementById("club").value;
+                                    if (Club == "admin") {
+                                        firebase.database().ref("feedback/" + "/" + Club + "/" + fid + "/").set({
+                                            name: Name.value,
+                                            tp_No: Tp_no.value,
+                                            email: Email.value,
+                                            message: Message.value,
+                                            status: Status,
+                                            reply: "waiting"
+                                        }, (error) => {
+                                            if (error) {
+                                                alert("Submission failed. Please try again");
+                                            } else {
+                                                alert("Submitted successful");
+                                                location.reload();
+                                            }
+                                        })
+
+                                    }
+                                    else {
+
+                                        firebase.database().ref("feedback/" + "/" + Club + "/" + uids + "/" + fid + "/").set({
+                                            name: Name.value,
+                                            tp_No: Tp_no.value,
+                                            email: Email.value,
+                                            message: Message.value,
+                                            status: Status,
+                                            reply: "waiting"
+                                        }, (error) => {
+                                            if (error) {
+                                                alert("Submission failed. Please try again");
+                                            } else {
+                                                alert("Submitted successful");
+                                                location.reload();
+                                            }
+                                        })
+                                    }
+                                };
+
+                                function getAllClub() {
+                                    firebase.database().ref('clubs/').once('value',
+                                        function (snapshot) {
+                                            var allClubs = Object.keys(snapshot.val());
+                                            allClubs.forEach(initClub);
+                                            function initClub(item) {
+                                                var clubs = item;
+                                                AddItemsToOptions(clubs);
+                                            }
+                                        });
+
+                                }
+
+                                function AddItemsToOptions(clubs) {
+                                    var select = document.getElementById('club');
+
+
+                                    select.innerHTML += '<option value="' + clubs + '">' + clubs + '</option>';
+
+
+                                }
+
+
+
+
+                            </script>
+
+                            <script>
+                                function logout() {
+                                    window.alert("You have signed out successfully");
+                                    window.location.href = "login.html";
+                                    firebase.auth().signOut().then(() => {
+                                    }).catch((error) => {
+                                        console.log(error);
+                                    });
+                                };
+                            </script>
+
 </body>
 
 </html>

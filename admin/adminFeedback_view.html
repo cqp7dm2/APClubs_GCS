@@ -116,34 +116,31 @@
 
         <div class="content-wrapper">
             <div class="container-fluid">
-
                 <div class="row">
                     <div class="col-md-12">
 
-                        <h2 class="page-title">Admin - Clubs & Society</h2>
+                        <h2 class="page-title">Commitee Members - Reply Enquiry</h2>
 
-                        <h5>Add & Edit Clubs/Society Information</h5>
+                        <h5>Kindly Reply all the Enquiry</h5>
+
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Table Listing -->
         <div class="row">
             <div class="col-md-12">
                 <div class="container">
                     <table id="table1" class="table">
                         <thead>
                             <th>No.</th>
-                            <th>Club/Society</th>
-                            <th>Short Description</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Activity</th>
-                            <th>How To Join</th>
-                            <th>Commitee Member</th>
-                            <!-- <th>Image 1</th>
-                <th>Image 2</th> -->
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>TP Number</th>
+                            <th>Message</th>
+                            <th>Reply</th>
+                            <th>Status</th>
+                            <th>Actions</th>
                         </thead>
                         <tbody id="tbody1">
 
@@ -159,35 +156,20 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Adding New Clubs</h5>
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Reply</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label class="labs">Club/Society:</label>
-                        <input type="input-group-text" id="NameMod"> <br>
-                        <label class="labs">Short&nbsp;Description</label>
-                        <input type="text" id="ShDescMod"> <br>
-                        <label class="labs">Type</label>
-                        <input type="text" id="TypeMod"> <br>
-                        <hr>
-                        <label class="labs">Description</label>
-                        <textarea class="form-control" aria-label="With textarea" id="DescMod"></textarea>
-                        <label class="labs">Activity</label>
-                        <textarea class="form-control" aria-label="With textarea" id="ActMod"></textarea>
-                        <label class="labs">How&nbsp;To&nbsp;Join</label><br>
-                        <textarea class="form-control" aria-label="With textarea" id="HTJMod"></textarea>
-                        <label class="labs">Commitee&nbsp;Members</label><br>
-                        <textarea class="form-control" aria-label="With textarea" id="CMMod"></textarea>
+                        <label class="labs">Message:</label>
+                        <textarea class="form-control" aria-label="With textarea" id="reply" placeholder="Reply Here..."
+                            rows=5></textarea>
+                        <input class="form-control" type="hidden" id="index">
                     </div>
                     <div class="modal-footer">
-                        <button id="AddModBtn" type="button" class="btn btn-primary" onclick="AddEvent()">Add New
-                            Clubs</button>
-                        <button id="UpdateModBtn" type="button" class="btn btn-success" onclick="UpdateEvent()">Update
-                            Clubs</button>
-                        <button id="DeleteModBtn" type="button" class="btn btn-danger" onclick="DeleteEvent()">Remove
-                            Clubs</button>
+                        <button id="UpdateModBtn" type="button" class="btn btn-success"
+                            onclick="addReply()">Submit</button>
                     </div>
                 </div>
             </div>
@@ -197,7 +179,7 @@
 
         <script id="mainscript">
 
-            //---------FIREBASE CONFIGURATION---------//
+
             var firebaseConfig = {
                 apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
                 authDomain: "apclubs-678c7.firebaseapp.com",
@@ -212,36 +194,36 @@
             firebase.initializeApp(firebaseConfig);
             var database = firebase.database();
 
-            var cns_number;
-
-            //---------GET ALL DATA---------//
-            function SelectAllData() {
-                document.getElementById("tbody1").innerHTML = "";
-                event_number = 0;
-                firebase.database().ref('clubs').once('value',
-                    function (AllRecords) {
-                        AllRecords.forEach(
-                            function (CurrentRecord) {
-                                var csname = CurrentRecord.val().name;
-                                var csshdesc = CurrentRecord.val().sh_desc;
-                                var cstype = CurrentRecord.val().type;
-                                var csdesc = CurrentRecord.val().desc;
-                                var csact = CurrentRecord.val().act;
-                                var csHTJ = CurrentRecord.val().htj;
-                                var csCM = CurrentRecord.val().comm;
-                                AddItemsToTable(csname, csshdesc, cstype, csdesc, csact, csHTJ, csCM);
-                            }
-                        );
-                    });
-            }
 
             window.onload = SelectAllData;
 
-            //---------FILLING THE TABLE---------//
 
-            var cns_list = [];
 
-            function AddItemsToTable(csname, csshdesc, cstype, csdesc, csact, csHTJ, csCM, btn) {
+            function SelectAllData() {
+                document.getElementById("tbody1").innerHTML = "";
+                firebase.database().ref("feedback/admin/").once('value',
+                    function (AllRecords) {
+                        var no = 0
+                        AllRecords.forEach(
+                            function (CurrentRecord) {
+                                var f_fid = Object.keys(AllRecords.val())[no++];
+                                console.log(f_fid)
+                                var f_name = CurrentRecord.val().name;
+                                var f_tp_No = CurrentRecord.val().tp_No;
+                                var f_email = CurrentRecord.val().email;
+                                var f_message = CurrentRecord.val().message;
+                                var f_status = CurrentRecord.val().status;
+                                var f_reply = CurrentRecord.val().reply;
+                                AddItemsToTable(f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid);
+                            });
+                    });
+            }
+
+
+            var f_list = [];
+            var feedbackNo = 0;
+
+            function AddItemsToTable(f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid) {
                 var tbody1 = document.getElementById('tbody1');
                 var trow = document.createElement('tr');
                 var td1 = document.createElement('td');
@@ -251,18 +233,16 @@
                 var td5 = document.createElement('td');
                 var td6 = document.createElement('td');
                 var td7 = document.createElement('td');
-                var td8 = document.createElement('td');
 
-                cns_list.push([csname, csshdesc, cstype, csdesc, csact, csHTJ, csCM]);
+                f_list.push([f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid])
 
-                td1.innerHTML = ++event_number;
-                td2.innerHTML = csname;
-                td3.innerHTML = csshdesc;
-                td4.innerHTML = cstype;
-                td5.innerHTML = csdesc;
-                td6.innerHTML = csact;
-                td7.innerHTML = csHTJ;
-                td8.innerHTML = csCM;
+                td1.innerHTML = ++feedbackNo;
+                td2.innerHTML = f_name;
+                td3.innerHTML = f_tp_No;
+                td4.innerHTML = f_email;
+                td5.innerHTML = f_message;
+                td6.innerHTML = f_reply;
+                td7.innerHTML = f_status;
 
                 trow.appendChild(td1);
                 trow.appendChild(td2);
@@ -271,121 +251,55 @@
                 trow.appendChild(td5);
                 trow.appendChild(td6);
                 trow.appendChild(td7);
-                trow.appendChild(td8);
 
                 var ControlDiv = document.createElement('div');
-                ControlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null)">Add New Clubs</button>&nbsp;&nbsp;&nbsp;';
-                ControlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(' + event_number + ')">Edit Clubs</button>';
-
+                ControlDiv.innerHTML += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null,' + feedbackNo + ')">Reply</button>';
+                ControlDiv.innerHTML += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(' + feedbackNo + ')">Edit</button>';
                 trow.appendChild(ControlDiv);
                 tbody1.appendChild(trow);
             }
 
-            var ModName = document.getElementById('NameMod');
-            var ModShDesc = document.getElementById('ShDescMod');
-            var ModType = document.getElementById('TypeMod');
-            var ModDesc = document.getElementById('DescMod');
-            var ModAct = document.getElementById('ActMod');
-            var ModHTJ = document.getElementById('HTJMod');
-            var ModCM = document.getElementById('CMMod');
-
-            var BTNmodAdd = document.getElementById('AddModBtn');
+            var Reply = document.getElementById("reply");
+            var f_index = document.getElementById("index");
             var BTNmodUpdate = document.getElementById('UpdateModBtn');
-            var BTNmodDelete = document.getElementById('DeleteModBtn');
 
-            function FillTboxes(index) {
+            function FillTboxes(index, index2) {
                 if (index == null) {
-                    ModName.value = "";
-                    ModShDesc.value = "";
-                    ModType.value = "";
-                    ModDesc.value = "";
-                    ModAct.value = "";
-                    ModHTJ.value = "";
-                    ModCM.value = "";
-                    BTNmodAdd.style.display = 'inline-block';
-                    BTNmodUpdate.style.display = 'none';
-                    BTNmodDelete.style.display = 'none';
+                    Reply.value = "";
+                    --index2;
+                    f_index = index2;
                 } else {
                     --index;
-                    ModName.value = cns_list[index][0];
-                    ModShDesc.value = cns_list[index][1];
-                    ModType.value = cns_list[index][2];
-                    ModDesc.value = cns_list[index][3];
-                    ModAct.value = cns_list[index][4];
-                    ModHTJ.value = cns_list[index][5];
-                    ModCM.value = cns_list[index][6];
-
-                    BTNmodAdd.style.display = 'none';
+                    Reply.value = f_list[index][4];
+                    f_index = index;
                     BTNmodUpdate.style.display = 'inline-block';
-                    BTNmodDelete.style.display = 'inline-block';
                 }
             }
 
-            function AddEvent() {
-                firebase.database().ref("clubs/" + ModName.value).set(
+            function addReply() {
+                var r_reply = document.getElementById("reply").value;
+                console.log(f_index)
+                var r_fid = f_list[f_index][6];
+                firebase.database().ref("feedback/admin/"+ r_fid + "/").update(
                     {
-                        name: ModName.value,
-                        sh_desc: ModShDesc.value,
-                        type: ModType.value,
-                        desc: ModDesc.value,
-                        act: ModAct.value,
-                        htj: ModHTJ.value,
-                        comm: ModCM.value
-                    },
-                    (error) => {
-                        if (error) {
-                            alert("Record was not added, there was some problem!");
-                        } else {
-                            alert("Record was added!");
-                            SelectAllData();
-                            $("exampleModalCenter").modal('hide');
-                            location.reload();
-                            return false;
-                        }
-                    }
-                )
-            }
-
-            function UpdateEvent() {
-                firebase.database().ref("clubs/" + ModName.value).update(
-                    {
-                        name: ModName.value,
-                        sh_desc: ModShDesc.value,
-                        type: ModType.value,
-                        desc: ModDesc.value,
-                        act: ModAct.value,
-                        htj: ModHTJ.value,
-                        comm: ModCM.value
+                        status: "Done",
+                        reply: r_reply,
                     },
                     (error) => {
                         if (error) {
                             alert("Record was not updated, there was some problem!");
                         } else {
-                            alert("Record was updated!");
-                            SelectAllData();
-                            $("exampleModalCenter").modal('hide');
+                            alert("Done Reply!");
                             location.reload();
                             return false;
                         }
-                    }
-                )
-            }
-
-            function DeleteEvent() {
-                firebase.database().ref("clubs/" + ModName.value).remove().then(
-                    function () {
-                        alert("Record was deleted!");
-                        SelectAllData();
-                        $("exampleModalCenter").modal('hide');
-                        location.reload();
-                        return false;
                     }
                 )
             }
 
         </script>
 
-        <!-- Loading Scripts -->
+
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap-select.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -395,6 +309,17 @@
         <script src="js/fileinput.js"></script>
         <script src="js/chartData.js"></script>
         <script src="js/main.js"></script>
+
+        <!-- Loading Scripts -->
+        <script src="../admin/js/jquery.min.js"></script>
+        <script src="../admin/js/bootstrap-select.min.js"></script>
+        <script src="../admin/js/bootstrap.min.js"></script>
+        <script src="../admin/js/jquery.dataTables.min.js"></script>
+        <script src="../admin/js/dataTables.bootstrap.min.js"></script>
+        <script src="../admin/js/Chart.min.js"></script>
+        <script src="../admin/js/fileinput.js"></script>
+        <script src="../admin/js/chartData.js"></script>
+        <script src="../admin/js/main.js"></script>
         <script>
             function logout() {
                 window.alert("You have signed out successfully");
