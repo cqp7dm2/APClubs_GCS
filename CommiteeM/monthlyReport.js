@@ -79,11 +79,11 @@ function AddItemsToTable(fullName, tpNumber, intakeCode, email) {
     cns_list.push([fullName, tpNumber, intakeCode, email]);
 
     td1.innerHTML = ++event_number;
-    td2.innerHTML = fullName;
+    td2.innerText = fullName;
     td2.classList += "Namefield";
-    td3.innerHTML = tpNumber;
-    td4.innerHTML = intakeCode;
-    td5.innerHTML = email;
+    td3.innerText = tpNumber;
+    td4.innerText = intakeCode;
+    td5.innerText = email;
 
     trow.appendChild(td1);
     trow.appendChild(td2);
@@ -135,12 +135,12 @@ function AddEventsToTable(eventName, eventDate, eventTime, eventDescription,even
     cns_list.push([eventName, eventDate, eventTime, eventDescription,eventLocation]);
 
     td1.innerHTML = ++event_number;
-    td2.innerHTML = eventName;
+    td2.innerText = eventName;
     td2.classList += "Namefield";
-    td3.innerHTML = eventDate;
-    td4.innerHTML = eventTime;
-    td5.innerHTML = eventDescription;
-    td6.innerHTML = eventLocation;
+    td3.innerText = eventDate;
+    td4.innerText = eventTime;
+    td5.innerText = eventDescription;
+    td6.innerText = eventLocation;
 
     trow.appendChild(td1);
     trow.appendChild(td2);
