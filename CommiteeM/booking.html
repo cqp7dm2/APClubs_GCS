@@ -1,69 +1,117 @@
-<html lang="en">
+<!doctype html>
+<html lang="en" class="no-js">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Classroom Booking</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="theme-color" content="#3e454c">
 
-    <!-- Nav bootstap & resources -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+	<title>APCLUBS | Commitee Panel</title>
+	<!--Bootstrap -->
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
+	<!--Custome Style -->
+	<link rel="stylesheet" href="../assets/css/style.css" type="text/css">
+	<!--OWL Carousel slider-->
+	<link rel="stylesheet" href="../assets/css/owl.carousel.css" type="text/css">
+	<link rel="stylesheet" href="../assets/css/owl.transitions.css" type="text/css">
+	<!--slick-slider -->
+	<link href="../assets/css/slick.css" rel="stylesheet">
+	<!--bootstrap-slider -->
+	<link href="../assets/css/bootstrap-slider.min.css" rel="stylesheet">
+	<!--FontAwesome Font Style -->
+	<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 
-    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="../assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" type="image/png" href="../favicon.ico"/>
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+		<!-- Font awesome -->
+		<link rel="stylesheet" href="../admin/css/font-awesome.min.css">
+		<!-- Sandstone Bootstrap CSS -->
+		<link rel="stylesheet" href="../admin/css/bootstrap.min.css">
+		<!-- Bootstrap Datatables -->
+		<link rel="stylesheet" href="../admin/css/dataTables.bootstrap.min.css">
+		<!-- Bootstrap social button library -->
+		<link rel="stylesheet" href="../admin/css/bootstrap-social.css">
+		<!-- Bootstrap select -->
+		<link rel="stylesheet" href="../admin/css/bootstrap-select.css">
+		<!-- Bootstrap file input -->
+		<link rel="stylesheet" href="../admin/css/fileinput.min.css">
+		<!-- Awesome Bootstrap checkbox -->
+		<link rel="stylesheet" href="../admin/css/awesome-bootstrap-checkbox.css">
+		<!-- Admin Stye -->
+		<link rel="stylesheet" href="../admin/css/style.css">
+
+		<style>
+		    .labs{
+		        display: inline-block;
+		        width: 100px;
+		    }
+            .container{
+                margin-top:200px;
+                margin-left:420px
+            }
+		</style>
 
 </head>
 
-<header>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <!-- Brand -->
-        <a class="navbar-brand" href="home.html">APClubs</a>
+<body>
 
-        <!-- Links -->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="Club_Search_Result.html">Clubs & Society</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Classroom Booking</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="user_events.html">Events</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="feedback_form.html">Enquiry & Feedback</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="club registration form.html">Club Registration</a>
-            </li>
+	<!-- Header -->
+  <div class="brand clearfix">
+  	<a href="commMember.html" style="font-size: 15px; color: #b5df1a;" class="logo">APCLUBS | Commitee Panel</a>
+  		<span class="menu-btn"><i class="fa fa-bars"></i></span>
+  		<ul class="ts-profile-nav">
 
-            <!-- Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Signed In
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="userProfile.html">My Profile</a>
-                    <a class="dropdown-item" id="adminbtn" href="admin/admin.html">Admin</a>
-                    <a class="dropdown-item" id="committeebtn" href="CommiteeM/commMember.html">Committee</a>
-                    <a class="dropdown-item" href="#" onclick="logout()">Sign Out</a>
-                </div>
-            </li>
-        </ul>
-    </nav>
-    <!-- Navbar -->
+  			<li class="ts-account " >
+  				<a href="#" style="color: #b5df1a;">Account <i class="fa fa-angle-down hidden-side "  ></i></a>
+  				<ul>
+  					<li><a href="#" onclick="logout()">Logout</a></li>
+  				</ul>
+  			</li>
+  		</ul>
+  	</div>
+<div class="ts-main-content">
+	<!-- Left Side Bar -->
+	<nav class="ts-sidebar">
+			<ul class="ts-sidebar-menu">
 
-</header>
+				<li class="ts-label " style="color: #b5df1a;">Main</li>
+				<li><a href="commMember.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+				<li><a href="monthlyReport.html"><i class="fa fa-male"></i>Monthly Report</a></li>
+				<li><a href="commiteeapprove.html"><i class="fa fa-male"></i>Members Registration</a></li>
+				<li><a href="booking.html"><i class="fa fa-building"></i>Classroom Booking</a></li>
+				<li><a href="bookingList.html"><i class="fa fa-users"></i>Check Status & Booking</a></li>
+				<li><a href="advisor_events.html"><i class="fa fa-users"></i>Event Management</a></li>
+				<li><a href="UpdateClubDetails.html"><i class="fa fa-envelope"></i>Update Clubs Detials</a></li>
+        <li><a href=""><i class="fa fa-envelope"></i>Student Enquiry</a></li>
+			<!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
 
-<body class="bg-light">
+			</ul>
+		</nav>
+
+
     <div>
         <div class="container w-100 h-100 bg-">
             <div class="row align-items-center h-100">
