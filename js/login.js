@@ -14,6 +14,12 @@ var database = firebase.database();
 
 //firebase login
 function login() {
+
+  var response = grecaptcha.getResponse();
+  if (response.length == 0) {
+    window.alert("Please verify the captcha");
+  } else {
+
   var loginemail = document.getElementById("loginemail").value;
   var loginpassword = document.getElementById("loginpassword").value;
 
@@ -29,6 +35,7 @@ function login() {
     window.alert("Error: " + 
     errorMessage);
   });
+}
 }
 
 // firebase.auth().onAuthStateChanged(function(user) {
