@@ -169,25 +169,6 @@
 
                                 function InsertData(uids) {
                                     var Club = document.getElementById("club").value;
-                                    if (Club == "admin") {
-                                        firebase.database().ref("feedback/" + "/" + Club + "/" + fid + "/").set({
-                                            name: Name.value,
-                                            tp_No: Tp_no.value,
-                                            email: Email.value,
-                                            message: Message.value,
-                                            status: Status,
-                                            reply: "waiting"
-                                        }, (error) => {
-                                            if (error) {
-                                                alert("Submission failed. Please try again");
-                                            } else {
-                                                alert("Submitted successful");
-                                                location.reload();
-                                            }
-                                        })
-
-                                    }
-                                    else {
 
                                         firebase.database().ref("feedback/" + "/" + Club + "/" + uids + "/" + fid + "/").set({
                                             name: Name.value,
@@ -204,7 +185,8 @@
                                                 location.reload();
                                             }
                                         })
-                                    }
+
+
                                 };
 
                                 function getAllClub() {

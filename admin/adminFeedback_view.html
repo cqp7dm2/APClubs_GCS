@@ -99,20 +99,20 @@
     </div>
     <div class="ts-main-content">
         <!-- Left Side Bar --->
-		<nav class="ts-sidebar">
-			<ul class="ts-sidebar-menu">
+        <nav class="ts-sidebar">
+            <ul class="ts-sidebar-menu">
 
-				<li class="ts-label" style="color: #d53939;">Main</li>
-				<li><a href="admin.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-				<li><a href="Admin_AddClubs.html"><i class="fa fa-male"></i>Clubs & Society</a></li>
-				<li><a href="admin_bookingList.html"><i class="fa fa-building"></i>Classroom Booking</a></li>
-				<li><a href="admin_bookingRecord.html"><i class="fa fa-building"></i>Classroom Booking Report</a></li>
-				<li><a href="admin_events.html"><i class="fa fa-users"></i>Event Management</a></li>
-				<li><a href="adminFeedback_view.html"><i class="fa fa-envelope"></i>Contact Us & Feedback</a></li>
-				<!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
+                <li class="ts-label" style="color: #d53939;">Main</li>
+                <li><a href="admin.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                <li><a href="Admin_AddClubs.html"><i class="fa fa-male"></i>Clubs & Society</a></li>
+                <li><a href="admin_bookingList.html"><i class="fa fa-building"></i>Classroom Booking</a></li>
+                <li><a href="admin_bookingRecord.html"><i class="fa fa-building"></i>Classroom Booking Report</a></li>
+                <li><a href="admin_events.html"><i class="fa fa-users"></i>Event Management</a></li>
+                <li><a href="adminFeedback_view.html"><i class="fa fa-envelope"></i>Contact Us & Feedback</a></li>
+                <!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
 
-			</ul>
-		</nav>
+            </ul>
+        </nav>
 
         <div class="content-wrapper">
             <div class="container-fluid">
@@ -195,15 +195,24 @@
             var database = firebase.database();
 
 
-            window.onload = SelectAllData;
 
 
+            firebase.database().ref("feedback/admin/").once('value',
+                function (snapshot) {
+                    var uid = Object.keys(snapshot.val());
+                    uid.forEach(initUID);
+                    function initUID(item) {
+                        var f_uid = item;
+                        console.log(f_uid)
+                        SelectAllData(f_uid);
+                    }
+                });
 
-            function SelectAllData() {
+            function SelectAllData(f_uid) {
                 document.getElementById("tbody1").innerHTML = "";
-                firebase.database().ref("feedback/admin/").once('value',
+                var no = 0;
+                firebase.database().ref("feedback/admin/" + f_uid + "/").once('value',
                     function (AllRecords) {
-                        var no = 0
                         AllRecords.forEach(
                             function (CurrentRecord) {
                                 var f_fid = Object.keys(AllRecords.val())[no++];
@@ -214,16 +223,18 @@
                                 var f_message = CurrentRecord.val().message;
                                 var f_status = CurrentRecord.val().status;
                                 var f_reply = CurrentRecord.val().reply;
-                                AddItemsToTable(f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid);
+                                AddItemsToTable(f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid, f_uid);
                             });
                     });
             }
 
 
+
+
             var f_list = [];
             var feedbackNo = 0;
 
-            function AddItemsToTable(f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid) {
+            function AddItemsToTable(f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid, f_uid) {
                 var tbody1 = document.getElementById('tbody1');
                 var trow = document.createElement('tr');
                 var td1 = document.createElement('td');
@@ -234,7 +245,7 @@
                 var td6 = document.createElement('td');
                 var td7 = document.createElement('td');
 
-                f_list.push([f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid])
+                f_list.push([f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid, f_uid])
 
                 td1.innerHTML = ++feedbackNo;
                 td2.innerHTML = f_name;
@@ -280,7 +291,8 @@
                 var r_reply = document.getElementById("reply").value;
                 console.log(f_index)
                 var r_fid = f_list[f_index][6];
-                firebase.database().ref("feedback/admin/"+ r_fid + "/").update(
+                var r_uid = f_list[f_index][7];
+                firebase.database().ref("feedback/admin/" + r_uid + "/" + r_fid + "/").update(
                     {
                         status: "Done",
                         reply: r_reply,
