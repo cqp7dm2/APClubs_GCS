@@ -228,7 +228,6 @@
 
 
             function SelectAllData(thisClub, f_uid) {
-                document.getElementById("tbody1").innerHTML = "";
                 firebase.database().ref("feedback/" + thisClub + "/" + f_uid + "/").once('value',
                     function (AllRecords) {
                         var no = 0

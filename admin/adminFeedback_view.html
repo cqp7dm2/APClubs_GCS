@@ -209,7 +209,7 @@
                 });
 
             function SelectAllData(f_uid) {
-                document.getElementById("tbody1").innerHTML = "";
+                //document.getElementById("tbody1").innerHTML = "";
                 var no = 0;
                 firebase.database().ref("feedback/admin/" + f_uid + "/").once('value',
                     function (AllRecords) {
@@ -244,9 +244,9 @@
                 var td5 = document.createElement('td');
                 var td6 = document.createElement('td');
                 var td7 = document.createElement('td');
-
+               
                 f_list.push([f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid, f_uid])
-
+                console.log(f_list)
                 td1.innerHTML = ++feedbackNo;
                 td2.innerHTML = f_name;
                 td3.innerHTML = f_tp_No;
