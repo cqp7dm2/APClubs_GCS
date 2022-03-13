@@ -96,9 +96,6 @@
                     <a class="nav-link" href="Club_Search_Result.html">Clubs & Society</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Classroom Booking</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="user_events.html">Events</a>
                 </li>
                 <li class="nav-item">
@@ -147,8 +144,10 @@
 
         //---Initialize Firebase---//
         const app = initializeApp(firebaseConfig);
-        import { getDatabase, ref, set, child, get, update, remove, 
-            query, orderByChild, equalTo }
+        import {
+            getDatabase, ref, set, child, get, update, remove,
+            query, orderByChild, equalTo
+        }
             from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
         const realdb = getDatabase();
 
@@ -175,15 +174,15 @@
         }
 
         function AddEvent(event, index) {
-            var d1 = event.event_imgURL.replace(/<[^>]*>/g,''); //remove the tags from the text
-            var d2 = event.event_name.replace(/<[^>]*>/g,'');
-            var d3 = event.event_club.replace(/<[^>]*>/g,'');
-            var d4 = event.event_date.replace(/<[^>]*>/g,'');
-            var d5 = event.event_time.replace(/<[^>]*>/g,'');
-            var d6 = event.event_location.replace(/<[^>]*>/g,'');
+            var d1 = event.event_imgURL.replace(/<[^>]*>/g, ''); //remove the tags from the text
+            var d2 = event.event_name.replace(/<[^>]*>/g, '');
+            var d3 = event.event_club.replace(/<[^>]*>/g, '');
+            var d4 = event.event_date.replace(/<[^>]*>/g, '');
+            var d5 = event.event_time.replace(/<[^>]*>/g, '');
+            var d6 = event.event_location.replace(/<[^>]*>/g, '');
 
             let html =
-            `
+                `
             <img src="`+ d1 + `" class="thumb mt-3" id="thumb` + index + `">
             <p class="title" id="title`+ index + `">` + d2 + `</p>
             <ul class="points">
@@ -192,7 +191,7 @@
                 <li>`+ d5 + `</li>
                 <li>`+ d6 + `</li>
             </ul>
-            <button class="detbtns btn" id="detbtn" onclick="location.href='clubs.html?clubs=`+ event.event_club +`'">Join Now!</button>
+            <button class="detbtns btn" id="detbtn" onclick="location.href='clubs.html?clubs=`+ event.event_club + `'">Join Now!</button>
             `
             let newEvent = document.createElement('div');
             newEvent.classList.add('productcard');
