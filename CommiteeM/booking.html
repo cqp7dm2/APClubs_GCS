@@ -274,7 +274,7 @@
                                                     //console.log(srtTime)
                                                     //console.log(check_CT)
                                                     //console.log(edTime)
-                                                    if(srtTime < check_CT){
+                                                    if(srtTime < check_CT || edTime < check_CT){
                                                         ++count;
                                                         console.log("not insert")
                                                     }
@@ -298,6 +298,8 @@
 
                                 function displayNoAvaliable() {
                                     alert("The Room is Not Available at that moment");
+                                    count = 0;
+                                    insertCount = 0;
                                     return;
                                 }
 
