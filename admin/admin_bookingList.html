@@ -118,192 +118,203 @@
             <ul class="ts-sidebar-menu">
 
                 <li class="ts-label" style="color: #d53939;">Main</li>
-				<li><a href="admin.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-				<li><a href="Admin_AddClubs.html"><i class="fa fa-male"></i>Clubs & Society</a></li>
-				<li><a href="admin_bookingList.html"><i class="fa fa-building"></i>Classroom Booking</a></li>
-				<li><a href="admin_bookingRecord.html"><i class="fa fa-building"></i>Classroom Booking Report</a></li>
-				<li><a href="admin_events.html"><i class="fa fa-users"></i>Event Management</a></li>
-				<li><a href="adminFeedback_view.html"><i class="fa fa-envelope"></i>Contact Us & Feedback</a></li>
-				<!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
+                <li><a href="admin.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                <li><a href="Admin_AddClubs.html"><i class="fa fa-male"></i>Clubs & Society</a></li>
+                <li><a href="admin_bookingList.html"><i class="fa fa-building"></i>Classroom Booking</a></li>
+                <li><a href="admin_bookingRecord.html"><i class="fa fa-building"></i>Classroom Booking Report</a></li>
+                <li><a href="admin_events.html"><i class="fa fa-users"></i>Event Management</a></li>
+                <li><a href="adminFeedback_view.html"><i class="fa fa-envelope"></i>Contact Us & Feedback</a></li>
+                <!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
 
             </ul>
         </nav>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="container">
-                <table id="table" class="table">
-                    <thead>
-                        <th>No.</th>
-                        <th>Club</th>
-                        <th>Room</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Purpose</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </thead>
-                    <tbody id="tbody1">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
+                    <h2 class="page-title">Admin - Classroom Booking Approval Panel</h2>
+                    <table id="table" class="table">
+                        <thead>
+                            <th>No.</th>
+                            <th>Club</th>
+                            <th>Room</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Purpose</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody id="tbody1">
 
-                    </tbody>
+                        </tbody>
 
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script type="module">
-
-
-        var firebaseConfig = {
-            apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
-            authDomain: "apclubs-678c7.firebaseapp.com",
-            databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "apclubs-678c7",
-            storageBucket: "apclubs-678c7.appspot.com",
-            messagingSenderId: "711066755172",
-            appId: "1:711066755172:web:8187fe865e562d32807f71",
-            measurementId: "G-NCK9V02TE8"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        var database = firebase.database();
-    </script>
-    <script>
-        var bookingNo = 0;
-        var selected_uids = 0;
-
-        window.onload = getAllUID;
-        function getAllUID() {
-            firebase.database().ref('classroom_booking/').once('value',
-                function (snapshot) {
-                    var allUID = Object.keys(snapshot.val());
-                    allUID.forEach(initUID);
-                    function initUID(item) {
-                        var uids = item;
-                        console.log(uids);
-                        SelectAllData(uids);
-                    }
-                });
-
-        }
-        function getAllBID(selected_uids, allBID) {
-            firebase.database().ref('classroom_booking/' + selected_uids + '/').once('value',
-                function (snapshot) {
-                    var allBID = Object.keys(snapshot.val());
-                    console.log(allBID)
-                });
-        }
-        
-
-        function approve(index, bid) {
-            --index;
-            selected_uids = f_list[index][0]; //=first uid
-            firebase.database().ref("classroom_booking/" + selected_uids + "/" + bid + "/").update(
-                {
-                    status: "Approve"
-                },
-                (error) => {
-                    if (error) {
-                        alert("Record was not updated, there was some problem!");
-                    } else {
-                        alert("Record was updated!");
-                        location.reload();
-                        return false;
-                    }
-                }
-            )
-        }
-
-        function decline(index, bid) {
-            --index;
-            selected_uids = f_list[index][0]; //=first uid
-            firebase.database().ref("classroom_booking/" + selected_uids + "/" + bid + "/").update(
-                {
-                    status: "Decline"
-                },
-                (error) => {
-                    if (error) {
-                        alert("Record was not updated, there was some problem!");
-                    } else {
-                        alert("Record was updated!");
-                        location.reload();
-                        return false;
-                    }
-                }
-            )
-        }
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script type="module">
 
 
-        function SelectAllData(uids) {
-            firebase.database().ref("classroom_booking/" + uids).once('value',
-                function (AllRecords) {
-                    var no = 0;
-                    AllRecords.forEach(
-                        function (CurrentRecord) {
-                            var f_bid = Object.keys(AllRecords.val())[no++];
-                            console.log(f_bid)
-                            var f_uids = uids;
-                            var f_room = CurrentRecord.val().room;
-                            var f_startDT = CurrentRecord.val().start_datetime;
-                            var f_endDT = CurrentRecord.val().end_datetime;
-                            var f_purpose = CurrentRecord.val().purpose;
-                            var f_status = CurrentRecord.val().status;
-                            var f_club = CurrentRecord.val().club;
-                            AddItemsToTable(f_uids, f_bid, f_room, f_startDT, f_endDT, f_purpose, f_status, f_club);
+            var firebaseConfig = {
+                apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
+                authDomain: "apclubs-678c7.firebaseapp.com",
+                databaseURL: "https://apclubs-678c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "apclubs-678c7",
+                storageBucket: "apclubs-678c7.appspot.com",
+                messagingSenderId: "711066755172",
+                appId: "1:711066755172:web:8187fe865e562d32807f71",
+                measurementId: "G-NCK9V02TE8"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            var database = firebase.database();
+        </script>
+        <script>
+            var bookingNo = 0;
+            var selected_uids = 0;
+
+            window.onload = getAllUID;
+            function getAllUID() {
+                firebase.database().ref('classroom_booking/').once('value',
+                    function (snapshot) {
+                        var allUID = Object.keys(snapshot.val());
+                        allUID.forEach(initUID);
+                        function initUID(item) {
+                            var uids = item;
+                            console.log(uids);
+                            SelectAllData(uids);
                         }
-                    );
+                    });
+
+            }
+            function getAllBID(selected_uids, allBID) {
+                firebase.database().ref('classroom_booking/' + selected_uids + '/').once('value',
+                    function (snapshot) {
+                        var allBID = Object.keys(snapshot.val());
+                        console.log(allBID)
+                    });
+            }
+
+
+            function approve(index, bid) {
+                --index;
+                selected_uids = f_list[index][0]; //=first uid
+                firebase.database().ref("classroom_booking/" + selected_uids + "/" + bid + "/").update(
+                    {
+                        status: "Approve"
+                    },
+                    (error) => {
+                        if (error) {
+                            alert("Record was not updated, there was some problem!");
+                        } else {
+                            alert("Record was updated!");
+                            location.reload();
+                            return false;
+                        }
+                    }
+                )
+            }
+
+            function decline(index, bid) {
+                --index;
+                selected_uids = f_list[index][0]; //=first uid
+                firebase.database().ref("classroom_booking/" + selected_uids + "/" + bid + "/").update(
+                    {
+                        status: "Decline"
+                    },
+                    (error) => {
+                        if (error) {
+                            alert("Record was not updated, there was some problem!");
+                        } else {
+                            alert("Record was updated!");
+                            location.reload();
+                            return false;
+                        }
+                    }
+                )
+            }
+
+
+            function SelectAllData(uids) {
+                firebase.database().ref("classroom_booking/" + uids).once('value',
+                    function (AllRecords) {
+                        var no = 0;
+                        AllRecords.forEach(
+                            function (CurrentRecord) {
+                                var f_bid = Object.keys(AllRecords.val())[no++];
+                                console.log(f_bid)
+                                var f_uids = uids;
+                                var f_room = CurrentRecord.val().room;
+                                var f_startDT = CurrentRecord.val().start_datetime;
+                                var f_endDT = CurrentRecord.val().end_datetime;
+                                var f_purpose = CurrentRecord.val().purpose;
+                                var f_status = CurrentRecord.val().status;
+                                var f_club = CurrentRecord.val().club;
+                                AddItemsToTable(f_uids, f_bid, f_room, f_startDT, f_endDT, f_purpose, f_status, f_club);
+                            }
+                        );
+                    });
+            }
+
+            var f_list = [];
+
+            function AddItemsToTable(f_uids, f_bid, f_room, f_startDT, f_endDT, f_purpose, f_status, f_club) {
+                var tbody1 = document.getElementById('tbody1');
+                var trow = document.createElement('tr');
+                var td1 = document.createElement('td');
+                var td2 = document.createElement('td');
+                var td3 = document.createElement('td');
+                var td4 = document.createElement('td');
+                var td5 = document.createElement('td');
+                var td6 = document.createElement('td');
+                var td7 = document.createElement('td');
+
+
+                f_list.push([f_uids, f_bid, f_room, f_startDT, f_endDT, f_purpose, f_status, f_club])
+
+                td1.innerHTML = ++bookingNo;
+                td2.innerHTML = f_club
+                td3.innerHTML = f_room;
+                td4.innerHTML = f_startDT;
+                td5.innerHTML = f_endDT;
+                td6.innerHTML = f_purpose;
+                td7.innerHTML = f_status;
+
+
+                trow.appendChild(td1);
+                trow.appendChild(td2);
+                trow.appendChild(td3);
+                trow.appendChild(td4);
+                trow.appendChild(td5);
+                trow.appendChild(td6);
+                trow.appendChild(td7);
+
+
+                var ControlDiv = document.createElement('div');
+                //console.log(f_list[bookingNo][0])
+                ControlDiv.innerHTML = '<button type="button" class="btn btn-success" onClick="approve(' + bookingNo + ',' + f_bid + ');">Approve</button>';
+                ControlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2"  onclick="decline(' + bookingNo + ',' + f_bid + ');">Decline</button>';
+
+                trow.appendChild(ControlDiv);
+                tbody1.appendChild(trow);
+            }
+
+        </script>
+        <script>
+            function logout() {
+                window.alert("You have signed out successfully");
+                window.location.href = "../login.html";
+                firebase.auth().signOut().then(() => {
+                }).catch((error) => {
+                    console.log(error);
                 });
-        }
-
-        var f_list = [];
-
-        function AddItemsToTable(f_uids,f_bid, f_room, f_startDT, f_endDT, f_purpose, f_status, f_club) {
-            var tbody1 = document.getElementById('tbody1');
-            var trow = document.createElement('tr');
-            var td1 = document.createElement('td');
-            var td2 = document.createElement('td');
-            var td3 = document.createElement('td');
-            var td4 = document.createElement('td');
-            var td5 = document.createElement('td');
-            var td6 = document.createElement('td');
-            var td7 = document.createElement('td');
-
-
-            f_list.push([f_uids,f_bid, f_room, f_startDT, f_endDT, f_purpose, f_status, f_club])
-
-            td1.innerHTML = ++bookingNo;
-            td2.innerHTML = f_club
-            td3.innerHTML = f_room;
-            td4.innerHTML = f_startDT;
-            td5.innerHTML = f_endDT;
-            td6.innerHTML = f_purpose;
-            td7.innerHTML = f_status;
-
-
-            trow.appendChild(td1);
-            trow.appendChild(td2);
-            trow.appendChild(td3);
-            trow.appendChild(td4);
-            trow.appendChild(td5);
-            trow.appendChild(td6);
-            trow.appendChild(td7);
-
-
-            var ControlDiv = document.createElement('div');
-            //console.log(f_list[bookingNo][0])
-            ControlDiv.innerHTML = '<button type="button" class="btn btn-success" onClick="approve(' + bookingNo + ',' + f_bid + ');">Approve</button>';
-            ControlDiv.innerHTML += '<button type="button" class="btn btn-primary my-2 ml-2"  onclick="decline(' + bookingNo + ',' + f_bid + ');">Decline</button>';
-
-            trow.appendChild(ControlDiv);
-            tbody1.appendChild(trow);
-        }
-
-    </script>
+            };
+        </script>
 </body>
 
 </html>
