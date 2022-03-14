@@ -45,6 +45,9 @@
                 <a class="nav-link" href="feedback_form.html">Enquiry & Feedback</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="feedback_replyList.html">Enquiry Reply</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="club registration form.html">Club Registration</a>
             </li>
 
@@ -170,21 +173,21 @@
                                 function InsertData(uids) {
                                     var Club = document.getElementById("club").value;
 
-                                        firebase.database().ref("feedback/" + "/" + Club + "/" + uids + "/" + fid + "/").set({
-                                            name: Name.value,
-                                            tp_No: Tp_no.value,
-                                            email: Email.value,
-                                            message: Message.value,
-                                            status: Status,
-                                            reply: "waiting"
-                                        }, (error) => {
-                                            if (error) {
-                                                alert("Submission failed. Please try again");
-                                            } else {
-                                                alert("Submitted successful");
-                                                location.reload();
-                                            }
-                                        })
+                                    firebase.database().ref("feedback/" + "/" + Club + "/" + uids + "/" + fid + "/").set({
+                                        name: Name.value,
+                                        tp_No: Tp_no.value,
+                                        email: Email.value,
+                                        message: Message.value,
+                                        status: Status,
+                                        reply: "waiting"
+                                    }, (error) => {
+                                        if (error) {
+                                            alert("Submission failed. Please try again");
+                                        } else {
+                                            alert("Submitted successful");
+                                            location.reload();
+                                        }
+                                    })
 
 
                                 };

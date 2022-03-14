@@ -30,7 +30,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="../assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" type="image/png" href="../favicon.ico"/>
+	<link rel="shortcut icon" type="image/png" href="../favicon.icon"/>
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
@@ -204,7 +204,11 @@
                                 var today = new Date();
                                 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
                                 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                                var time2 = today.getHours() + ":" + today.getMinutes();
                                 var currentTime = date + ' ' + time;
+                                var chk_CT = date + ' ' + time2;
+                                var check_CT = new Date(chk_CT).getTime();
+                                console.log(check_CT)
                                 var bk_id = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
                                 var count = 0;
                                 var insertCount = 0;
@@ -225,7 +229,6 @@
                                             allUID.forEach(initUID);
                                             function initUID(item) {
                                                 var uids = item;
-                                                console.log(uids);
                                                 SelectAllData(classroom, uids, startTime, endTime)
                                             }
                                             console.log(count)
@@ -269,8 +272,13 @@
                                                     //console.log(chk_startDT)
                                                     //console.log(chk_endDT)
                                                     //console.log(srtTime)
+                                                    //console.log(check_CT)
                                                     //console.log(edTime)
-
+                                                    if(srtTime < check_CT){
+                                                        ++count;
+                                                        console.log("not insert")
+                                                    }
+                                                    else{
                                                     if (classroom.value == checkRoom && ((srtTime == chk_startDT && edTime == chk_endDT) || (srtTime > chk_startDT && srtTime < chk_endDT) || (edTime > chk_startDT && edTime < chk_endDT) || (srtTime < chk_startDT && edTime < chk_endDT))) {
                                                         ++count;
                                                         console.log("not insert")
@@ -280,10 +288,9 @@
                                                         console.log("insert")
                                                     }
                                                 }
+                                                }
                                             );
                                         });
-                                    console.log(insertCount)
-                                    console.log(count)
                                 }
 
 
