@@ -107,6 +107,7 @@
                 <li><a href="Admin_AddClubs.html"><i class="fa fa-male"></i>Clubs & Society</a></li>
                 <li><a href="admin_bookingList.html"><i class="fa fa-building"></i>Classroom Booking</a></li>
                 <li><a href="admin_bookingRecord.html"><i class="fa fa-building"></i>Classroom Booking Report</a></li>
+                <li><a href="admin_announcement.html"><i class="fa fa-users"></i>Announcement Management</a></li>
                 <li><a href="admin_events.html"><i class="fa fa-users"></i>Event Management</a></li>
                 <li><a href="adminFeedback_view.html"><i class="fa fa-envelope"></i>Contact Us & Feedback</a></li>
                 <!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
@@ -119,9 +120,9 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <h2 class="page-title">Admin - Reply Enquiry</h2>
+                        <h2 class="page-title"> Admin - Annoucement Approval</h2>
 
-                        <h5>Kindly attend to all enquiries below.</h5>
+                        <h5>Kindly attend to all announcement below.</h5>
 
                     </div>
                 </div>
@@ -134,11 +135,8 @@
                     <table id="table1" class="table">
                         <thead>
                             <th>No.</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>TP Number</th>
-                            <th>Message</th>
-                            <th>Reply</th>
+                            <th>Announcement</th>
+                            <th>Reason</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </thead>
@@ -156,20 +154,20 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Reply</h5>
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Reason</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label class="labs">Message:</label>
-                        <textarea class="form-control" aria-label="With textarea" id="reply" placeholder="Reply Here..."
+                        <label class="labs">Reason:</label>
+                        <textarea class="form-control" aria-label="With textarea" id="reason" placeholder="Type Reason Here..."
                             rows=5></textarea>
                         <input class="form-control" type="hidden" id="index">
                     </div>
                     <div class="modal-footer">
                         <button id="UpdateModBtn" type="button" class="btn btn-success"
-                            onclick="addReply()">Submit</button>
+                            onclick="addReason()">Submit</button>
                     </div>
                 </div>
             </div>
@@ -197,33 +195,43 @@
 
 
 
-            firebase.database().ref("feedback/admin/").once('value',
+            firebase.database().ref("committee/").once('value',
                 function (snapshot) {
                     var uid = Object.keys(snapshot.val());
+                    console.log(uid);
                     uid.forEach(initUID);
                     function initUID(item) {
                         var f_uid = item;
                         console.log(f_uid)
-                        SelectAllData(f_uid);
+                        GetClub(f_uid);
                     }
                 });
+            function GetClub(f_uid) {
+                firebase.database().ref("committee/" + f_uid + "/").once('value',
+                    function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            var club = childSnapshot.val();
+                            console.log(club);
+                            SelectAllData(club)
+                        });
+                    });
+            }
 
-            function SelectAllData(f_uid) {
+            
+
+            function SelectAllData(club) {
                 //document.getElementById("tbody1").innerHTML = "";
                 var no = 0;
-                firebase.database().ref("feedback/admin/" + f_uid + "/").once('value',
+                firebase.database().ref("announcement/" + club + "/").once('value',
                     function (AllRecords) {
                         AllRecords.forEach(
                             function (CurrentRecord) {
                                 var f_fid = Object.keys(AllRecords.val())[no++];
                                 console.log(f_fid)
-                                var f_name = CurrentRecord.val().name;
-                                var f_tp_No = CurrentRecord.val().tp_No;
-                                var f_email = CurrentRecord.val().email;
-                                var f_message = CurrentRecord.val().message;
-                                var f_status = CurrentRecord.val().status;
-                                var f_reply = CurrentRecord.val().reply;
-                                AddItemsToTable(f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid, f_uid);
+                                var f_anouncement = CurrentRecord.val().announcement;
+                                var f_reason = CurrentRecord.val().reason;
+                                var f_status = CurrentRecord.val().status;                  
+                                AddItemsToTable(f_anouncement,f_reason,f_status,f_fid,club);
                             });
                     });
             }
@@ -232,75 +240,89 @@
 
 
             var f_list = [];
-            var feedbackNo = 0;
+            var announceNo = 0;
 
-            function AddItemsToTable(f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid, f_uid) {
+            function AddItemsToTable(f_anouncement,f_reason,f_status,f_fid,club) {
                 var tbody1 = document.getElementById('tbody1');
                 var trow = document.createElement('tr');
                 var td1 = document.createElement('td');
                 var td2 = document.createElement('td');
                 var td3 = document.createElement('td');
                 var td4 = document.createElement('td');
-                var td5 = document.createElement('td');
-                var td6 = document.createElement('td');
-                var td7 = document.createElement('td');
-               
-                f_list.push([f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_fid, f_uid])
+                
+
+                f_list.push([f_anouncement,f_reason,f_status,f_fid,club])
                 console.log(f_list)
-                td1.innerHTML = ++feedbackNo;
-                td2.innerHTML = f_name;
-                td3.innerHTML = f_tp_No;
-                td4.innerHTML = f_email;
-                td5.innerHTML = f_message;
-                td6.innerHTML = f_reply;
-                td7.innerHTML = f_status;
+                td1.innerHTML = ++announceNo;
+                td2.innerHTML = f_anouncement;
+                td3.innerHTML = f_reason;
+                td4.innerHTML = f_status;
+                
 
                 trow.appendChild(td1);
                 trow.appendChild(td2);
                 trow.appendChild(td3);
                 trow.appendChild(td4);
-                trow.appendChild(td5);
-                trow.appendChild(td6);
-                trow.appendChild(td7);
+                
 
                 var ControlDiv = document.createElement('div');
-                ControlDiv.innerHTML += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null,' + feedbackNo + ')">Reply</button>';
+                ControlDiv.innerHTML += '<button type="button" class="btn btn-success" onclick="approve(' + announceNo + ')">Approve</button>';
+                ControlDiv.innerHTML += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(' + announceNo + ')">Decline</button>';
                 trow.appendChild(ControlDiv);
                 tbody1.appendChild(trow);
             }
 
-            var Reply = document.getElementById("reply");
-            var f_index = document.getElementById("index");
-            var BTNmodUpdate = document.getElementById('UpdateModBtn');
 
-            function FillTboxes(index, index2) {
-                if (index == null) {
-                    Reply.value = "";
-                    --index2;
-                    f_index = index2;
-                } else {
-                    --index;
-                    Reply.value = f_list[index][4];
-                    f_index = index;
-                    BTNmodUpdate.style.display = 'inline-block';
-                }
-            }
-
-            function addReply() {
-                var r_reply = document.getElementById("reply").value;
-                console.log(f_index)
-                var r_fid = f_list[f_index][6];
-                var r_uid = f_list[f_index][7];
-                firebase.database().ref("feedback/admin/" + r_uid + "/" + r_fid + "/").update(
+            function approve(index) {
+                --index;
+                var f_club = f_list[index][4];
+                var f_fid = f_list[index][3];
+                console.log()
+                firebase.database().ref("announcement/" + f_club + "/" + f_fid + "/").update(
                     {
-                        status: "Done",
-                        reply: r_reply,
+                        status: "Approve"
                     },
                     (error) => {
                         if (error) {
                             alert("Record was not updated, there was some problem!");
                         } else {
-                            alert("Done Reply!");
+                            alert("Record was updated!");
+                            location.reload();
+                            return false;
+                        }
+                    }
+                )
+            }
+
+
+
+            var Reason = document.getElementById("reason");
+            var f_index = document.getElementById("index");
+            var BTNmodUpdate = document.getElementById('UpdateModBtn');
+
+            function FillTboxes(index) {
+                    --index;
+                    Reason.value = f_list[index][1];
+                    f_index = index;
+                    BTNmodUpdate.style.display = 'inline-block';
+                
+            }
+
+            function addReason() {
+                var r_reason = document.getElementById("reason").value;
+                console.log(f_index)
+                var f_club = f_list[f_index][4];
+                var f_fid = f_list[f_index][3];
+                firebase.database().ref("announcement/" + f_club + "/" + f_fid + "/").update(
+                    {
+                        status: "Decline",
+                        reason: r_reason,
+                    },
+                    (error) => {
+                        if (error) {
+                            alert("Record was not updated, there was some problem!");
+                        } else {
+                            alert("Success To Add Reason and Decline!");
                             location.reload();
                             return false;
                         }

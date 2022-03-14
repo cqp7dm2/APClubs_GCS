@@ -104,16 +104,16 @@
             <ul class="ts-sidebar-menu">
 
                 <li class="ts-label " style="color: #b5df1a;">Main</li>
-                <li><a href="commMember.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-                <li><a href="monthlyReport.html"><i class="fa fa-male"></i>Monthly Report</a></li>
-                <li><a href="commiteeapprove.html"><i class="fa fa-male"></i>Members Registration</a></li>
-                <li><a href="submitAnnouncement.html"><i class="fa fa-users"></i>Submit Announcement</a></li>
-                <li><a href="submitAnnouncement.html"><i class="fa fa-users"></i>Announcement List</a></li>
-                <li><a href="booking.html"><i class="fa fa-building"></i>Classroom Booking</a></li>
-                <li><a href="bookingList.html"><i class="fa fa-building"></i>Check Status & Booking</a></li>
-                <li><a href="advisor_events.html"><i class="fa fa-users"></i>Event Management</a></li>
-                <li><a href="UpdateClubDetails.html"><i class="fa fa-envelope"></i>Update Clubs Detials</a></li>
-                <li><a href="feedback_view.html"><i class="fa fa-envelope"></i>Student Enquiry</a></li>
+				<li><a href="commMember.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+				<li><a href="monthlyReport.html"><i class="fa fa-male"></i>Monthly Report</a></li>
+				<li><a href="commiteeapprove.html"><i class="fa fa-male"></i>Members Registration</a></li>
+				<li><a href="submitAnnouncement.html"><i class="fa fa-users"></i>Submit Announcement</a></li>
+				<li><a href="announcementList.html"><i class="fa fa-users"></i>Announcement List</a></li>
+				<li><a href="booking.html"><i class="fa fa-building"></i>Classroom Booking</a></li>
+				<li><a href="bookingList.html"><i class="fa fa-building"></i>Check Status & Booking</a></li>
+				<li><a href="advisor_events.html"><i class="fa fa-users"></i>Event Management</a></li>
+				<li><a href="UpdateClubDetails.html"><i class="fa fa-envelope"></i>Update Clubs Detials</a></li>
+        		<li><a href="feedback_view.html"><i class="fa fa-envelope"></i>Student Enquiry</a></li>
                 <!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
 
             </ul>
@@ -124,9 +124,7 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <h2 class="page-title">Commitee Members - Reply Enquiry</h2>
-
-                        <h5>Kindly attend to all enquiries below.</h5>
+                        <h2 class="page-title">Annoucement List</h2>
 
                     </div>
                 </div>
@@ -139,13 +137,9 @@
                     <table id="table1" class="table">
                         <thead>
                             <th>No.</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>TP Number</th>
-                            <th>Message</th>
-                            <th>Reply</th>
+                            <th>Announcement</th>
+                            <th>Reason(If Delcine)</th>
                             <th>Status</th>
-                            <th>Actions</th>
                         </thead>
                         <tbody id="tbody1">
 
@@ -203,130 +197,62 @@
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     var uids = user.uid;
+                    console.log(uids)
                     firebase.database().ref('committee/' + uids).once('value',
                         function (snapshot) {
                             snapshot.forEach(function (childSnapshot) {
                                 var club = childSnapshot.val();
-                                GetUID(club);
+                                console.log(club)
+                                SelectAllData(club)
                             });
                         }
                     );
                 }
             });
 
-            function GetUID(club) {
-                var thisClub = club;
-                firebase.database().ref("feedback/" + club + "/").once('value',
-                    function (snapshot) {
-                        var uid = Object.keys(snapshot.val());
-                        uid.forEach(initUID);
-                        function initUID(item) {
-                            var f_uid = item;
-                            SelectAllData(thisClub, f_uid);
-                        }
-                    });
-            }
 
 
-
-            function SelectAllData(thisClub, f_uid) {
-                firebase.database().ref("feedback/" + thisClub + "/" + f_uid + "/").once('value',
+            function SelectAllData(club) {
+                firebase.database().ref("announcement/" + club + "/").once('value',
                     function (AllRecords) {
-                        var no = 0
                         AllRecords.forEach(
                             function (CurrentRecord) {
-                                var f_fid = Object.keys(AllRecords.val())[no++];
-                                var f_name = CurrentRecord.val().name;
-                                var f_tp_No = CurrentRecord.val().tp_No;
-                                var f_email = CurrentRecord.val().email;
-                                var f_message = CurrentRecord.val().message;
+                                var f_anouncement = CurrentRecord.val().announcement;
+                                var f_reason = CurrentRecord.val().reason;
                                 var f_status = CurrentRecord.val().status;
-                                var f_reply = CurrentRecord.val().reply;
-                                var f_club = thisClub;
-                                var f_uids = f_uid;
-                                AddItemsToTable(f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_club, f_uids, f_fid);
+                                AddItemsToTable(f_anouncement, f_reason, f_status);
                             });
                     });
             }
 
 
             var f_list = [];
-            var feedbackNo = 0;
+            var announceNo = 0;
 
-            function AddItemsToTable(f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_club, f_uids, f_fid) {
+            function AddItemsToTable(f_anouncement, f_reason, f_status) {
                 var tbody1 = document.getElementById('tbody1');
                 var trow = document.createElement('tr');
                 var td1 = document.createElement('td');
                 var td2 = document.createElement('td');
                 var td3 = document.createElement('td');
                 var td4 = document.createElement('td');
-                var td5 = document.createElement('td');
-                var td6 = document.createElement('td');
-                var td7 = document.createElement('td');
 
-                f_list.push([f_name, f_tp_No, f_email, f_message, f_reply, f_status, f_club, f_uids, f_fid])
+                f_list.push([f_anouncement, f_reason, f_status])
 
-                td1.innerHTML = ++feedbackNo;
-                td2.innerHTML = f_name;
-                td3.innerHTML = f_tp_No;
-                td4.innerHTML = f_email;
-                td5.innerHTML = f_message;
-                td6.innerHTML = f_reply;
-                td7.innerHTML = f_status;
+                td1.innerHTML = ++announceNo;
+                td2.innerHTML = f_anouncement;
+                td3.innerHTML = f_reason;
+                td4.innerHTML = f_status;
 
                 trow.appendChild(td1);
                 trow.appendChild(td2);
                 trow.appendChild(td3);
                 trow.appendChild(td4);
-                trow.appendChild(td5);
-                trow.appendChild(td6);
-                trow.appendChild(td7);
 
-                var ControlDiv = document.createElement('div');
-                ControlDiv.innerHTML += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null,' + feedbackNo + ')">Reply</button>';
-                trow.appendChild(ControlDiv);
                 tbody1.appendChild(trow);
             }
 
-            var Reply = document.getElementById("reply");
-            var f_index = document.getElementById("index");
-            var BTNmodUpdate = document.getElementById('UpdateModBtn');
 
-            function FillTboxes(index, index2) {
-                if (index == null) {
-                    Reply.value = "";
-                    --index2;
-                    f_index = index2;
-                } else {
-                    --index;
-                    Reply.value = f_list[index][4];
-                    f_index = index;
-                    BTNmodUpdate.style.display = 'inline-block';
-                }
-            }
-
-            function addReply() {
-                var r_reply = document.getElementById("reply").value;
-                console.log(f_index)
-                var r_club = f_list[f_index][6];
-                var r_uid = f_list[f_index][7];
-                var r_fid = f_list[f_index][8];
-                firebase.database().ref("feedback/" + r_club + "/" + r_uid + "/" + r_fid + "/").update(
-                    {
-                        status: "Done",
-                        reply: r_reply,
-                    },
-                    (error) => {
-                        if (error) {
-                            alert("Record was not updated, there was some problem!");
-                        } else {
-                            alert("Done Reply!");
-                            location.reload();
-                            return false;
-                        }
-                    }
-                )
-            }
 
         </script>
 
