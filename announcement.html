@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>APClubs | Announcement</title>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+
+    <!-- Nav bootstap & resources -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/loggedinstate.js"></script>
+
+    <style>
+        .club {
+            width: 120px;
+        }
+        .table {
+            align-items:stretch;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="home.html">APClubs</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="Club_Search_Result.html">Clubs & Society</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="announcement.html">Announcement</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user_events.html">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="feedback_form.html">Enquiry & Feedback</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="feedback_replyList.html">Enquiry Reply</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="club registration form.html">Club Registration</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Signed In
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="userProfile.html">My Profile</a>
+                    <a class="dropdown-item" id="adminbtn" href="admin/admin.html">Admin</a>
+                    <a class="dropdown-item" id="committeebtn" href="CommiteeM/commMember.html">Committee</a>
+                    <a class="dropdown-item" href="#" onclick="logout()">Sign Out</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <!-- Navbar -->
+    <div class="content-wrapper">
+        <div class="container">
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h2 class="page-title">Club/Society Announcement</h2>
+
+                    <h5>Kindly attend to all announcement below.</h5>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
+                    <table id="table1" class="table">
+                        <thead>
+                            <th class="club">Club</th>
+                            <th>Announcement</th>
+                        </thead>
+                        <tbody id="tbody1">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <script id="mainscript">
+
+            var database = firebase.database();
+
+
+
+
+            firebase.database().ref("committee/").once('value',
+                function (snapshot) {
+                    var uid = Object.keys(snapshot.val());
+                    console.log(uid);
+                    uid.forEach(initUID);
+                    function initUID(item) {
+                        var f_uid = item;
+                        console.log(f_uid)
+                        GetClub(f_uid);
+                    }
+                });
+            function GetClub(f_uid) {
+                firebase.database().ref("committee/" + f_uid + "/").once('value',
+                    function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            var club = childSnapshot.val();
+                            console.log(club);
+                            SelectAllData(club)
+                        });
+                    });
+            }
+
+            
+
+            function SelectAllData(club) {
+                //document.getElementById("tbody1").innerHTML = "";
+                firebase.database().ref("announcement/" + club + "/").once('value',
+                    function (AllRecords) {
+                        AllRecords.forEach(
+                            function (CurrentRecord) {
+                                var f_anouncement = CurrentRecord.val().announcement;                 
+                                AddItemsToTable(f_anouncement,club);
+                            });
+                    });
+            }
+
+
+
+
+            var f_list = [];
+            var announceNo = 0;
+
+            function AddItemsToTable(f_anouncement,club) {
+                var tbody1 = document.getElementById('tbody1');
+                var trow = document.createElement('tr');
+                var td1 = document.createElement('td');
+                var td2 = document.createElement('td');
+                
+
+                f_list.push([f_anouncement,club])
+                console.log(f_list)
+                td1.innerHTML = club;
+                td2.innerHTML = f_anouncement;
+                
+                trow.appendChild(td1);
+                trow.appendChild(td2);
+
+                tbody1.appendChild(trow);
+            }
+
+        </script>
+
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap-select.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/dataTables.bootstrap.min.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/fileinput.js"></script>
+        <script src="js/chartData.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Loading Scripts -->
+        <script src="../admin/js/jquery.min.js"></script>
+        <script src="../admin/js/bootstrap-select.min.js"></script>
+        <script src="../admin/js/bootstrap.min.js"></script>
+        <script src="../admin/js/jquery.dataTables.min.js"></script>
+        <script src="../admin/js/dataTables.bootstrap.min.js"></script>
+        <script src="../admin/js/Chart.min.js"></script>
+        <script src="../admin/js/fileinput.js"></script>
+        <script src="../admin/js/chartData.js"></script>
+        <script src="../admin/js/main.js"></script>
+        <script>
+            function logout() {
+                window.alert("You have signed out successfully");
+                window.location.href = "../login.html";
+                firebase.auth().signOut().then(() => {
+                }).catch((error) => {
+                    console.log(error);
+                });
+            };
+        </script>
+</body>
+
+</html>
