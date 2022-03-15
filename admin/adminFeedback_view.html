@@ -80,8 +80,7 @@
         width: 100px;
     }
     .container {
-        float: right;
-        margin-right: 500px;
+        margin-left: 15%;
     }
 </style>
 
@@ -259,6 +258,12 @@
                 td5.innerHTML = f_message;
                 td6.innerHTML = f_reply;
                 td7.innerHTML = f_status;
+
+                if (td7.innerHTML == "Pending") {
+                    td7.innerHTML = "<b><span style='color:#f5c71a'>" + f_status + "</span></b>";
+                } else if (td7.innerHTML == "Done") {
+                    td7.innerHTML = "<b><span style='color:green'>" + f_status + "</span></b>";
+                };
 
                 trow.appendChild(td1);
                 trow.appendChild(td2);

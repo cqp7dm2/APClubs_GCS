@@ -15,6 +15,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="css/announcement.scss">
 
     <!-- Nav bootstap & resources -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -27,8 +28,17 @@
         .club {
             width: 120px;
         }
+
         .table {
-            align-items:stretch;
+            align-items: stretch;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            background-image: url("images/loginbg.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     </style>
 
@@ -79,137 +89,139 @@
     </nav>
     <!-- Navbar -->
     <div class="content-wrapper">
-        <div class="container">
-            <br/>
+        <br/>
+        <div class="container bg-light">
+            <br />
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-lg-12">
 
                     <h2 class="page-title">Club/Society Announcement</h2>
 
-                    <h5>Kindly attend to all announcement below.</h5>
+                    <h5>Kindly attend to all the announcements below</h5>
 
                 </div>
             </div>
         </div>
     </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="container">
-                    <table id="table1" class="table">
-                        <thead>
-                            <th class="club">Club</th>
-                            <th>Announcement</th>
-                        </thead>
-                        <tbody id="tbody1">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="container bg-light">
+                <table id="table1" class="table table-striped table-bordered table-light">
+                    <thead class="thead-dark">
+                        <th class="club">Club</th>
+                        <th>Announcement</th>
+                    </thead>
+                    <tbody id="tbody1">
 
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
+                <br/>
             </div>
         </div>
+    </div>
 
 
-        <script id="mainscript">
+    <script id="mainscript">
 
-            var database = firebase.database();
-
-
+        var database = firebase.database();
 
 
-            firebase.database().ref("committee/").once('value',
+
+
+        firebase.database().ref("committee/").once('value',
+            function (snapshot) {
+                var uid = Object.keys(snapshot.val());
+                console.log(uid);
+                uid.forEach(initUID);
+                function initUID(item) {
+                    var f_uid = item;
+                    console.log(f_uid)
+                    GetClub(f_uid);
+                }
+            });
+        function GetClub(f_uid) {
+            firebase.database().ref("committee/" + f_uid + "/").once('value',
                 function (snapshot) {
-                    var uid = Object.keys(snapshot.val());
-                    console.log(uid);
-                    uid.forEach(initUID);
-                    function initUID(item) {
-                        var f_uid = item;
-                        console.log(f_uid)
-                        GetClub(f_uid);
-                    }
+                    snapshot.forEach(function (childSnapshot) {
+                        var club = childSnapshot.val();
+                        console.log(club);
+                        SelectAllData(club)
+                    });
                 });
-            function GetClub(f_uid) {
-                firebase.database().ref("committee/" + f_uid + "/").once('value',
-                    function (snapshot) {
-                        snapshot.forEach(function (childSnapshot) {
-                            var club = childSnapshot.val();
-                            console.log(club);
-                            SelectAllData(club)
+        }
+
+
+
+        function SelectAllData(club) {
+            //document.getElementById("tbody1").innerHTML = "";
+            firebase.database().ref("announcement/" + club + "/").once('value',
+                function (AllRecords) {
+                    AllRecords.forEach(
+                        function (CurrentRecord) {
+                            var f_anouncement = CurrentRecord.val().announcement;
+                            AddItemsToTable(f_anouncement, club);
                         });
-                    });
-            }
-
-            
-
-            function SelectAllData(club) {
-                //document.getElementById("tbody1").innerHTML = "";
-                firebase.database().ref("announcement/" + club + "/").once('value',
-                    function (AllRecords) {
-                        AllRecords.forEach(
-                            function (CurrentRecord) {
-                                var f_anouncement = CurrentRecord.val().announcement;                 
-                                AddItemsToTable(f_anouncement,club);
-                            });
-                    });
-            }
-
-
-
-
-            var f_list = [];
-            var announceNo = 0;
-
-            function AddItemsToTable(f_anouncement,club) {
-                var tbody1 = document.getElementById('tbody1');
-                var trow = document.createElement('tr');
-                var td1 = document.createElement('td');
-                var td2 = document.createElement('td');
-                
-
-                f_list.push([f_anouncement,club])
-                console.log(f_list)
-                td1.innerHTML = club;
-                td2.innerHTML = f_anouncement;
-                
-                trow.appendChild(td1);
-                trow.appendChild(td2);
-
-                tbody1.appendChild(trow);
-            }
-
-        </script>
-
-
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap-select.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.dataTables.min.js"></script>
-        <script src="js/dataTables.bootstrap.min.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/fileinput.js"></script>
-        <script src="js/chartData.js"></script>
-        <script src="js/main.js"></script>
-
-        <!-- Loading Scripts -->
-        <script src="../admin/js/jquery.min.js"></script>
-        <script src="../admin/js/bootstrap-select.min.js"></script>
-        <script src="../admin/js/bootstrap.min.js"></script>
-        <script src="../admin/js/jquery.dataTables.min.js"></script>
-        <script src="../admin/js/dataTables.bootstrap.min.js"></script>
-        <script src="../admin/js/Chart.min.js"></script>
-        <script src="../admin/js/fileinput.js"></script>
-        <script src="../admin/js/chartData.js"></script>
-        <script src="../admin/js/main.js"></script>
-        <script>
-            function logout() {
-                window.alert("You have signed out successfully");
-                window.location.href = "../login.html";
-                firebase.auth().signOut().then(() => {
-                }).catch((error) => {
-                    console.log(error);
                 });
-            };
-        </script>
+        }
+
+
+
+
+        var f_list = [];
+        var announceNo = 0;
+
+        function AddItemsToTable(f_anouncement, club) {
+            var tbody1 = document.getElementById('tbody1');
+            var trow = document.createElement('tr');
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+
+
+            f_list.push([f_anouncement, club])
+            console.log(f_list)
+            td1.innerHTML = club;
+            td2.innerHTML = f_anouncement;
+
+            trow.appendChild(td1);
+            trow.appendChild(td2);
+
+            tbody1.appendChild(trow);
+        }
+
+    </script>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.min.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script src="js/fileinput.js"></script>
+    <script src="js/chartData.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Loading Scripts -->
+    <script src="../admin/js/jquery.min.js"></script>
+    <script src="../admin/js/bootstrap-select.min.js"></script>
+    <script src="../admin/js/bootstrap.min.js"></script>
+    <script src="../admin/js/jquery.dataTables.min.js"></script>
+    <script src="../admin/js/dataTables.bootstrap.min.js"></script>
+    <script src="../admin/js/Chart.min.js"></script>
+    <script src="../admin/js/fileinput.js"></script>
+    <script src="../admin/js/chartData.js"></script>
+    <script src="../admin/js/main.js"></script>
+    <script>
+        function logout() {
+            window.alert("You have signed out successfully");
+            window.location.href = "login.html";
+            firebase.auth().signOut().then(() => {
+            }).catch((error) => {
+                console.log(error);
+            });
+        };
+    </script>
 </body>
 
 </html>

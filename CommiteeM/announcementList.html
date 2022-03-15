@@ -84,6 +84,9 @@
         .status {
             width: 120px;
         }
+        .container {
+            margin-left: 18%;
+        }
     </style>
 
 </head>
@@ -130,7 +133,7 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <h2 class="page-title">Annoucement List</h2>
+                        <h2 class="page-title">Annoucement List Dashboard</h2>
 
                     </div>
                 </div>
@@ -144,7 +147,7 @@
                         <thead>
                             <th class="no">No.</th>
                             <th>Announcement</th>
-                            <th>Reason(If Delcine)</th>
+                            <th>Reason (If Declined)</th>
                             <th class="status">Status</th>
                         </thead>
                         <tbody id="tbody1">
@@ -249,6 +252,14 @@
                 td2.innerHTML = f_anouncement;
                 td3.innerHTML = f_reason;
                 td4.innerHTML = f_status;
+
+                if (td4.innerHTML == "Pending") {
+                    td4.innerHTML = "<b><span style='color:#f5c71a'>" + f_status + "</span></b>";
+                } else if (td4.innerHTML == "Approved") {
+                    td4.innerHTML = "<b><span style='color:green'>" + f_status + "</span></b>";
+                } else if (td4.innerHTML == "Declined") {
+                    td4.innerHTML = "<b><span style='color:red'>" + f_status + "</span></b>";
+                };
 
                 trow.appendChild(td1);
                 trow.appendChild(td2);
