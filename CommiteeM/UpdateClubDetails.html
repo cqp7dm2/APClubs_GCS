@@ -77,6 +77,7 @@
         .labs {
             display: inline-block;
             width: 100px;
+            margin-right: 50px;
         }
     </style>
 
@@ -112,9 +113,8 @@
                 <li><a href="booking.html"><i class="fa fa-building"></i>Classroom Booking</a></li>
                 <li><a href="bookingList.html"><i class="fa fa-building"></i>Check Status & Booking</a></li>
                 <li><a href="advisor_events.html"><i class="fa fa-users"></i>Event Management</a></li>
-                <li><a href="UpdateClubDetails.html"><i class="fa fa-envelope"></i>Update Clubs Detials</a></li>
+                <li><a href="UpdateClubDetails.html"><i class="fa fa-envelope"></i>Update Clubs Details</a></li>
                 <li><a href="feedback_view.html"><i class="fa fa-envelope"></i>Student Enquiry</a></li>
-                <!-- <li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li> -->
 
             </ul>
         </nav>
@@ -176,7 +176,9 @@
                         <label class="labs">Short&nbsp;Description</label>
                         <input type="text" id="ShDescMod"> <br>
                         <label class="labs">Type</label>
-                        <input type="text" id="TypeMod"> <br>
+                        <select id="TypeMod" style="padding-right:16%;">
+                        </select>   
+                        <br>
                         <hr>
                         <label class="labs">Description</label>
                         <textarea class="form-control" aria-label="With textarea" id="DescMod"></textarea>
@@ -257,6 +259,20 @@
 
             window.onload = SelectAllData;
 
+
+            firebase.database().ref("clubtype").once("value",
+                function (AllRecords) {
+                    AllRecords.forEach(
+                        function (CurrentRecord) {
+                            var clubtype = CurrentRecord.val();
+                            var optionclub = document.createElement("option");
+                            var TypeMod = document.getElementById("TypeMod");
+                            TypeMod.appendChild(optionclub);
+                            optionclub.value = clubtype;
+                            optionclub.innerHTML = clubtype;
+                        }
+                    );
+                });
             //---------FILLING THE TABLE---------//
 
             var cns_list = [];
@@ -329,7 +345,16 @@
                     --index;
                     ModName.value = cns_list[index][0];
                     ModShDesc.value = cns_list[index][1];
-                    ModType.value = cns_list[index][2];
+
+                    var x = ModType.options.length;                    
+                    for (var i = 0; i < x; i++) {
+                        var categNo = document.getElementById("TypeMod").options[i].value;
+                        var ClubTypeValue =  cns_list[index][2];
+                        if (categNo == ClubTypeValue ) {
+                            ModType.options[i].selected = true;
+                        } 
+                    }
+
                     ModDesc.value = cns_list[index][3];
                     ModAct.value = cns_list[index][4];
                     ModHTJ.value = cns_list[index][5];

@@ -330,12 +330,24 @@
     </div>
     <div class="container-select">
         <div class="select-box">
-            <input type="text" id="selected" hidden>
+            <input type="text" id="testselected" hidden>
             <div class="selected">Select Club Category</div>
-            <div class="options-container" id="options-container">
+            <div class="options-container">
                 <div class="option">
-                    <input type="radio" class="radio">
-                    <label>No filter</label>
+                    <input type="radio" class="radio" id="test1" name="category">
+                    <label for="test1">No filter</label>
+                </div>
+                <div class="option">
+                    <input type="radio" class="radio" id="test2" name="category">
+                    <label for="test2">sports</label>
+                </div>
+                <div class="option">
+                    <input type="radio" class="radio" id="test3" name="category">
+                    <label for="test3">language</label>
+                </div>
+                <div class="option">
+                    <input type="radio" class="radio" id="test4" name="category">
+                    <label for="test4">test4</label>
                 </div>
             </div>
         </div>
@@ -366,7 +378,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
 
-    <script type="module">
+    <script>
         var firebaseConfig = {
             apiKey: "AIzaSyCtllaNW3ao2Gnel0LjGr00wYoO9dC9c5I",
             authDomain: "apclubs-678c7.firebaseapp.com",
@@ -379,6 +391,7 @@
         };
         firebase.initializeApp(firebaseConfig);
 
+        function SelectedAllData() {
             firebase.database().ref("clubs").once("value",
                 function (AllRecords) {
                     AllRecords.forEach(
@@ -390,7 +403,8 @@
                         }
                     );
                 });
-
+        }
+        window.onload = SelectedAllData;
 
         function AddItemsToTable(Sdesc, Sname, Stype) {
             var datcont = document.getElementById("row");
@@ -415,46 +429,15 @@
             datcont.appendChild(tcol);
         }
 
-        firebase.database().ref("clubtype").once("value",
-                function (AllRecords) {
-                    AllRecords.forEach(
-                        function (CurrentRecord) {
-                            var clubtype = CurrentRecord.val();
-                            AddClubType(clubtype);
-                        }
-                    );
-                });
-
-        function AddClubType(clubtypevalue){
-            var optioncont = document.getElementById("options-container");
-            var selectdiv = document.createElement("div");
-            var optioninp = document.createElement("input");
-            var selectlabel = document.createElement("label");
-            optioninp.setAttribute("type","radio");
-            selectdiv.classList = "option";
-            optioninp.classList = "radio";
-            selectlabel.innerHTML = clubtypevalue;
-            optioncont.appendChild(selectdiv);
-            selectdiv.appendChild(optioninp);
-            selectdiv.appendChild(selectlabel);
-            var selected = document.querySelector(".selected");
-            var testselected = document.querySelector("#selected");
-            var optionsContainer = document.querySelector(".options-container");
-            var searchvalue = searchbar.value.toUpperCase();
-            var optionList = document.querySelectorAll(".option");
-
-            selectdiv.addEventListener("click", () => {
-                selected.innerHTML = selectdiv.querySelector("label").innerHTML;
-                if (selected.innerHTML != "No filter" && searchvalue != " ") {
-                    search_table_filter();
-                } else {
-                    search_table();
-                }
-                optionsContainer.classList.remove("Active");
+        var cblink = document.querySelectorAll(".Namefield");
+        cblink.forEach(a => {
+            a.addEventListener("click", () => {
+                alert("it is working");
             });
+        });
 
-        }
-        
+
+
         var searchbar = document.getElementById("search_input");
         var searchbtn = document.getElementById("search_icon");
         var trow = document.getElementById("row").getElementsByClassName("column");
@@ -498,16 +481,16 @@
         }
 
         var selected = document.querySelector(".selected");
-        var testselected = document.querySelector("#selected");
+        var testselected = document.querySelector("#testselected");
         var optionsContainer = document.querySelector(".options-container");
-        var searchvalue = searchbar.value.toUpperCase();
         var optionList = document.querySelectorAll(".option");
+        var searchvalue = searchbar.value.toUpperCase();
 
         selected.addEventListener("click", () => {
             optionsContainer.classList.toggle("Active");
         });
 
-            optionList.forEach(o => {
+        optionList.forEach(o => {
             o.addEventListener("click", () => {
                 selected.innerHTML = o.querySelector("label").innerHTML;
                 if (selected.innerHTML != "No filter" && searchvalue != " ") {
@@ -550,25 +533,22 @@
                     }
                 }
             } else {
-                for (let k = 0; k < trow.length; k++) {
-                    var tr = trow[k].getElementsByClassName("card");
-                    for (let i = 0; i < tr.length; i++) {
-                        var tdn = tr[i].getElementsByClassName("Namefield")
-                        var tdt = tr[i].getElementsByClassName("Typefield")
+                for (let i = 0; i < tr.length; i++) {
+                    var tdn = tr[i].getElementsByClassName("Namefield")
+                    var tdt = tr[i].getElementsByClassName("Typefield")
 
-                        for (let j = 0; j < tdn.length; j++) {
-                            if (tdt[j].innerHTML.toUpperCase().indexOf(filter) > -1 && tdn[j].innerHTML.toUpperCase().indexOf(searchvalue) > -1) {
-                                found = true;
-                            }
+                    for (let j = 0; j < tdn.length; j++) {
+                        if (tdt[j].innerHTML.toUpperCase().indexOf(filter) > -1 && tdn[j].innerHTML.toUpperCase().indexOf(searchvalue) > -1) {
+                            found = true;
                         }
-                        if (found) {
-                            tr[i].style.display = "table-row";
-                            found = false;
-                        }
+                    }
+                    if (found) {
+                        tr[i].style.display = "table-row";
+                        found = false;
+                    }
 
-                        else {
-                            tr[i].style.display = "none";
-                        }
+                    else {
+                        tr[i].style.display = "none";
                     }
                 }
             }
