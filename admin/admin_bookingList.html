@@ -207,7 +207,7 @@
                 selected_uids = f_list[index][0]; //=first uid
                 firebase.database().ref("classroom_booking/" + selected_uids + "/" + bid + "/").update(
                     {
-                        status: "Approve"
+                        status: "Approved"
                     },
                     (error) => {
                         if (error) {
@@ -226,7 +226,7 @@
                 selected_uids = f_list[index][0]; //=first uid
                 firebase.database().ref("classroom_booking/" + selected_uids + "/" + bid + "/").update(
                     {
-                        status: "Decline"
+                        status: "Declined"
                     },
                     (error) => {
                         if (error) {
@@ -286,6 +286,13 @@
                 td6.innerHTML = f_purpose;
                 td7.innerHTML = f_status;
 
+                if (td7.innerHTML == "Pending") {
+                    td7.innerHTML = "<b><span style='color:#f5c71a'>" + f_status + "</span></b>";
+                } else if (td7.innerHTML == "Approved") {
+                    td7.innerHTML = "<b><span style='color:green'>" + f_status + "</span></b>";
+                } else if (td7.innerHTML == "Declined") {
+                    td7.innerHTML = "<b><span style='color:red'>" + f_status + "</span></b>";
+                }
 
                 trow.appendChild(td1);
                 trow.appendChild(td2);

@@ -359,7 +359,7 @@
                                 <script>
                                     function logout() {
                                         window.alert("You have signed out successfully");
-                                        window.location.href = "login.html";
+                                        window.location.href = "../login.html";
                                         firebase.auth().signOut().then(() => {
                                         }).catch((error) => {
                                             console.log(error);

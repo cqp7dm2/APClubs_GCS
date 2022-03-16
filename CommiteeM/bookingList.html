@@ -214,6 +214,14 @@
                 td5.innerHTML = f_purpose;
                 td6.innerHTML = f_status;
 
+                if (td6.innerHTML == "Pending") {
+                    td6.innerHTML = "<b><span style='color:#f5c71a'>" + f_status + "</span></b>";
+                } else if (td6.innerHTML == "Approved") {
+                    td6.innerHTML = "<b><span style='color:green'>" + f_status + "</span></b>";
+                } else if (td6.innerHTML == "Declined") {
+                    td6.innerHTML = "<b><span style='color:red'>" + f_status + "</span></b>";
+                }
+
                 trow.appendChild(td1);
                 trow.appendChild(td2);
                 trow.appendChild(td3);
@@ -237,7 +245,7 @@
         <script>
             function logout() {
                 window.alert("You have signed out successfully");
-                window.location.href = "login.html";
+                window.location.href = "../login.html";
                 firebase.auth().signOut().then(() => {
                 }).catch((error) => {
                     console.log(error);

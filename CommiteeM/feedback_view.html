@@ -274,6 +274,16 @@
                 td6.innerHTML = f_reply;
                 td7.innerHTML = f_status;
 
+                if (td6.innerHTML == "Waiting") {
+                    td6.innerHTML = "<b><span style='color:#f5c71a'>" + f_reply + "</span></b>";
+                };
+
+                if (td7.innerHTML == "Pending") {
+                    td7.innerHTML = "<b><span style='color:#f5c71a'>" + f_status + "</span></b>";
+                } else if (td7.innerHTML == "Done") {
+                    td7.innerHTML = "<b><span style='color:green'>" + f_status + "</span></b>";
+                }
+
                 trow.appendChild(td1);
                 trow.appendChild(td2);
                 trow.appendChild(td3);

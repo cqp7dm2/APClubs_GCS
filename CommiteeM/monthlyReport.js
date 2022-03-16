@@ -31,24 +31,12 @@ firebase.auth().onAuthStateChanged((user) => {
 
     }
 });
-// function SelectClubData() {
-//     var currentUID = firebase.auth().currentUser.uid;
-
-//     firebase.database().ref('/committee/' + currentUID).once('value',
-//         function (AllRecords) {
-//             AllRecords.forEach(
-//                 function (CurrentRecord) {
-//                     var club = CurrentRecord.val().Committee;
-//                 }
-//             );
-//         });
-// }
 
 // Getting the data
 function SelectAllData(club) {
     console.log(club);
     document.getElementById("tbody1").innerHTML = "";
-    event_number = 0;
+    event_number2 = 0;
 
     firebase.database().ref('/clubMember/' + club).once('value',
         function (AllRecords) {
@@ -78,7 +66,7 @@ function AddItemsToTable(fullName, tpNumber, intakeCode, email) {
 
     cns_list.push([fullName, tpNumber, intakeCode, email]);
 
-    td1.innerHTML = ++event_number;
+    td1.innerHTML = ++event_number2;
     td2.innerText = fullName;
     td2.classList += "Namefield";
     td3.innerText = tpNumber;
