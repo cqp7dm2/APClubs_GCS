@@ -39,7 +39,67 @@
             background-image: url("images/loginbg.jpg");
             background-repeat: no-repeat;
             background-size: cover;
-        }
+        } 
+
+.clubname-left{
+    margin:1%;
+    font-weight: bold;
+    font-size: 30px;
+}
+.announcement-left{
+    font-size: 25px;
+    margin: 15px;
+    word-wrap: break-word;
+}
+.bubble-cont-left {
+    margin-left:5%;
+    min-width: 200px;
+}
+.bubble-left {
+	height: fit-content;
+	width: auto;
+	min-width: 200px;
+    margin-right:15%;
+	background: #87ceeb;
+    overflow:hidden;
+	border-radius: 20px;
+	margin-top: 50px;
+    margin-left:0;
+	font-size: 200px;
+	text-align: justify;
+}
+
+
+.bubble-cont-right {
+    min-width: 200px;
+    margin-left: 15%;
+    margin-right:5%;
+}
+.bubble-right {
+	height: auto;
+	width: auto;
+	min-width: 200px;
+	background: #87ceeb;
+    overflow:hidden;
+	border-radius: 20px;
+	margin-top: 50px;
+    margin-right:0px;
+    margin-left:0;
+	font-size: 200px;
+	text-align: right;
+}
+
+.clubname-right{
+    margin:1%;
+    font-weight: bold;
+    font-size: 30px;
+}
+.announcement-right{
+    font-size: 25px;
+    margin: 15px; 
+    overflow:visible;
+    word-wrap: break-word;
+}
     </style>
 
 </head>
@@ -87,108 +147,71 @@
             </li>
         </ul>
     </nav>
-    <!-- Navbar -->
-    <div class="content-wrapper">
-        <br/>
-        <div class="container bg-light">
-            <br />
-            <div class="row">
-                <div class="col-lg-12">
 
-                    <h2 class="page-title">Club/Society Announcement</h2>
-
-                    <h5>Kindly attend to all the announcements below</h5>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="container bg-light">
-                <table id="table1" class="table table-striped table-bordered table-light">
-                    <thead class="thead-dark">
-                        <th class="club">Club</th>
-                        <th>Announcement</th>
-                    </thead>
-                    <tbody id="tbody1">
-
-                    </tbody>
-                </table>
-                <br/>
-            </div>
-        </div>
-    </div>
-
+<div id="announce-cont">
+</div>
 
     <script id="mainscript">
 
         var database = firebase.database();
 
-
-
-
-        firebase.database().ref("committee/").once('value',
-            function (snapshot) {
-                var uid = Object.keys(snapshot.val());
-                console.log(uid);
-                uid.forEach(initUID);
-                function initUID(item) {
-                    var f_uid = item;
-                    console.log(f_uid)
-                    GetClub(f_uid);
-                }
-            });
-        function GetClub(f_uid) {
-            firebase.database().ref("committee/" + f_uid + "/").once('value',
-                function (snapshot) {
-                    snapshot.forEach(function (childSnapshot) {
-                        var club = childSnapshot.val();
-                        console.log(club);
-                        SelectAllData(club)
-                    });
-                });
-        }
-
-
-
-        function SelectAllData(club) {
-            //document.getElementById("tbody1").innerHTML = "";
-            firebase.database().ref("announcement/" + club + "/").once('value',
+        val = 0;
+        announcelist = [];
+            firebase.database().ref("announcement/").once('value',
                 function (AllRecords) {
                     AllRecords.forEach(
                         function (CurrentRecord) {
-                            var f_anouncement = CurrentRecord.val().announcement;
-                            AddItemsToTable(f_anouncement, club);
+                            CurrentRecord.forEach(
+                                function (actualvalue) {
+                                var f_anouncement =  actualvalue.val().announcement;
+                                var status = actualvalue.val().status;
+                                var clubname = CurrentRecord.key;
+                                 if (status == "Approved") {
+                                announcelist.push([clubname,f_anouncement]);
+                                addItem(val);
+                                val++;
+                                 }
+                            });
                         });
                 });
+
+
+
+        function addItem(val){
+            var anncont = document.getElementById("announce-cont");
+            if (val % 2 == 0){
+            var bbleftcont = document.createElement("div");
+            var bbleft = document.createElement("div");
+            var leftclubnametext = document.createElement("h3");
+            var leftannouncementtext = document.createElement("p");
+            bbleftcont.classList = "bubble-cont-left";
+            bbleft.classList = "bubble-left";
+            leftclubnametext.classList = "clubname-left";
+            leftannouncementtext.classList = "announcement-left";
+            leftclubnametext.innerHTML = announcelist[val][0];
+            leftannouncementtext.innerHTML = announcelist[val][1];
+            console.log( leftclubnametext.innerHTML);
+            anncont.appendChild(bbleftcont);
+            bbleftcont.appendChild(bbleft);
+            bbleft.appendChild(leftclubnametext);
+            bbleft.appendChild(leftannouncementtext);
+            } else {
+            var bbrightcont = document.createElement("div");
+            var bbright = document.createElement("div");
+            var rightclubnametext = document.createElement("h3");
+            var rightannouncementtext = document.createElement("p");
+            bbrightcont.classList = "bubble-cont-right";
+            bbright.classList = "bubble-right";
+            rightclubnametext.classList = "clubname-right";
+            rightannouncementtext.classList = "announcement-right";
+            rightclubnametext.innerHTML = announcelist[val][0];
+            rightannouncementtext.innerHTML = announcelist[val][1];
+            anncont.appendChild(bbrightcont);
+            bbrightcont.appendChild(bbright);
+            bbright.appendChild(rightclubnametext);
+            bbright.appendChild(rightannouncementtext);
+            }   
         }
-
-
-
-
-        var f_list = [];
-        var announceNo = 0;
-
-        function AddItemsToTable(f_anouncement, club) {
-            var tbody1 = document.getElementById('tbody1');
-            var trow = document.createElement('tr');
-            var td1 = document.createElement('td');
-            var td2 = document.createElement('td');
-
-
-            f_list.push([f_anouncement, club])
-            console.log(f_list)
-            td1.innerHTML = club;
-            td2.innerHTML = f_anouncement;
-
-            trow.appendChild(td1);
-            trow.appendChild(td2);
-
-            tbody1.appendChild(trow);
-        }
-
     </script>
 
 
