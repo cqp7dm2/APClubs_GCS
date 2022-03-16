@@ -161,7 +161,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Adding New Clubs</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Adding New Clubs & Edit Clubs</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -327,13 +327,13 @@
                     ModName.value = cns_list[index][0];
                     ModShDesc.value = cns_list[index][1];
 
-                    var x = ModType.options.length;                    
+                    var x = ModType.options.length;
                     for (var i = 0; i < x; i++) {
                         var categNo = document.getElementById("TypeMod").options[i].value;
                         var ClubTypeValue =  cns_list[index][2];
                         if (categNo == ClubTypeValue ) {
                             ModType.options[i].selected = true;
-                        } 
+                        }
                     }
                     ModDesc.value = cns_list[index][3];
                     ModAct.value = cns_list[index][4];
